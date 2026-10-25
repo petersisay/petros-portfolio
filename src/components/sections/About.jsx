@@ -9,12 +9,12 @@ export default function About() {
   const [imgError, setImgError] = useState(false);
 
   const highlights = [
-    '3rd Year Software Engineering Student at ASTU',
-    'Full-Stack web development with React & Node.js',
-    'Relational database modeling with MySQL & SQL',
-    'Java desktop & server-side application development',
-    'Clean code principles & responsive UI implementation',
-    'Continuously learning through hands-on software projects',
+    'Senior Software Engineering Student (4th Year) at ASTU',
+    'Modern Full-Stack engineering with React 19, TypeScript & Node.js',
+    'Cross-Platform mobile apps with Flutter 3 & Clean Architecture',
+    'High-throughput databases: MongoDB Atlas & MySQL relational modeling',
+    'Test-driven development (197+ Vitest automated suites in production)',
+    'Engineering civic platforms (TemariHub, Lehulu, Revola) for Ethiopian realities',
   ];
 
   return (
@@ -35,7 +35,7 @@ export default function About() {
 
             <div className={styles.paragraphs}>
               <p>
-                Hello! I'm <strong>{siteConfig.name}</strong>, a Software Engineering student currently in my 3rd year of studies at <strong>{siteConfig.university}</strong> in Ethiopia.
+                Hello! I'm <strong>{siteConfig.name}</strong>, a senior Software Engineering student in my 4th year of studies at <strong>{siteConfig.university}</strong> in Ethiopia.
               </p>
               <p>
                 My passion lies in crafting robust digital experiences — bridging frontend user interfaces with structured backend logic and well-designed relational databases. Whether building responsive web interfaces with React or engineering desktop software in Java with MySQL, I focus on writing clean, maintainable code.
