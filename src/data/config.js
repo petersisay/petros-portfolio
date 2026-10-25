@@ -7,20 +7,20 @@ export const siteConfig = {
   shortName: 'Petros',
   initials: 'PG',
   title: 'Software Engineering Student & Full-Stack Developer',
-  tagline: 'Building thoughtful digital experiences and practical software solutions.',
-  bio: "I'm a 3rd Year Software Engineering Student at Adama Science and Technology University (ASTU) in Ethiopia. I build frontend web applications, full-stack systems, Java desktop software, and relational database systems with a focus on clean code, responsiveness, and practical problem solving.",
+  tagline: 'Building thoughtful digital experiences, scalable platforms, and practical software solutions.',
+  bio: "I'm a 4th-Year Senior Software Engineering Student at Adama Science and Technology University (ASTU) in Ethiopia. I build production-grade web platforms, mobile apps, and distributed backend systems with a focus on clean code, reliability, and solving real-world African challenges.",
 
   // Identity & Specs
   location: 'Adama, Ethiopia',
   university: 'Adama Science and Technology University (ASTU)',
   degree: 'B.Sc. Software Engineering',
-  year: '3rd Year Student',
+  year: '4th Year Senior Student',
   status: 'Open to Internships & Junior Roles',
 
   // Social & Contact Links
   email: 'petrossisay7164@gmail.com',
-  github: 'https://github.com/petrossisay1646',
-  githubUsername: 'petrossisay1646',
+  github: 'https://github.com/petersisay',
+  githubUsername: 'petersisay',
   linkedin: 'https://www.linkedin.com/in/petros-sisay-gelan',
   telegram: 'https://t.me/Petros_sisay',
   telegramHandle: '@Petros_sisay',
