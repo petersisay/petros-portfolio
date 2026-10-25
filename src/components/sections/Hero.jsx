@@ -5,10 +5,10 @@ import { siteConfig } from '../../data/config';
 import styles from './Hero.module.css';
 
 const ROLES = [
-  'Software Engineering Student',
-  'Full-Stack Web Developer',
-  'Java Application Developer',
-  'Database Systems Builder',
+  'Senior Software Engineering Student',
+  'Full-Stack Web Architect',
+  'Cross-Platform Mobile Developer (Flutter)',
+  'Civic Platforms & Systems Builder',
 ];
 
 function TypedRoles() {
