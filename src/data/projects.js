@@ -283,30 +283,6 @@ export const projects = [
     color: '#3b82f6',
   },
   {
-    id: 'apple-website',
-    title: 'Apple Marketing Page Replica',
-    tagline: 'Pixel-accurate frontend replication of Apple\'s product showcase.',
-    description:
-      'A frontend clone of Apple\'s product page focusing on minimal design, precise typographic scale, and modern CSS layout mastery — a study in world-class UI precision.',
-    longDescription:
-      'Replicating Apple\'s design language provided an excellent opportunity to master fine-grained visual details, precise spacing rules, typography, and responsive container behavior across multiple breakpoints using modern CSS.',
-    problem: 'Challenge to reproduce world-class UI design accuracy and typography rules without external libraries.',
-    solution: 'Meticulously crafted the page using raw HTML5 and modern CSS flexbox/grid layout techniques.',
-    features: [
-      'Pixel-accurate typography and section spacing',
-      'Responsive design handling high-DPI displays',
-      'Subtle hover states and micro-interactions',
-      'Clean semantic code organization',
-    ],
-    tech: ['HTML5', 'CSS3', 'Flexbox', 'CSS Grid'],
-    category: ['frontend', 'personal'],
-    liveUrl: 'https://melodic-hummingbird-fdca26.netlify.app/',
-    githubUrl: 'https://github.com/petersisay/Apple-website',
-    featured: false,
-    image: '/projects/apple-website.webp',
-    color: '#60a5fa',
-  },
-  {
     id: 'puppy-lovers',
     title: 'Puppy Lovers Experience',
     tagline: 'Creative, interactive web page showcasing expressive CSS styling.',
