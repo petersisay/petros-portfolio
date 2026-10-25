@@ -185,30 +185,6 @@ export const projects = [
     color: '#8b5cf6',
   },
   {
-    id: 'promodoro-timer',
-    title: 'Pomodoro Focus Timer',
-    tagline: 'Modern glassmorphic productivity timer built with pure HTML, CSS, and Vanilla JS.',
-    description:
-      'A sleek, beautifully designed Pomodoro Timer web application featuring customizable intervals, session tracking, Web Audio API alerts, and localStorage persistence.',
-    longDescription:
-      'Built to experiment with glassmorphic aesthetics, Web Audio API integration, and clean state handling in Vanilla JavaScript. It provides a focused, distraction-free environment for deep work sessions.',
-    problem: 'Wanted a lightweight, zero-dependency focus timer with audio cues and persistent statistics.',
-    solution: 'Engineered a standalone Vanilla JavaScript app with modern CSS glassmorphism, responsive controls, and audio synthesize chimes.',
-    features: [
-      '25-minute focus intervals with automated 5-minute and 15-minute break scheduling',
-      'Web Audio API chime notifications when sessions complete',
-      'Persistent focus statistics and session counters saved in localStorage',
-      'Glassmorphic UI with smooth CSS micro-interactions',
-    ],
-    tech: ['HTML5', 'CSS3', 'JavaScript', 'Audio API', 'LocalStorage'],
-    category: ['frontend', 'personal'],
-    liveUrl: 'https://promodoro-timer1.vercel.app',
-    githubUrl: 'https://github.com/petersisay/promodoro-timer1',
-    featured: false,
-    image: null,
-    color: '#ef4444',
-  },
-  {
     id: 'group-chat-app',
     title: 'Java Multi-Client Group Chat',
     tagline: 'Real-time multi-threaded Java desktop chat application over TCP sockets.',
