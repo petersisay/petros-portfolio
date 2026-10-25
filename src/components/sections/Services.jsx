@@ -1,10 +1,11 @@
-import { LayoutTemplate, Layers, Code2, Database, Server, PenTool } from 'lucide-react';
+import { LayoutTemplate, Layers, Code2, Database, Server, PenTool, Smartphone } from 'lucide-react';
 import { services } from '../../data/services';
 import { useIntersection } from '../../hooks/useIntersection';
 import styles from './Services.module.css';
 
 const ICON_MAP = {
   LayoutTemplate: <LayoutTemplate size={24} />,
+  Smartphone: <Smartphone size={24} />,
   Layers: <Layers size={24} />,
   Code2: <Code2 size={24} />,
   Database: <Database size={24} />,
