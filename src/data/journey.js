@@ -1,5 +1,6 @@
 // ═══════════════════════════════════════════════════════════════════
 // SOFTWARE ENGINEERING JOURNEY — Petros Sisay Gelan Portfolio
+// Updated with 2026 Senior Milestones: TemariHub, Lehulu, Revola
 // ═══════════════════════════════════════════════════════════════════
 
 export const journeyItems = [
@@ -55,12 +56,22 @@ export const journeyItems = [
   },
   {
     id: 'fullstack-focus',
-    year: '2025 – Present',
-    title: 'Full-Stack Integration & Professional Growth',
-    institution: 'ASTU (3rd Year) & Portfolio Building',
+    year: '2025',
+    title: 'Full-Stack Integration & Cross-Platform Mobile',
+    institution: 'ASTU & Autonomous System Architecture',
     description:
-      'Combining frontend UI engineering, backend logic, and database management into full-stack software development. Actively preparing for software engineering internships and junior developer opportunities.',
-    tags: ['Full Stack', 'Node.js', 'REST APIs', 'React', 'MySQL', 'Software Architecture'],
+      'Architected complete MERN applications, integrated RESTful APIs, and adopted Flutter 3 & Riverpod for Clean Architecture cross-platform mobile development with offline resilience.',
+    tags: ['Node.js', 'Express.js', 'Flutter 3', 'Dart', 'Riverpod', 'Clean Architecture'],
+    category: 'milestone',
+  },
+  {
+    id: 'civic-production-systems',
+    year: '2026 – Present',
+    title: 'Production Platforms & Civic Systems Architecture',
+    institution: 'ASTU (4th Year Senior) & Open Source Engineering',
+    description:
+      'Engineering production-grade platforms addressing real-world Ethiopian challenges: TemariHub (STEM opportunity tracker with 125+ automated tests), Lehulu (local services marketplace with geospatial boundaries), and Revola (circular materials marketplace with Chapa ETB payments).',
+    tags: ['TypeScript (Strict)', 'React 19', 'MongoDB Atlas', 'Geospatial Indexing', 'Vitest', 'CSRF Security'],
     category: 'current',
   },
 ];
