@@ -10,10 +10,10 @@ export default function About() {
 
   const highlights = [
     'Senior Software Engineering Student (4th Year) at ASTU',
+    'AIG-Tech Full-Stack Intern (Grade A+) — REST APIs, OSRM & Socket.IO',
     'Modern Full-Stack engineering with React 19, TypeScript & Node.js',
     'Cross-Platform mobile apps with Flutter 3 & Clean Architecture',
     'High-throughput databases: MongoDB Atlas & MySQL relational modeling',
-    'Test-driven development (197+ Vitest automated suites in production)',
     'Engineering civic platforms (TemariHub, Lehulu, Revola) for Ethiopian realities',
   ];
 
@@ -41,7 +41,7 @@ export default function About() {
                 My passion lies in crafting robust digital experiences — bridging frontend user interfaces with structured backend logic and well-designed relational databases. Whether building responsive web interfaces with React or engineering desktop software in Java with MySQL, I focus on writing clean, maintainable code.
               </p>
               <p>
-                As an aspiring Software Engineer, I prioritize continuous learning, problem-solving, and practical execution. I am actively seeking software engineering internships, junior developer roles, and freelance opportunities to apply my skills to real-world projects.
+                Completed an industrial Full-Stack Web Development internship at <strong>AIG-Tech Enterprise (Adama Investment Group)</strong> earning an <strong>A+ Grade</strong>. My focus centered on Express REST APIs, MongoDB 2dsphere geospatial indexing, Socket.IO live courier tracking, and secure Chapa/Telebirr payment webhooks.
               </p>
             </div>
 
@@ -94,6 +94,14 @@ export default function About() {
                   <div className={styles.specDetails}>
                     <span className={styles.specLabel}>Degree / Year</span>
                     <span className={styles.specValue}>{siteConfig.degree} ({siteConfig.year})</span>
+                  </div>
+                </div>
+
+                <div className={styles.specRow}>
+                  <Award size={16} className={styles.specIcon} />
+                  <div className={styles.specDetails}>
+                    <span className={styles.specLabel}>Internship Honor</span>
+                    <span className={styles.specValue}>AIG-Tech Enterprise (Grade A+)</span>
                   </div>
                 </div>
 
