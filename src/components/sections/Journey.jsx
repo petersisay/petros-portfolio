@@ -33,6 +33,7 @@ export default function Journey() {
                 <div className={`${styles.markerDot} ${item.category === 'current' ? styles.currentDot : ''}`}>
                   {item.category === 'education' && <GraduationCap size={14} />}
                   {item.category === 'current' && <Sparkles size={14} />}
+                  {item.category === 'experience' && <Layers size={14} />}
                   {item.category === 'milestone' && <Code size={14} />}
                 </div>
                 {idx < journeyItems.length - 1 && <div className={styles.markerLine} />}
@@ -44,6 +45,9 @@ export default function Journey() {
                   <span className={styles.yearBadge}>{item.year}</span>
                   {item.category === 'current' && (
                     <span className={styles.statusBadge}>Active Focus</span>
+                  )}
+                  {item.category === 'experience' && (
+                    <span className={styles.statusBadge} style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', borderColor: 'rgba(16, 185, 129, 0.3)' }}>Grade A+</span>
                   )}
                 </div>
 

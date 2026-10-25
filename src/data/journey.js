@@ -65,6 +65,16 @@ export const journeyItems = [
     category: 'milestone',
   },
   {
+    id: 'aig-tech-internship',
+    year: 'Aug – Sep 2026',
+    title: 'Full Stack Web Development Intern (Grade A+)',
+    institution: 'AIG-Tech Enterprise (Adama Investment Group)',
+    description:
+      'Completed practical industrial training in the Innovation & Development Dept under Mr. Million Sime. Architected Express REST APIs, MongoDB 2dsphere geospatial indexing, municipal geofencing, Socket.IO live courier tracking, and Chapa/Telebirr payment webhooks.',
+    tags: ['A+ Evaluation', 'Node.js', 'Express 5', 'MongoDB Atlas', 'Socket.IO', 'Geospatial API', 'Chapa'],
+    category: 'experience',
+  },
+  {
     id: 'civic-production-systems',
     year: '2026 – Present',
     title: 'Production Platforms & Civic Systems Architecture',
