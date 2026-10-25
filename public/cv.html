@@ -49,19 +49,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 1.35rem 1.15rem;
+      padding: 1.25rem 1.15rem;
       flex-shrink: 0;
       border-right: 1px solid rgba(255,255,255,0.06);
     }
 
     .photo-wrap {
-      width: 90px;
-      height: 90px;
+      width: 86px;
+      height: 86px;
       border-radius: 50%;
       border: 3px solid #3b82f6;
       box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
       overflow: hidden;
-      margin-bottom: 0.65rem;
+      margin-bottom: 0.55rem;
       background: #1e293b;
       flex-shrink: 0;
     }
@@ -75,28 +75,28 @@
     }
 
     .sidebar-name {
-      font-size: 1.18rem;
+      font-size: 1.15rem;
       font-weight: 800;
       color: #ffffff;
       text-align: center;
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.12rem;
       letter-spacing: -0.02em;
       line-height: 1.2;
     }
 
     .sidebar-title {
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       color: #60a5fa;
       font-weight: 600;
       text-align: center;
-      margin-bottom: 0.95rem;
+      margin-bottom: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
     .sidebar-section {
       width: 100%;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.75rem;
     }
 
     .sidebar-section:last-child {
@@ -104,14 +104,14 @@
     }
 
     .sidebar-section-title {
-      font-size: 0.67rem;
+      font-size: 0.66rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: #ffffff;
       border-bottom: 1.5px solid #3b82f6;
-      padding-bottom: 0.2rem;
-      margin-bottom: 0.45rem;
+      padding-bottom: 0.18rem;
+      margin-bottom: 0.4rem;
       display: flex;
       align-items: center;
       gap: 0.35rem;
@@ -120,15 +120,15 @@
     .contact-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.69rem;
+      gap: 0.45rem;
+      font-size: 0.68rem;
       color: #94a3b8;
-      margin-bottom: 0.32rem;
+      margin-bottom: 0.28rem;
       line-height: 1.25;
     }
 
     .contact-item .icon {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: #60a5fa;
       flex-shrink: 0;
       width: 13px;
@@ -142,27 +142,27 @@
     }
 
     .skill-group-title {
-      font-size: 0.63rem;
+      font-size: 0.62rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #60a5fa;
       font-weight: 700;
-      margin-top: 0.3rem;
-      margin-bottom: 0.18rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.15rem;
     }
 
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.22rem;
-      margin-bottom: 0.25rem;
+      gap: 0.2rem;
+      margin-bottom: 0.2rem;
     }
 
     .skill-badge {
-      font-size: 0.63rem;
+      font-size: 0.62rem;
       background: rgba(59, 130, 246, 0.12);
       color: #e2e8f0;
-      padding: 0.12rem 0.38rem;
+      padding: 0.1rem 0.35rem;
       border-radius: 4px;
       border: 1px solid rgba(59, 130, 246, 0.25);
       font-weight: 500;
@@ -172,39 +172,53 @@
     .lang-item {
       display: flex;
       justify-content: space-between;
-      font-size: 0.69rem;
+      font-size: 0.68rem;
       color: #cbd5e1;
-      margin-bottom: 0.22rem;
+      margin-bottom: 0.18rem;
       padding-left: 0.15rem;
     }
 
     .lang-item span {
       font-weight: 600;
       color: #60a5fa;
-      font-size: 0.65rem;
+      font-size: 0.64rem;
     }
 
-    .interest-item {
+    .ref-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 5px;
+      padding: 0.32rem 0.45rem;
+      margin-bottom: 0.3rem;
+      line-height: 1.25;
+    }
+
+    .ref-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .ref-name {
       font-size: 0.68rem;
-      color: #94a3b8;
-      margin-bottom: 0.2rem;
-      padding-left: 0.55rem;
-      position: relative;
+      font-weight: 700;
+      color: #ffffff;
     }
 
-    .interest-item::before {
-      content: '▪';
-      position: absolute;
-      left: 0;
-      color: #3b82f6;
-      font-size: 0.6rem;
+    .ref-role {
+      font-size: 0.61rem;
+      color: #94a3b8;
+    }
+
+    .ref-org {
+      font-size: 0.61rem;
+      color: #60a5fa;
+      font-weight: 600;
     }
 
     /* ── RIGHT MAIN CONTENT ── */
     .main-content {
       flex: 1;
       height: 100%;
-      padding: 1.35rem 1.6rem;
+      padding: 1.25rem 1.55rem;
       background: #ffffff;
       display: flex;
       flex-direction: column;
@@ -212,7 +226,7 @@
     }
 
     .main-section {
-      margin-bottom: 0.65rem;
+      margin-bottom: 0.55rem;
     }
 
     .main-section:last-child {
@@ -220,23 +234,23 @@
     }
 
     .main-section-title {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: #0f172a;
       border-bottom: 1.5px solid #2563eb;
-      padding-bottom: 0.2rem;
-      margin-bottom: 0.45rem;
+      padding-bottom: 0.18rem;
+      margin-bottom: 0.4rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .profile-text {
-      font-size: 0.74rem;
+      font-size: 0.73rem;
       color: #334155;
-      line-height: 1.48;
+      line-height: 1.45;
       text-align: justify;
     }
 
@@ -245,7 +259,7 @@
     }
 
     .exp-item {
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.4rem;
     }
 
     .exp-item:last-child {
@@ -256,27 +270,27 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 0.05rem;
+      margin-bottom: 0.04rem;
     }
 
     .exp-title {
-      font-size: 0.78rem;
+      font-size: 0.77rem;
       font-weight: 700;
       color: #0f172a;
     }
 
     .exp-date {
-      font-size: 0.66rem;
+      font-size: 0.65rem;
       color: #64748b;
       font-weight: 600;
       white-space: nowrap;
     }
 
     .exp-company {
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       color: #2563eb;
       font-weight: 600;
-      margin-bottom: 0.16rem;
+      margin-bottom: 0.14rem;
       display: flex;
       align-items: center;
       gap: 0.35rem;
@@ -286,10 +300,20 @@
       background: #eff6ff;
       border: 1px solid #bfdbfe;
       color: #1d4ed8;
-      font-size: 0.6rem;
-      padding: 0.04rem 0.3rem;
+      font-size: 0.59rem;
+      padding: 0.03rem 0.28rem;
       border-radius: 3px;
       font-weight: 600;
+    }
+
+    .exp-company span.badge-grade {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+      font-size: 0.59rem;
+      padding: 0.03rem 0.28rem;
+      border-radius: 3px;
+      font-weight: 700;
     }
 
     .exp-bullets {
@@ -297,17 +321,17 @@
     }
 
     .exp-bullets li {
-      font-size: 0.71rem;
+      font-size: 0.7rem;
       color: #334155;
-      margin-bottom: 0.1rem;
-      line-height: 1.33;
+      margin-bottom: 0.08rem;
+      line-height: 1.32;
     }
 
     .edu-item {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 0.22rem;
+      margin-bottom: 0.18rem;
     }
 
     .edu-left {
@@ -315,19 +339,19 @@
     }
 
     .edu-title {
-      font-size: 0.77rem;
+      font-size: 0.76rem;
       font-weight: 700;
       color: #0f172a;
     }
 
     .edu-institution {
-      font-size: 0.69rem;
+      font-size: 0.68rem;
       color: #475569;
       font-style: italic;
     }
 
     .edu-date {
-      font-size: 0.67rem;
+      font-size: 0.66rem;
       color: #64748b;
       font-weight: 600;
       white-space: nowrap;
@@ -336,13 +360,13 @@
     .tech-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 0.22rem;
-      font-size: 0.69rem;
+      gap: 0.2rem;
+      font-size: 0.68rem;
       background: #f8fafc;
-      padding: 0.42rem 0.65rem;
+      padding: 0.38rem 0.6rem;
       border-radius: 5px;
       border: 1px solid #e2e8f0;
-      line-height: 1.38;
+      line-height: 1.35;
     }
 
     .tech-grid-row strong {
@@ -456,7 +480,7 @@
       <div class="skill-group-title">Languages & Core</div>
       <div class="skill-tags">
         <span class="skill-badge">TypeScript</span>
-        <span class="skill-badge">JavaScript (ES6+)</span>
+        <span class="skill-badge">JavaScript</span>
         <span class="skill-badge">Dart</span>
         <span class="skill-badge">Java (OOP)</span>
         <span class="skill-badge">SQL</span>
@@ -469,13 +493,12 @@
         <span class="skill-badge">Riverpod</span>
         <span class="skill-badge">Vite</span>
         <span class="skill-badge">Tailwind CSS</span>
-        <span class="skill-badge">HTML5 / CSS3</span>
       </div>
 
       <div class="skill-group-title">Backend & Database</div>
       <div class="skill-tags">
         <span class="skill-badge">Node.js</span>
-        <span class="skill-badge">Express.js</span>
+        <span class="skill-badge">Express 5</span>
         <span class="skill-badge">MongoDB Atlas</span>
         <span class="skill-badge">MySQL</span>
         <span class="skill-badge">REST APIs</span>
@@ -486,7 +509,7 @@
         <span class="skill-badge">Vitest</span>
         <span class="skill-badge">Git & GitHub</span>
         <span class="skill-badge">Vercel</span>
-        <span class="skill-badge">Netlify</span>
+        <span class="skill-badge">Render</span>
       </div>
     </div>
 
@@ -498,13 +521,19 @@
       <div class="lang-item">Afaan Oromo <span>Proficient</span></div>
     </div>
 
-    <!-- FOCUS AREAS -->
+    <!-- REFERENCES -->
     <div class="sidebar-section">
-      <h2 class="sidebar-section-title">Focus Areas</h2>
-      <div class="interest-item">Full-Stack Web Engineering</div>
-      <div class="interest-item">Cross-Platform Mobile Apps</div>
-      <div class="interest-item">Test-Driven Development</div>
-      <div class="interest-item">Distributed Cloud Architecture</div>
+      <h2 class="sidebar-section-title">References</h2>
+      <div class="ref-card">
+        <div class="ref-name">Mr. Million Sime</div>
+        <div class="ref-role">Senior Software Developer | AgentOps</div>
+        <div class="ref-org">AIG-Tech Enterprise (Supervisor)</div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-name">Dr. Ejigu Tefera</div>
+        <div class="ref-role">Academic Department Advisor</div>
+        <div class="ref-org">ASTU Software Engineering</div>
+      </div>
     </div>
   </aside>
 
@@ -515,7 +544,7 @@
     <section class="main-section">
       <h2 class="main-section-title">Profile</h2>
       <p class="profile-text">
-        <strong>Senior Software Engineering student (4th Year)</strong> at Adama Science and Technology University (ASTU), specializing in scalable full-stack web platforms, cross-platform mobile systems (Flutter), and cloud-backed architectures. Experienced in building production-ready applications with <strong>TypeScript, React, Flutter, Node.js, Express, and MongoDB Atlas</strong>, with a strong focus on automated testing (Vitest), modular component design, and responsive UX. Disciplined in engineering clean, maintainable systems and eager to contribute to high-impact engineering teams.
+        <strong>Senior Software Engineering student (4th Year)</strong> at Adama Science and Technology University (ASTU) with proven industrial internship experience at <strong>AIG-Tech Enterprise (Evaluated with Grade A+)</strong>. Specialized in production-ready full-stack web platforms, cross-platform mobile systems (Flutter), and distributed backend architectures. Experienced across <strong>TypeScript, React, Flutter, Node.js, Express 5, MongoDB Atlas, and Socket.IO</strong>, with strong emphasis on automated testing (Vitest), modular architecture, and responsive UX.
       </p>
     </section>
 
@@ -538,9 +567,25 @@
       </div>
     </section>
 
-    <!-- FEATURED PROJECTS -->
+    <!-- EXPERIENCE & PROJECTS -->
     <section class="main-section">
-      <h2 class="main-section-title">Engineering Projects & Experience</h2>
+      <h2 class="main-section-title">Experience & Engineering Projects</h2>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Full Stack Web Development Intern — AIG-Tech Enterprise</div>
+          <div class="exp-date">Aug – Sep 2026</div>
+        </div>
+        <div class="exp-company">
+          <span>Adama Investment Group (AIG) · Innovation & Development</span>
+          <span class="badge-grade">Grade A+</span>
+          <span class="badge">Enterprise</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Architected backend REST APIs, MongoDB 2dsphere geospatial indexing, OSRM road distance routing, and municipal geofencing.</li>
+          <li>Engineered real-time Socket.IO courier tracking with throttled database persistence, and verified Chapa/Telebirr payment webhooks (HMAC-SHA256).</li>
+        </ul>
+      </div>
 
       <div class="exp-item">
         <div class="exp-header">
@@ -552,7 +597,7 @@
           <span class="badge">125+ Tests</span>
         </div>
         <ul class="exp-bullets">
-          <li>Architected a centralized STEM opportunity platform for Ethiopian students featuring categorized listings, real-time deadline indexing, and full-text search.</li>
+          <li>Architected a centralized STEM opportunity platform for Ethiopian students with categorized listings, real-time deadline indexing, and search.</li>
           <li>Engineered automated test suites using Vitest spanning 125+ unit and integration tests with strict CI validation and sub-second execution.</li>
         </ul>
       </div>
@@ -568,7 +613,7 @@
         </div>
         <ul class="exp-bullets">
           <li>Built a cross-platform mobile marketplace connecting households with verified local service technicians and artisans.</li>
-          <li>Integrated geospatial service discovery, direct quote negotiation workflows, and reactive state management powered by Riverpod.</li>
+          <li>Integrated geospatial service discovery, quote negotiation workflows, and reactive state management powered by Riverpod.</li>
         </ul>
       </div>
 
@@ -582,23 +627,7 @@
           <span class="badge">Featured UI</span>
         </div>
         <ul class="exp-bullets">
-          <li>Engineered a high-performance audio streaming client featuring interactive real-time waveform visualizers, dynamic playlists, and zero-latency playback.</li>
-          <li>Designed an ultra-modern dark glassmorphism interface with fluid micro-interactions and comprehensive keyboard navigation.</li>
-        </ul>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-header">
-          <div class="exp-title">AdamaMaterials — Construction E-Commerce Platform</div>
-          <div class="exp-date">2025</div>
-        </div>
-        <div class="exp-company">
-          <span>TypeScript · React · Context API · Tailwind CSS</span>
-          <span class="badge">E-Commerce</span>
-        </div>
-        <ul class="exp-bullets">
-          <li>Engineered a full-featured marketplace for building materials with strict TypeScript type definitions, live price filters, and instant cart updates.</li>
-          <li>Optimized bundle size and render performance with client-side caching and debounced catalog search.</li>
+          <li>Engineered a high-performance audio streaming client with real-time waveform visualizers, dynamic playlists, and zero-latency playback.</li>
         </ul>
       </div>
 
@@ -612,8 +641,7 @@
           <span class="badge">Desktop System</span>
         </div>
         <ul class="exp-bullets">
-          <li>Built a concurrent multithreaded TCP socket server handling multiple simultaneous client sessions with message broadcasting and connection safety.</li>
-          <li>Designed a clean Java Swing desktop GUI with live client lists, user join/leave notifications, and synchronized chat logs.</li>
+          <li>Built a concurrent multithreaded TCP socket server handling multiple simultaneous client sessions with broadcast messaging.</li>
         </ul>
       </div>
     </section>
@@ -628,15 +656,15 @@
         </div>
         <div class="tech-grid-row">
           <strong>Backend & APIs:</strong>
-          <span>Node.js, Express.js, RESTful API Design, Middleware Architecture, Socket.IO / WebSockets</span>
+          <span>Node.js, Express 5, RESTful API Design, Socket.IO / WebSockets, OSRM Routing, Geofencing</span>
         </div>
         <div class="tech-grid-row">
           <strong>Databases & Cloud:</strong>
-          <span>MongoDB Atlas, Mongoose, MySQL, Relational Schema Normalization, Vercel, Netlify</span>
+          <span>MongoDB Atlas, 2dsphere Geospatial Indexing, Mongoose, MySQL, Vercel, Render</span>
         </div>
         <div class="tech-grid-row">
           <strong>Quality & Tools:</strong>
-          <span>Vitest, Test-Driven Development (TDD), Git, GitHub, IntelliJ IDEA, VS Code, Agile Sprints</span>
+          <span>Vitest, Test-Driven Development (TDD), Git, GitHub, HMAC-SHA256 Webhook Security, Agile Sprints</span>
         </div>
       </div>
     </section>
