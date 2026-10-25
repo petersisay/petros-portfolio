@@ -1,12 +1,14 @@
-import { Layout, Server, Database, Code2, Wrench } from 'lucide-react';
+import { Layout, Server, Database, Code2, Wrench, Smartphone, ShieldCheck } from 'lucide-react';
 import { skillCategories } from '../../data/skills';
 import { useIntersection } from '../../hooks/useIntersection';
 import styles from './Skills.module.css';
 
 const ICON_MAP = {
   Layout: <Layout size={22} />,
+  Smartphone: <Smartphone size={22} />,
   Server: <Server size={22} />,
   Database: <Database size={22} />,
+  ShieldCheck: <ShieldCheck size={22} />,
   Code2: <Code2 size={22} />,
   Wrench: <Wrench size={22} />,
 };
