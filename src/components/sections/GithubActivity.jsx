@@ -6,6 +6,13 @@ import styles from './GithubActivity.module.css';
 
 const REPOS = [
   {
+    name: 'CodeTogether',
+    desc: 'Real-time collaborative code editor & pair programming workspace with WebRTC video/voice calls and ZIP export.',
+    lang: 'JavaScript',
+    url: 'https://github.com/petersisay/CodeTogether',
+    stars: 1,
+  },
+  {
     name: 'TemariHub',
     desc: 'Full-stack opportunity discovery & 7-stage application tracking platform for Ethiopian STEM students with 125+ tests.',
     lang: 'TypeScript',
@@ -20,31 +27,17 @@ const REPOS = [
     stars: 1,
   },
   {
-    name: 'AdamaMaterials-E-commerce-',
-    desc: 'Revola circular economy marketplace for reclaimed construction supplies with Chapa ETB payments & Leaflet maps.',
-    lang: 'TypeScript',
-    url: 'https://github.com/petersisay/AdamaMaterials-E-commerce-',
+    name: 'StudentRegisterSystem',
+    desc: 'Enterprise-grade Java EE student registration and academic lifecycle management web application with MVC & MySQL.',
+    lang: 'Java',
+    url: 'https://github.com/petersisay/StudentRegisterSystem',
     stars: 1,
   },
   {
-    name: 'flutter_todo_pro',
-    desc: 'PetroFlow cross-platform task & Pomodoro focus mobile app built with Flutter 3, Riverpod 2.6 & Clean Architecture.',
-    lang: 'Dart',
-    url: 'https://github.com/petersisay/flutter_todo_pro',
-    stars: 1,
-  },
-  {
-    name: 'guided-annual-planner',
-    desc: 'Paper-inspired annual planning & personal growth PWA built with React, TypeScript, Express, and 197 Vitest tests.',
-    lang: 'TypeScript',
-    url: 'https://github.com/petersisay/guided-annual-planner',
-    stars: 1,
-  },
-  {
-    name: 'mern-todo-pro',
-    desc: 'Full-stack MERN productivity workspace with Kanban board, Pomodoro focus mode, streak tracker, and REST API.',
+    name: 'petros-portfolio',
+    desc: 'Personal developer portfolio built with React 19, Vite, custom tokens, keyboard command palette, and dark theme.',
     lang: 'JavaScript',
-    url: 'https://github.com/petersisay/mern-todo-pro',
+    url: 'https://github.com/petersisay/petros-portfolio',
     stars: 1,
   },
 ];
