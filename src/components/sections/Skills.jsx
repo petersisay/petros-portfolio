@@ -1,81 +1,33 @@
 import React from 'react'
-import { Terminal, Sparkles, Layers, Quote } from 'lucide-react'
+import {
+  Layout,
+  Server,
+  Database,
+  Smartphone,
+  Wrench,
+  ShieldCheck,
+  Quote,
+  CheckCircle2,
+} from 'lucide-react'
+import { skillCategories } from '../../data/skills'
 import styles from './Skills.module.css'
 
-const SKILL_DOMAINS = [
-  {
-    category: 'Frontend Engineering',
-    skills: [
-      { name: 'TypeScript', level: 'proficient' },
-      { name: 'React 19', level: 'proficient' },
-      { name: 'JavaScript (ES6+)', level: 'proficient' },
-      { name: 'HTML5 & CSS3', level: 'proficient' },
-      { name: 'Vite', level: 'proficient' },
-      { name: 'Responsive Design', level: 'proficient' },
-    ],
-  },
-  {
-    category: 'Backend & APIs',
-    skills: [
-      { name: 'Node.js', level: 'proficient' },
-      { name: 'Express 5', level: 'proficient' },
-      { name: 'REST APIs', level: 'proficient' },
-      { name: 'Socket.IO', level: 'proficient' },
-      { name: 'JWT Auth', level: 'proficient' },
-      { name: 'CSRF Protection', level: 'proficient' },
-    ],
-  },
-  {
-    category: 'Mobile App Development',
-    skills: [
-      { name: 'Flutter 3', level: 'proficient' },
-      { name: 'Dart', level: 'proficient' },
-      { name: 'Riverpod', level: 'proficient' },
-      { name: 'Material 3', level: 'proficient' },
-      { name: 'Clean Architecture', level: 'proficient' },
-    ],
-  },
-  {
-    category: 'Databases & Storage',
-    skills: [
-      { name: 'MongoDB Atlas', level: 'proficient' },
-      { name: 'Mongoose', level: 'proficient' },
-      { name: 'MySQL', level: 'proficient' },
-      { name: 'SQL', level: 'proficient' },
-      { name: '2dsphere Geospatial', level: 'building' },
-    ],
-  },
-  {
-    category: 'Java Systems & Enterprise',
-    skills: [
-      { name: 'Java (Core + OOP)', level: 'proficient' },
-      { name: 'JDBC', level: 'proficient' },
-      { name: 'Java Swing', level: 'proficient' },
-      { name: 'Java Servlets', level: 'proficient' },
-      { name: 'JSP', level: 'proficient' },
-      { name: 'Apache Tomcat', level: 'learning' },
-    ],
-  },
-  {
-    category: 'Tools & Ecosystem',
-    skills: [
-      { name: 'Git & GitHub', level: 'proficient' },
-      { name: 'Vitest', level: 'proficient' },
-      { name: 'VS Code', level: 'proficient' },
-      { name: 'IntelliJ IDEA', level: 'proficient' },
-      { name: 'Chapa API', level: 'proficient' },
-      { name: 'Telebirr', level: 'proficient' },
-    ],
-  },
-]
+const ICONS_MAP = {
+  Layout: Layout,
+  Server: Server,
+  Database: Database,
+  Smartphone: Smartphone,
+  Wrench: Wrench,
+  ShieldCheck: ShieldCheck,
+}
 
 const CORE_TECH_PILLS = [
-  { name: 'React 19', tag: 'UI Library' },
-  { name: 'Node.js', tag: 'Runtime' },
-  { name: 'Flutter', tag: 'Mobile' },
-  { name: 'Java', tag: 'Enterprise' },
-  { name: 'MongoDB', tag: 'NoSQL' },
-  { name: 'MySQL', tag: 'RDBMS' },
+  { name: 'React 19', tag: 'Frontend Library' },
+  { name: 'Node.js & Express', tag: 'Backend Runtime' },
+  { name: 'Flutter 3 & Dart', tag: 'Mobile Ecosystem' },
+  { name: 'Java (Core & OOP)', tag: 'Enterprise & Sockets' },
+  { name: 'MongoDB Atlas', tag: 'NoSQL & Geospatial' },
+  { name: 'MySQL Database', tag: 'Relational & SQL' },
 ]
 
 export default function Skills() {
@@ -83,66 +35,57 @@ export default function Skills() {
     <section id="skills" className={styles.skillsSection}>
       <div className="container">
         <div className="reveal">
-          <div className="section-label">05 / Skills</div>
-          <h2 className="section-title">Technical Expertise</h2>
+          <div className="section-label">04 / Technical Arsenal</div>
+          <h2 className="section-title">Technical Skills &amp; Engineering Practices</h2>
           <p className={styles.sectionSubtitle}>
-            A structured breakdown of languages, frameworks, and developer tools applied in real
-            production systems.
+            A structured, authentic inventory of languages, frameworks, architectural patterns, and
+            developer platforms applied across verified production systems.
           </p>
         </div>
 
         <div className={styles.twoColLayout}>
-          {/* LEFT: Visual Skill Tree */}
+          {/* LEFT: 6 Categorized Skill Groups */}
           <div className={`${styles.treeColumn} reveal`}>
-            {/* Legend */}
-            <div className={styles.legend}>
-              <div className={styles.legendItem}>
-                <span className={`${styles.dot} ${styles.dotGreen}`} />
-                <span>Proficient</span>
-              </div>
-              <div className={styles.legendItem}>
-                <span className={`${styles.dot} ${styles.dotViolet}`} />
-                <span>Building</span>
-              </div>
-              <div className={styles.legendItem}>
-                <span className={`${styles.dot} ${styles.dotOrange}`} />
-                <span>Learning</span>
-              </div>
-            </div>
-
             <div className={styles.categoryList}>
-              {SKILL_DOMAINS.map((domain) => (
-                <div key={domain.category} className={styles.categoryCard}>
-                  <div className={styles.categoryHeader}>
-                    <span className={styles.categoryTitle}>{domain.category}</span>
-                    <span className={styles.skillCount}>{domain.skills.length} skills</span>
-                  </div>
+              {skillCategories.map((cat) => {
+                const IconComponent = ICONS_MAP[cat.icon] || Layout
+                return (
+                  <div key={cat.id} className={styles.categoryCard}>
+                    <div className={styles.categoryHeader}>
+                      <div className={styles.categoryTitleGroup}>
+                        <IconComponent size={18} className={styles.categoryIcon} />
+                        <span className={styles.categoryTitle}>{cat.title}</span>
+                      </div>
+                      <span className={styles.skillCount}>{cat.skills.length} competencies</span>
+                    </div>
 
-                  <div className={styles.chipsWrap}>
-                    {domain.skills.map((skill) => (
-                      <span key={skill.name} className={styles.skillChip}>
-                        <span
-                          className={`${styles.dot} ${
-                            skill.level === 'proficient'
-                              ? styles.dotGreen
-                              : skill.level === 'building'
-                              ? styles.dotViolet
-                              : styles.dotOrange
-                          }`}
-                        />
-                        <span className={styles.skillName}>{skill.name}</span>
-                      </span>
-                    ))}
+                    <p className={styles.categoryDesc}>{cat.description}</p>
+
+                    <div className={styles.chipsWrap}>
+                      {cat.skills.map((skill) => (
+                        <span key={skill.name} className={styles.skillChip}>
+                          <CheckCircle2 size={13} className={styles.chipCheck} />
+                          <span className={styles.skillName}>{skill.name}</span>
+                          {skill.level && (
+                            <span className={styles.levelBadge}>{skill.level}</span>
+                          )}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
 
-          {/* RIGHT: Quote Block & Core Logos */}
+          {/* RIGHT: Engineering Philosophy & Core Pillars */}
           <div className={`${styles.quoteColumn} reveal`}>
+            {/* Engineering Philosophy Card */}
             <div className={styles.quoteCard}>
-              <Quote size={40} className={styles.quoteIcon} />
+              <div className={styles.quoteCardTop}>
+                <Quote size={36} className={styles.quoteIcon} />
+                <span className={styles.philosophyTag}>Engineering Philosophy</span>
+              </div>
               <blockquote className={styles.quoteText}>
                 &ldquo;I believe in learning by building.
                 <br />
@@ -151,10 +94,15 @@ export default function Skills() {
                 Every bug is a teacher.&rdquo;
               </blockquote>
               <div className={styles.quoteAuthor}>— Petros Sisay Gelan</div>
+              <p className={styles.philosophyNote}>
+                Software engineering is more than syntax — it is the disciplined application of
+                computational logic to build dependable, maintainable solutions for real humans.
+              </p>
             </div>
 
+            {/* Core Specialization Pills */}
             <div className={styles.coreBadgesSection}>
-              <h4 className={styles.coreBadgesTitle}>Core Specializations</h4>
+              <h4 className={styles.coreBadgesTitle}>Primary Architectural Focus</h4>
               <div className={styles.badgeGrid}>
                 {CORE_TECH_PILLS.map((tech) => (
                   <div key={tech.name} className={styles.techPillLarge}>
