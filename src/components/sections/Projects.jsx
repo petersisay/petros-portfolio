@@ -8,6 +8,9 @@ import {
   SlidersHorizontal,
   ChevronLeft,
   ChevronRight,
+  ShieldCheck,
+  AlertCircle,
+  Wrench,
 } from 'lucide-react'
 import { Github } from '../common/Icons'
 import { projects, filterCategories } from '../../data/projects'
@@ -56,13 +59,13 @@ export default function Projects() {
     <section id="projects" className={styles.projectsSection}>
       <div className="container">
         <div className="reveal">
-          <div className="section-label">04 / Work</div>
+          <div className="section-label">03 / Featured Projects</div>
           <div className={styles.headerRow}>
             <div>
-              <h2 className="section-title">Featured Engineering Projects</h2>
+              <h2 className="section-title">Engineered Digital Products</h2>
               <p className={styles.sectionSubtitle}>
-                A curated selection of full-stack platforms, cross-platform mobile apps, and distributed
-                systems built with clean architecture and modern tooling.
+                A curated portfolio of full-stack web platforms, cross-platform Flutter applications,
+                and distributed systems built with clean architecture and verified data integrity.
               </p>
             </div>
 
@@ -112,10 +115,12 @@ export default function Projects() {
         </div>
 
         {/* Filter Tabs */}
-        <div className={`${styles.filterRow} reveal`}>
+        <div className={`${styles.filterRow} reveal`} role="tablist" aria-label="Project categories">
           {filterCategories.map((cat) => (
             <button
               key={cat.id}
+              role="tab"
+              aria-selected={activeCategory === cat.id}
               onClick={() => setActiveCategory(cat.id)}
               className={`${styles.filterPill} ${activeCategory === cat.id ? styles.activeFilter : ''}`}
             >
@@ -142,7 +147,7 @@ export default function Projects() {
                   setSelectedProject(project)
                 }
               }}
-              aria-label={`View details for ${project.title}`}
+              aria-label={`View detailed case study for ${project.title}`}
             >
               {/* Project Image */}
               <div className={styles.imageWrapper}>
@@ -151,33 +156,48 @@ export default function Projects() {
                   alt={project.title}
                   className={styles.projectImage}
                   loading="lazy"
-                  onError={(e) => {
-                    e.target.style.display = 'none'
-                  }}
+                  width="600"
+                  height="340"
                 />
                 <div className={styles.imageOverlay}>
-                  <span className={styles.viewPrompt}>Click for Case Study</span>
+                  <span className={styles.viewPrompt}>Open Case Study</span>
                 </div>
               </div>
 
               {/* Card Body */}
               <div className={styles.cardBody}>
-                {/* Categories & Tech chips */}
+                {/* Meta Badges */}
                 <div className={styles.chipsRow}>
-                  {project.featured && (
-                    <span className={styles.featuredBadge}>
-                      <Sparkles size={11} /> Featured
+                  {project.statusBadge && (
+                    <span
+                      className={`${styles.statusBadge} ${
+                        project.statusBadge.includes('In Development')
+                          ? styles.statusDev
+                          : styles.statusLive
+                      }`}
+                    >
+                      {project.statusBadge}
                     </span>
                   )}
-                  {project.tech?.slice(0, 3).map((t) => (
-                    <span key={t} className={styles.techChip}>
-                      {t}
-                    </span>
-                  ))}
+                  {project.projectType && (
+                    <span className={styles.typeBadge}>{project.projectType}</span>
+                  )}
                 </div>
 
                 <h3 className={styles.projectTitle}>{project.title}</h3>
                 <p className={styles.projectDesc}>{project.description}</p>
+
+                {/* Tech Pills */}
+                <div className={styles.techList}>
+                  {project.tech?.slice(0, 4).map((t) => (
+                    <span key={t} className={styles.techChip}>
+                      {t}
+                    </span>
+                  ))}
+                  {project.tech?.length > 4 && (
+                    <span className={styles.techMore}>+{project.tech.length - 4}</span>
+                  )}
+                </div>
 
                 {/* Footer Buttons */}
                 <div className={styles.cardFooter}>
@@ -188,10 +208,10 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       className={styles.linkBtn}
                       onClick={(e) => e.stopPropagation()}
-                      aria-label={`GitHub repo for ${project.title}`}
+                      aria-label={`GitHub repository for ${project.title}`}
                     >
                       <Github size={15} />
-                      <span>Code →</span>
+                      <span>Source →</span>
                     </a>
                   )}
 
@@ -202,10 +222,10 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       className={`${styles.linkBtn} ${styles.liveBtn}`}
                       onClick={(e) => e.stopPropagation()}
-                      aria-label={`Live demo for ${project.title}`}
+                      aria-label={`Live production deployment for ${project.title}`}
                     >
                       <ExternalLink size={15} />
-                      <span>Live Demo →</span>
+                      <span>Live Site →</span>
                     </a>
                   )}
                 </div>
@@ -227,7 +247,7 @@ export default function Projects() {
               <button
                 className={styles.closeBtn}
                 onClick={() => setSelectedProject(null)}
-                aria-label="Close dialog"
+                aria-label="Close case study dialog"
               >
                 <X size={20} />
               </button>
@@ -237,17 +257,26 @@ export default function Projects() {
                   src={selectedProject.image}
                   alt={selectedProject.title}
                   className={styles.modalImage}
+                  width="800"
+                  height="450"
                 />
               </div>
 
               <div className={styles.modalBody}>
                 <div className={styles.modalMeta}>
-                  {selectedProject.category && (
-                    <span className={styles.modalCategory}>
-                      {Array.isArray(selectedProject.category)
-                        ? selectedProject.category.join(' · ')
-                        : selectedProject.category}
+                  {selectedProject.statusBadge && (
+                    <span
+                      className={`${styles.statusBadge} ${
+                        selectedProject.statusBadge.includes('In Development')
+                          ? styles.statusDev
+                          : styles.statusLive
+                      }`}
+                    >
+                      {selectedProject.statusBadge}
                     </span>
+                  )}
+                  {selectedProject.projectType && (
+                    <span className={styles.typeBadge}>{selectedProject.projectType}</span>
                   )}
                 </div>
 
@@ -263,28 +292,63 @@ export default function Projects() {
                   {selectedProject.longDescription || selectedProject.description}
                 </p>
 
-                {/* Problem & Solution */}
+                {/* Problem & Solution Grid */}
                 {(selectedProject.problem || selectedProject.solution) && (
                   <div className={styles.probSolGrid}>
                     {selectedProject.problem && (
                       <div className={styles.probCard}>
-                        <h4 className={styles.probTitle}>The Engineering Problem</h4>
+                        <div className={styles.probHeader}>
+                          <AlertCircle size={16} />
+                          <h4 className={styles.probTitle}>The Engineering Problem</h4>
+                        </div>
                         <p className={styles.probText}>{selectedProject.problem}</p>
                       </div>
                     )}
                     {selectedProject.solution && (
                       <div className={styles.solCard}>
-                        <h4 className={styles.solTitle}>The Architectural Solution</h4>
+                        <div className={styles.solHeader}>
+                          <ShieldCheck size={16} />
+                          <h4 className={styles.solTitle}>The Architectural Solution</h4>
+                        </div>
                         <p className={styles.solText}>{selectedProject.solution}</p>
                       </div>
                     )}
                   </div>
                 )}
 
-                {/* Features List */}
+                {/* Engineering Contributions */}
+                {selectedProject.contributions && selectedProject.contributions.length > 0 && (
+                  <div className={styles.featuresSection}>
+                    <div className={styles.sectionHeaderRow}>
+                      <Wrench size={16} className={styles.sectionIcon} />
+                      <h4 className={styles.featuresHeading}>My Engineering Contributions</h4>
+                    </div>
+                    <ul className={styles.featuresList}>
+                      {selectedProject.contributions.map((item, idx) => (
+                        <li key={idx} className={styles.featureItem}>
+                          <Check size={16} className={styles.checkIcon} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Technical Challenges */}
+                {selectedProject.challenges && (
+                  <div className={styles.challengeBox}>
+                    <h4 className={styles.challengeHeading}>Technical Challenge Overcome</h4>
+                    <p className={styles.challengeText}>{selectedProject.challenges}</p>
+                  </div>
+                )}
+
+                {/* Core Features List */}
                 {selectedProject.features && selectedProject.features.length > 0 && (
                   <div className={styles.featuresSection}>
-                    <h4 className={styles.featuresHeading}>Core Architectural Features</h4>
+                    <div className={styles.sectionHeaderRow}>
+                      <Sparkles size={16} className={styles.sectionIcon} />
+                      <h4 className={styles.featuresHeading}>Core Architectural Capabilities</h4>
+                    </div>
                     <ul className={styles.featuresList}>
                       {selectedProject.features.map((feature, idx) => (
                         <li key={idx} className={styles.featureItem}>
@@ -318,7 +382,7 @@ export default function Projects() {
                       className={styles.modalPrimaryBtn}
                     >
                       <Github size={18} />
-                      <span>View Source on GitHub</span>
+                      <span>Inspect Repository on GitHub</span>
                     </a>
                   )}
                   {selectedProject.liveUrl && (
