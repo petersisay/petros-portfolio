@@ -520,8 +520,98 @@
   transform: translateY(-2px);
 }
 
+
+/* ── Modal Screenshot Gallery Switcher ── */
+.galleryContainer {
+  background-color: var(--bg-card-alt);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+}
+
+.galleryTabs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem 0.5rem;
+}
+
+.galleryThumbBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  text-align: center;
+  width: 100%;
+}
+
+.galleryThumbBtn:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+}
+
+.galleryThumbActive {
+  border-color: var(--accent-primary) !important;
+  background-color: var(--accent-light) !important;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.25);
+}
+
+.galleryThumbImg {
+  width: 100%;
+  height: 40px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 3px;
+}
+
+.galleryThumbLabel {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.galleryCaption {
+  padding: 0.25rem 1.25rem 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.captionBadge {
+  display: inline-block;
+  font-size: 0.675rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-primary);
+  background-color: var(--accent-light);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
 @media (max-width: 640px) {
   .featuredGrid, .projectsGrid, .problemSolutionGrid {
     grid-template-columns: 1fr;
+  }
+  .galleryTabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .modalImageContainer {
+    max-height: 200px;
   }
 }
