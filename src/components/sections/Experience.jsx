@@ -1,49 +1,113 @@
 import React from 'react'
-import { Briefcase, Calendar, MapPin, Award, CheckCircle2, ArrowRight } from 'lucide-react'
+import {
+  Briefcase,
+  GraduationCap,
+  Calendar,
+  MapPin,
+  Award,
+  CheckCircle2,
+  BookOpen,
+  Building2,
+  Code2,
+} from 'lucide-react'
 import styles from './Experience.module.css'
 
-const IN_PROGRESS_PROJECTS = [
-  {
-    title: 'TemariHub',
-    tagline: 'STEM Opportunity Tracker',
-    desc: 'Bilingual opportunity platform for Ethiopian STEM students with 125+ automated Vitest tests, CSRF security, and 7-stage application tracking.',
-    tech: ['React 19', 'TypeScript', 'Node.js', 'Express', 'MongoDB Atlas', 'Vitest'],
-    link: '#projects',
-  },
-  {
-    title: 'Lehulu',
-    tagline: 'Services Marketplace',
-    desc: 'Local services marketplace with geospatial municipal boundaries across Adama, Bishoftu, and Addis Ababa, connecting households with verified specialists.',
-    tech: ['TypeScript', 'React', 'Node.js', 'Express', 'MongoDB Atlas', 'Geospatial'],
-    link: '#projects',
-  },
-  {
-    title: 'Revola',
-    tagline: 'Circular Marketplace',
-    desc: 'Circular materials marketplace with Chapa ETB payment gateway, Leaflet depot mapping with 2dsphere indexing, and companion Flutter mobile app.',
-    tech: ['React 19', 'TypeScript', 'Express', 'MongoDB Atlas', 'Chapa API', 'Flutter'],
-    link: '#projects',
-  },
-]
-
 export default function Experience() {
-  const scrollToProjects = (e) => {
-    e.preventDefault()
-    const el = document.getElementById('projects')
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <section id="experience" className={styles.experienceSection}>
       <div className="container">
         <div className="reveal">
-          <div className="section-label">03 / Experience</div>
-          <h2 className="section-title">Professional Experience</h2>
+          <div className="section-label">05 / Experience &amp; Education</div>
+          <h2 className="section-title">Academic &amp; Professional Milestones</h2>
+          <p className={styles.sectionSubtitle}>
+            A verified timeline distinguishing formal university engineering education, industrial
+            internship contributions, and independent software development.
+          </p>
         </div>
 
-        {/* Featured Internship Card */}
+        {/* 1. Academic Education Card */}
+        <div className={`${styles.mainCard} ${styles.eduCard} reveal`}>
+          <div className={`${styles.accentBar} ${styles.eduAccentBar}`} />
+
+          <div className={styles.cardContent}>
+            <div className={styles.cardTop}>
+              <div>
+                <span className={styles.typePill}>Formal University Education</span>
+                <h3 className={styles.companyName}>Adama Science and Technology University (ASTU)</h3>
+                <div className={styles.roleName}>
+                  B.Sc. in Software Engineering — Fourth-Year, First-Semester Student
+                </div>
+              </div>
+
+              <div className={styles.badgeCol}>
+                <div className={styles.statusBadge}>
+                  <GraduationCap size={16} />
+                  <span>Senior Undergrad</span>
+                </div>
+                <div className={styles.metaRow}>
+                  <span className={styles.metaItem}>
+                    <Calendar size={14} /> 2023 – Present
+                  </span>
+                  <span className={styles.metaDivider}>•</span>
+                  <span className={styles.metaItem}>
+                    <MapPin size={14} /> Adama, Ethiopia
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.departmentNote}>
+              Department of <strong>Software Engineering</strong>, School of Electrical Engineering &amp; Computing.
+            </div>
+
+            <div className={styles.achievements}>
+              <h4 className={styles.achievementsTitle}>Core Academic Pillars &amp; Disciplines:</h4>
+              <ul className={styles.bulletList}>
+                <li className={styles.bulletItem}>
+                  <CheckCircle2 size={18} className={styles.bulletIcon} />
+                  <span>
+                    Mastered computational fundamentals: <strong>Data Structures &amp; Algorithms</strong>,{' '}
+                    <strong>Object-Oriented Analysis &amp; Design (OOAD)</strong>, and formal{' '}
+                    <strong>Software Engineering Methodologies</strong>.
+                  </span>
+                </li>
+                <li className={styles.bulletItem}>
+                  <CheckCircle2 size={18} className={styles.bulletIcon} />
+                  <span>
+                    Designed relational databases using <strong>MySQL</strong> with strict 3NF normalization,
+                    indexing, transactions, and JDBC persistence layers.
+                  </span>
+                </li>
+                <li className={styles.bulletItem}>
+                  <CheckCircle2 size={18} className={styles.bulletIcon} />
+                  <span>
+                    Completed advanced coursework in <strong>Operating Systems</strong>,{' '}
+                    <strong>Computer Networking (TCP/IP, Sockets)</strong>, and <strong>Distributed Web Architecture</strong>.
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div className={styles.techPillRow}>
+              {[
+                'Data Structures',
+                'Algorithms',
+                'Software Architecture',
+                'Java EE',
+                'MySQL / SQL',
+                'Operating Systems',
+                'Computer Networks',
+                'Object-Oriented Design',
+              ].map((topic) => (
+                <span key={topic} className={styles.techPill}>
+                  {topic}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Professional Internship Card */}
         <div className={`${styles.mainCard} reveal`}>
           <div className={styles.accentBar} />
 
@@ -73,12 +137,12 @@ export default function Experience() {
             </div>
 
             <div className={styles.departmentNote}>
-              Worked in the <strong>Innovation & Development Department</strong> under the mentorship of{' '}
-              <strong>Mr. Million Sime</strong>.
+              Completed practical industrial training in the <strong>Innovation &amp; Development Department</strong> under
+              the mentorship of <strong>Mr. Million Sime</strong>.
             </div>
 
             <div className={styles.achievements}>
-              <h4 className={styles.achievementsTitle}>Key Deliverables & Systems Built:</h4>
+              <h4 className={styles.achievementsTitle}>Key Deliverables &amp; Systems Engineered:</h4>
               <ul className={styles.bulletList}>
                 <li className={styles.bulletItem}>
                   <CheckCircle2 size={18} className={styles.bulletIcon} />
@@ -92,7 +156,7 @@ export default function Experience() {
                   <CheckCircle2 size={18} className={styles.bulletIcon} />
                   <span>
                     Architected <strong>Socket.IO real-time courier tracking</strong> pipelines integrated
-                    with municipal boundary geofencing to dispatch delivery events with low latency.
+                    with municipal boundary geofencing to dispatch delivery telemetry with sub-second latency.
                   </span>
                 </li>
                 <li className={styles.bulletItem}>
@@ -100,14 +164,14 @@ export default function Experience() {
                   <span>
                     Integrated secure fintech payment webhooks for <strong>Chapa</strong> and{' '}
                     <strong>Telebirr</strong>, ensuring cryptographic payload validation and transactional
-                    reliability.
+                    idempotency.
                   </span>
                 </li>
                 <li className={styles.bulletItem}>
                   <CheckCircle2 size={18} className={styles.bulletIcon} />
                   <span>
                     Designed end-to-end geospatial data ingestion pipelines supporting scalable urban delivery
-                    and localized routing services.
+                    and localized routing services in regional hubs.
                   </span>
                 </li>
               </ul>
@@ -132,43 +196,35 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* Currently Building Sub-section */}
-        <div className={styles.inProgressSection}>
-          <div className="reveal">
-            <div className={styles.subHeader}>
-              <h3 className={styles.subHeading}>Currently Building (4th Year Engineering)</h3>
-              <span className={styles.inProgressBadge}>🔨 In Progress</span>
-            </div>
-            <p className={styles.subDesc}>
-              Large-scale systems currently undergoing active development, testing, and production
-              rollout.
-            </p>
+        {/* 3. Engineering Work Classification Note */}
+        <div className={`${styles.classificationBox} reveal`}>
+          <div className={styles.classHeader}>
+            <Building2 size={20} className={styles.classIcon} />
+            <h4 className={styles.classTitle}>Engineering Distinction Protocol</h4>
           </div>
-
-          <div className={styles.inProgressGrid}>
-            {IN_PROGRESS_PROJECTS.map((proj) => (
-              <div key={proj.title} className={`${styles.inProgressCard} reveal`}>
-                <div className={styles.inProgressCardHeader}>
-                  <span className={styles.inProgressCardTag}>🔨 In Progress</span>
-                  <span className={styles.inProgressCategory}>{proj.tagline}</span>
-                </div>
-                <h4 className={styles.inProgressTitle}>{proj.title}</h4>
-                <p className={styles.inProgressDesc}>{proj.desc}</p>
-
-                <div className={styles.inProgressTech}>
-                  {proj.tech.map((t) => (
-                    <span key={t} className={styles.miniTechPill}>
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <a href={proj.link} onClick={scrollToProjects} className={styles.viewLink}>
-                  <span>Explore details</span>
-                  <ArrowRight size={14} />
-                </a>
-              </div>
-            ))}
+          <p className={styles.classDesc}>
+            To maintain complete transparency and professional integrity, every item in this portfolio
+            is strictly categorized:
+          </p>
+          <div className={styles.classGrid}>
+            <div className={styles.classCard}>
+              <span className={styles.classCardTag}>Industry Internship</span>
+              <p className={styles.classCardText}>
+                Production enterprise services developed under direct supervision at AIG-Tech Enterprise.
+              </p>
+            </div>
+            <div className={styles.classCard}>
+              <span className={styles.classCardTag}>Independent Full-Stack</span>
+              <p className={styles.classCardText}>
+                Autonomous production deployments addressing civic, educational, and logistics needs (Revola, PetroFlow, TemariHub, Lehulu, CodeTogether).
+              </p>
+            </div>
+            <div className={styles.classCard}>
+              <span className={styles.classCardTag}>Academic &amp; In-Development</span>
+              <p className={styles.classCardText}>
+                University laboratory architectures and course projects (EngiLab, Student Registration System, Java Multi-Client Chat).
+              </p>
+            </div>
           </div>
         </div>
       </div>
