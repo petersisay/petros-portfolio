@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Mail, Send, CheckCircle2, AlertCircle, Loader2, ArrowUpRight } from 'lucide-react'
 import { Github, Linkedin, Telegram } from '../common/Icons'
+import { siteConfig } from '../../data/config'
 import styles from './Contact.module.css'
 
 export default function Contact() {
@@ -20,9 +21,9 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setStatus('error')
-      setErrorMessage('Please fill in all required fields.')
+      setErrorMessage('Please complete all required fields.')
       return
     }
 
@@ -30,18 +31,18 @@ export default function Contact() {
     setErrorMessage('')
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/petrossisay7164@gmail.com', {
+      const response = await fetch(siteConfig.contactEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject || 'Portfolio Inquiry',
-          message: formData.message,
-          _subject: `Portfolio Contact: ${formData.subject || 'New Message'}`,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim() || 'Portfolio Project Inquiry',
+          message: formData.message.trim(),
+          _subject: `Portfolio Inquiry from ${formData.name.trim()}: ${formData.subject.trim() || 'New Message'}`,
         }),
       })
 
@@ -50,11 +51,15 @@ export default function Contact() {
         setFormData({ name: '', email: '', subject: '', message: '' })
       } else {
         setStatus('error')
-        setErrorMessage('Failed to send message. Please email petrossisay7164@gmail.com directly.')
+        setErrorMessage(
+          `Unable to deliver message right now. Please email ${siteConfig.email} directly.`
+        )
       }
     } catch (err) {
       setStatus('error')
-      setErrorMessage('Network error occurred. Please try again or reach out via email.')
+      setErrorMessage(
+        `Network error encountered. Please verify your connection or email ${siteConfig.email} directly.`
+      )
     }
   }
 
@@ -62,36 +67,40 @@ export default function Contact() {
     <section id="contact" className={styles.contactSection}>
       <div className="container">
         <div className="reveal">
-          <div className="section-label">06 / Contact</div>
-          <h2 className="section-title">Get in Touch</h2>
+          <div className="section-label">07 / Contact</div>
+          <h2 className="section-title">Initiate Collaboration</h2>
+          <p className={styles.sectionSubtitle}>
+            Whether you have an internship opportunity, full-stack project inquiry, or technical collaboration,
+            my inbox is always accessible.
+          </p>
         </div>
 
         <div className={styles.grid}>
-          {/* Left Column */}
+          {/* Left Column: Direct verified channels */}
           <div className={`${styles.infoCol} reveal`}>
-            <h3 className={styles.leftHeading}>Let&apos;s Work Together</h3>
+            <h3 className={styles.leftHeading}>Let&apos;s Build Together</h3>
             <p className={styles.leadText}>
-              I&apos;m actively looking for internship opportunities and junior developer roles.
-              Whether you have a project, an opportunity, or just want to connect — my inbox is
-              always open.
+              I am actively seeking software engineering internships, junior developer roles, and
+              high-impact collaborative opportunities. Reach out via direct channels or send a message
+              through the form.
             </p>
 
             <div className={styles.contactList}>
               {/* Email */}
-              <a href="mailto:petrossisay7164@gmail.com" className={styles.contactCard}>
+              <a href={`mailto:${siteConfig.email}`} className={styles.contactCard}>
                 <div className={styles.iconCircle}>
                   <Mail size={18} />
                 </div>
                 <div className={styles.contactTextGroup}>
-                  <span className={styles.contactType}>Email</span>
-                  <span className={styles.contactValue}>petrossisay7164@gmail.com</span>
+                  <span className={styles.contactType}>Direct Email</span>
+                  <span className={styles.contactValue}>{siteConfig.email}</span>
                 </div>
                 <ArrowUpRight size={16} className={styles.arrowIcon} />
               </a>
 
               {/* GitHub */}
               <a
-                href="https://github.com/petrossisay1646"
+                href={siteConfig.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.contactCard}
@@ -100,15 +109,15 @@ export default function Contact() {
                   <Github size={18} />
                 </div>
                 <div className={styles.contactTextGroup}>
-                  <span className={styles.contactType}>GitHub</span>
-                  <span className={styles.contactValue}>github.com/petrossisay1646</span>
+                  <span className={styles.contactType}>GitHub Codebase</span>
+                  <span className={styles.contactValue}>github.com/{siteConfig.githubUsername}</span>
                 </div>
                 <ArrowUpRight size={16} className={styles.arrowIcon} />
               </a>
 
               {/* LinkedIn */}
               <a
-                href="https://www.linkedin.com/in/petros-sisay-gelan"
+                href={siteConfig.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.contactCard}
@@ -117,7 +126,7 @@ export default function Contact() {
                   <Linkedin size={18} />
                 </div>
                 <div className={styles.contactTextGroup}>
-                  <span className={styles.contactType}>LinkedIn</span>
+                  <span className={styles.contactType}>LinkedIn Profile</span>
                   <span className={styles.contactValue}>linkedin.com/in/petros-sisay-gelan</span>
                 </div>
                 <ArrowUpRight size={16} className={styles.arrowIcon} />
@@ -125,7 +134,7 @@ export default function Contact() {
 
               {/* Telegram */}
               <a
-                href="https://t.me/Petros_sisay"
+                href={siteConfig.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.contactCard}
@@ -134,8 +143,8 @@ export default function Contact() {
                   <Telegram size={18} />
                 </div>
                 <div className={styles.contactTextGroup}>
-                  <span className={styles.contactType}>Telegram</span>
-                  <span className={styles.contactValue}>t.me/Petros_sisay</span>
+                  <span className={styles.contactType}>Telegram Messaging</span>
+                  <span className={styles.contactValue}>{siteConfig.telegramHandle}</span>
                 </div>
                 <ArrowUpRight size={16} className={styles.arrowIcon} />
               </a>
@@ -144,15 +153,15 @@ export default function Contact() {
 
           {/* Right Column: Contact Form */}
           <div className={`${styles.formCol} reveal`}>
-            <form onSubmit={handleSubmit} className={styles.formCard}>
+            <form onSubmit={handleSubmit} className={styles.formCard} noValidate>
               <h4 className={styles.formTitle}>Send a Direct Message</h4>
 
               <div className={styles.fieldGroup}>
-                <label htmlFor="name" className={styles.label}>
+                <label htmlFor="contact-name" className={styles.label}>
                   Your Name <span className={styles.req}>*</span>
                 </label>
                 <input
-                  id="name"
+                  id="contact-name"
                   type="text"
                   name="name"
                   required
@@ -165,15 +174,15 @@ export default function Contact() {
               </div>
 
               <div className={styles.fieldGroup}>
-                <label htmlFor="email" className={styles.label}>
+                <label htmlFor="contact-email" className={styles.label}>
                   Your Email <span className={styles.req}>*</span>
                 </label>
                 <input
-                  id="email"
+                  id="contact-email"
                   type="email"
                   name="email"
                   required
-                  placeholder="e.g. abebe@example.com"
+                  placeholder="e.g. abebe@company.com"
                   value={formData.email}
                   onChange={handleChange}
                   className={styles.input}
@@ -182,14 +191,14 @@ export default function Contact() {
               </div>
 
               <div className={styles.fieldGroup}>
-                <label htmlFor="subject" className={styles.label}>
+                <label htmlFor="contact-subject" className={styles.label}>
                   Subject
                 </label>
                 <input
-                  id="subject"
+                  id="contact-subject"
                   type="text"
                   name="subject"
-                  placeholder="e.g. Internship Opportunity / Project Collaboration"
+                  placeholder="e.g. Software Engineering Opportunity / Project Inquiry"
                   value={formData.subject}
                   onChange={handleChange}
                   className={styles.input}
@@ -198,15 +207,15 @@ export default function Contact() {
               </div>
 
               <div className={styles.fieldGroup}>
-                <label htmlFor="message" className={styles.label}>
+                <label htmlFor="contact-message" className={styles.label}>
                   Message <span className={styles.req}>*</span>
                 </label>
                 <textarea
-                  id="message"
+                  id="contact-message"
                   name="message"
                   rows={5}
                   required
-                  placeholder="Hi Petros, I reviewed your portfolio and would like to discuss..."
+                  placeholder="Hi Petros, I reviewed your software portfolio and would like to connect regarding..."
                   value={formData.message}
                   onChange={handleChange}
                   className={styles.textarea}
@@ -215,16 +224,16 @@ export default function Contact() {
               </div>
 
               {status === 'success' && (
-                <div className={styles.successBanner}>
+                <div className={styles.successBanner} role="alert">
                   <CheckCircle2 size={18} />
-                  <span>Message sent successfully! I will reply to your email shortly.</span>
+                  <span>Your message was delivered successfully! I will reply to your email shortly.</span>
                 </div>
               )}
 
               {status === 'error' && (
-                <div className={styles.errorBanner}>
+                <div className={styles.errorBanner} role="alert">
                   <AlertCircle size={18} />
-                  <span>{errorMessage || 'Failed to send message.'}</span>
+                  <span>{errorMessage || 'Failed to dispatch message.'}</span>
                 </div>
               )}
 
@@ -236,7 +245,7 @@ export default function Contact() {
                 {status === 'loading' ? (
                   <>
                     <Loader2 size={18} className={styles.spinner} />
-                    <span>Sending message...</span>
+                    <span>Transmitting message...</span>
                   </>
                 ) : (
                   <>
