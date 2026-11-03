@@ -1,14 +1,15 @@
 import React from 'react'
 import { Sun, Moon } from 'lucide-react'
 import { Github, Linkedin, Telegram } from '../common/Icons'
+import { siteConfig } from '../../data/config'
 import styles from './SideNav.module.css'
 
 const NAV_ITEMS = [
   { id: 'hero', number: '01', label: 'Hero' },
   { id: 'about', number: '02', label: 'About' },
   { id: 'experience', number: '03', label: 'Experience' },
-  { id: 'projects', number: '04', label: 'Work' },
-  { id: 'skills', number: '05', label: 'Skills' },
+  { id: 'projects', number: '04', label: 'Projects' },
+  { id: 'skills', number: '05', label: 'Arsenal' },
   { id: 'contact', number: '06', label: 'Contact' },
 ]
 
@@ -28,9 +29,10 @@ export default function SideNav({ active, theme, toggleTheme }) {
           <span className={styles.logoAccent}>P</span>SG
         </a>
         <div className={styles.roleSub}>Full-Stack Developer</div>
+        <div className={styles.instSub}>ASTU · 4th Year</div>
       </div>
 
-      <nav className={styles.nav}>
+      <nav className={styles.nav} aria-label="Main Navigation">
         {NAV_ITEMS.map((item) => {
           const isActive = active === item.id
           return (
@@ -50,7 +52,7 @@ export default function SideNav({ active, theme, toggleTheme }) {
       <div className={styles.bottom}>
         <div className={styles.socials}>
           <a
-            href="https://github.com/petrossisay1646"
+            href={siteConfig.github}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Profile"
@@ -59,7 +61,7 @@ export default function SideNav({ active, theme, toggleTheme }) {
             <Github size={18} />
           </a>
           <a
-            href="https://www.linkedin.com/in/petros-sisay-gelan"
+            href={siteConfig.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
@@ -68,7 +70,7 @@ export default function SideNav({ active, theme, toggleTheme }) {
             <Linkedin size={18} />
           </a>
           <a
-            href="https://t.me/Petros_sisay"
+            href={siteConfig.telegram}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Telegram Profile"

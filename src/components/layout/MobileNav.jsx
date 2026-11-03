@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { Github, Linkedin, Telegram } from '../common/Icons'
+import { siteConfig } from '../../data/config'
 import styles from './MobileNav.module.css'
 
 const NAV_ITEMS = [
   { id: 'hero', number: '01', label: 'Hero' },
   { id: 'about', number: '02', label: 'About' },
   { id: 'experience', number: '03', label: 'Experience' },
-  { id: 'projects', number: '04', label: 'Work' },
-  { id: 'skills', number: '05', label: 'Skills' },
+  { id: 'projects', number: '04', label: 'Projects' },
+  { id: 'skills', number: '05', label: 'Arsenal' },
   { id: 'contact', number: '06', label: 'Contact' },
 ]
 
@@ -63,7 +64,7 @@ export default function MobileNav({ active, theme, toggleTheme }) {
 
       {isOpen && (
         <div className={styles.overlay}>
-          <nav className={styles.navList}>
+          <nav className={styles.navList} aria-label="Mobile Navigation">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.id}
@@ -82,7 +83,7 @@ export default function MobileNav({ active, theme, toggleTheme }) {
 
           <div className={styles.bottomSocials}>
             <a
-              href="https://github.com/petrossisay1646"
+              href={siteConfig.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
@@ -91,7 +92,7 @@ export default function MobileNav({ active, theme, toggleTheme }) {
               <Github size={20} />
             </a>
             <a
-              href="https://www.linkedin.com/in/petros-sisay-gelan"
+              href={siteConfig.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
@@ -100,7 +101,7 @@ export default function MobileNav({ active, theme, toggleTheme }) {
               <Linkedin size={20} />
             </a>
             <a
-              href="https://t.me/Petros_sisay"
+              href={siteConfig.telegram}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Telegram Profile"

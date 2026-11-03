@@ -12,23 +12,23 @@
   padding: 40px 24px;
   z-index: 100;
   box-sizing: border-box;
-  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 
 .top {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   padding-bottom: 24px;
   border-bottom: 1px solid var(--border);
 }
 
 .logo {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2rem;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2.2rem;
   font-weight: 400;
   letter-spacing: -0.02em;
-  color: var(--text);
+  color: var(--text-primary);
   line-height: 1;
 }
 
@@ -37,10 +37,19 @@
 }
 
 .roleSub {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.instSub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -79,7 +88,7 @@
 }
 
 .navItem:hover {
-  color: var(--text);
+  color: var(--text-primary);
   background: var(--bg-subtle);
 }
 
@@ -119,7 +128,7 @@
 .socials {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .socialBtn {
