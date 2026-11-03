@@ -5,35 +5,42 @@
 export const siteConfig = {
   name: 'Petros Sisay Gelan',
   shortName: 'Petros',
-  initials: 'PG',
-  title: 'Software Engineering Student & Full-Stack Developer',
-  tagline: 'Building thoughtful digital experiences, scalable platforms, and practical software solutions.',
-  bio: "I'm a 4th-Year Senior Software Engineering Student at Adama Science and Technology University (ASTU) in Ethiopia. I build production-grade web platforms, mobile apps, and distributed backend systems with a focus on clean code, reliability, and solving real-world African challenges.",
+  initials: 'PSG',
+  title: 'Full-Stack Developer | Software Engineering Student',
+  headline: 'Building Digital Products That Solve Real Problems.',
+  tagline:
+    'I design, develop, and deploy practical software solutions using modern technologies, combining thoughtful engineering, problem-solving, and user-centered design.',
+  bio:
+    "I'm a Fourth-year, first-semester Software Engineering student at Adama Science and Technology University (ASTU), Ethiopia. I design, develop, and deploy practical software solutions using modern web, mobile, and backend technologies — bridging engineering fundamentals with practical products that solve real-world problems.",
 
-  // Identity & Specs
+  // Identity & Academic Standing
   location: 'Adama, Ethiopia',
   university: 'Adama Science and Technology University (ASTU)',
+  department: 'Software Engineering',
   degree: 'B.Sc. Software Engineering',
-  year: '4th Year Senior Student',
+  year: 'Fourth-year, first-semester Software Engineering student',
   status: 'Open to Internships & Junior Roles',
 
-  // Social & Contact Links
-  email: 'petrossisay1646@gmail.com',
-  github: 'https://github.com/petrossisay1646',
-  githubUsername: 'petrossisay1646',
-  linkedin: 'https://www.linkedin.com/in/petros-sisay-gelan',
+  // Verified Social & Contact Links
+  email: 'petrossisay7164@gmail.com',
+  github: 'https://github.com/petersisay',
+  githubUsername: 'petersisay',
+  linkedin: 'https://www.linkedin.com/in/petros-sisay-gelan/',
   telegram: 'https://t.me/Petros_sisay',
   telegramHandle: '@Petros_sisay',
 
-  // Asset paths (User can place cv.pdf and profile.jpg in public/)
-  cvPath: '/cv.pdf',
+  // Asset paths
+  cvPath: '/cv.html',
+  cvPdfPath: '/cv.pdf',
   profilePhoto: '/profile.jpg',
 
-  // Active contact endpoint sending real emails to petrossisay1646@gmail.com
-  contactEndpoint: 'https://formsubmit.co/ajax/petrossisay1646@gmail.com',
+  // Active verified contact endpoint
+  contactEndpoint: 'https://formsubmit.co/ajax/petrossisay7164@gmail.com',
 
   // Meta SEO
-  metaTitle: 'Petros Sisay Gelan — Software Engineering Student & Full-Stack Developer',
-  metaDescription: 'Software Engineering student at ASTU building responsive web applications, Java desktop/web software, and database systems. Open to internships and junior developer roles.',
-  keywords: 'Petros Sisay Gelan, Software Engineering, Full Stack Developer, ASTU, React, Java, MySQL, Web Development, Ethiopia',
+  metaTitle: 'Petros Sisay Gelan — Full-Stack Developer | Software Engineering Student',
+  metaDescription:
+    'Fourth-year Software Engineering student at ASTU building practical digital products, full-stack web platforms, Flutter mobile apps, and backend database systems.',
+  keywords:
+    'Petros Sisay Gelan, Software Engineering, Full Stack Developer, ASTU, React, Node.js, Express, MongoDB, Flutter, Java, Ethiopia, Portfolio',
 };
