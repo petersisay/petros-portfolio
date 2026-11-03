@@ -7,10 +7,11 @@ import styles from './MobileNav.module.css'
 const NAV_ITEMS = [
   { id: 'hero', number: '01', label: 'Hero' },
   { id: 'about', number: '02', label: 'About' },
-  { id: 'experience', number: '03', label: 'Experience' },
-  { id: 'projects', number: '04', label: 'Projects' },
-  { id: 'skills', number: '05', label: 'Arsenal' },
-  { id: 'contact', number: '06', label: 'Contact' },
+  { id: 'projects', number: '03', label: 'Projects' },
+  { id: 'skills', number: '04', label: 'Arsenal' },
+  { id: 'experience', number: '05', label: 'Experience' },
+  { id: 'engineering-activity', number: '06', label: 'Activity' },
+  { id: 'contact', number: '07', label: 'Contact' },
 ]
 
 export default function MobileNav({ active, theme, toggleTheme }) {
