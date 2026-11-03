@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* ═══════════════════════════════════════════════════════════════════
+   GLOBAL STYLES & ACCESSIBLE TYPOGRAPHY — Petros Sisay Gelan
+   ═══════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -9,52 +13,67 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--bg);
+  background-color: var(--bg);
   color: var(--text);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.7;
   overflow-x: hidden;
-  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+  transition: background-color var(--dur) var(--ease),
+              color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Headings & Editorial Typography */
 h1, h2, h3, h4 {
-  font-family: 'DM Serif Display', serif;
-  line-height: 1.2;
+  font-family: 'DM Serif Display', Georgia, serif;
+  line-height: 1.25;
   font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
-code, .mono {
-  font-family: 'JetBrains Mono', monospace;
+/* Monospace Technical Data */
+code, pre, .mono {
+  font-family: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
+/* Clean Links & Images */
 a {
   color: inherit;
   text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
-button, input, textarea {
+button, input, textarea, select {
   font-family: inherit;
+  font-size: inherit;
 }
 
-.accent {
-  color: var(--accent);
+/* Accessible Focus Ring */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
-.container {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 32px;
+/* Selection Highlight */
+::selection {
+  background: var(--accent);
+  color: #FFFFFF;
 }
 
-/* Scrollbar */
+/* Custom Minimal Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -62,45 +81,31 @@ button, input, textarea {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
-  border-radius: 3px;
 }
 
-/* Selection */
-::selection {
-  background: var(--accent);
-  color: #000;
+/* Layout Utilities */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 32px;
 }
 
-/* Reveal animation */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-  will-change: opacity, transform;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-24px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-  will-change: opacity, transform;
-}
-.reveal-left.visible {
-  opacity: 1;
-  transform: translateX(0);
+.accent {
+  color: var(--accent);
 }
 
-/* Reusable section styling */
+/* Section Header Patterns */
 .section-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 600;
   color: var(--accent);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 8px;
   display: inline-flex;
@@ -110,11 +115,52 @@ button, input, textarea {
 
 .section-title {
   font-size: clamp(2rem, 3.5vw, 3rem);
-  font-family: 'DM Serif Display', serif;
-  color: var(--text);
+  font-family: 'DM Serif Display', Georgia, serif;
+  color: var(--text-primary);
   margin-bottom: 24px;
 }
 
+/* Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  will-change: opacity, transform;
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .reveal-left {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Responsive Padding */
 @media (max-width: 768px) {
   .container {
     padding: 0 20px;
