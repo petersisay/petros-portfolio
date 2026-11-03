@@ -5,6 +5,72 @@
 
 export const projects = [
   {
+    id: 'amen-plus',
+    title: 'AMEN+ (አሜን+) — Apostolic Media Streaming Platform',
+    tagline: 'Focused, distraction-reduced Christian media streaming platform with YouTube Data API v3 proxy & focus-trapped playback.',
+    description:
+      'A dedicated Christian media streaming platform created for አሜን - AMEN (@amenapostolicmedia), an official media ministry of the Apostolic Church of Ethiopia, delivering focused online streaming and media discovery for sermons, apostolic teachings, and worship.',
+    longDescription:
+      'AMEN+ provides a dedicated, distraction-reduced streaming environment directly connected to the channel\'s 110-video uploads catalogue. Built with React 18, Vite, and an Express.js backend reverse proxy on Render, the system isolates Google Cloud API keys server-side, enforces exact-origin CORS whitelisting, sanitizes error responses, and provides accessible video playback using privacy-enhanced YouTube embeds.',
+    problem:
+      'Streaming faith-based media directly on public platforms frequently exposes viewers to distracting commercial interruptions, unrelated algorithmic recommendations, and user tracking, while querying YouTube APIs directly from client-side JavaScript risks exposing private API keys.',
+    solution:
+      'Architected a full-stack web application with an Express.js proxy on Render that loads API credentials exclusively via environment variables, validates requests, redacts tokens from error messages, and streams video via youtube-nocookie.com inside an accessible focus-trapped modal dialog.',
+    features: [
+      'Dynamic YouTube Data API v3 synchronization (27,000 subscribers, 110 uploads, 2.6M+ channel views)',
+      'Featured Hero spotlight highlighting the latest media release with high-resolution thumbnail backdrops',
+      'Progressive pagination loading 20 releases initially and 10 on demand with Set-based deduplication',
+      'Privacy-enhanced theater playback via youtube-nocookie.com with zero pre-play cookie storage',
+      'Implemented dialog focus management (initial focus entry, Tab/Shift+Tab trapping, Escape dismissal, focus restoration)',
+      'Strict server proxy security with exact-origin CORS filtering and regex-based token redaction',
+      'Custom Ethiopian Apostolic design identity (Deep Emerald Green & Champagne Gold) with Noto Sans Ethiopic typography',
+      'Comprehensive SEO metadata with Open Graph, Twitter Cards, robots.txt, sitemap, and dedicated 1200×630 sharing banner',
+    ],
+    architecture:
+      'Decoupled multi-cloud architecture: React 18 SPA hosted on Vercel Edge CDN dispatches REST queries to an Express.js proxy on Render. The server validates origins against CORS whitelists, injects server-side YOUTUBE_API_KEY credentials to fetch channels and playlistItems from Google Cloud, strips sensitive parameters on exceptions, and serves sanitized payloads to the client.',
+    security:
+      'Zero frontend API key exposure, strict exact-origin CORS enforcement (disallowing wildcards), regex error sanitization (key=[REDACTED]), youtube-nocookie.com privacy-enhanced embeds, and secure rel="noopener noreferrer" external links.',
+    tech: ['React 18', 'Vite', 'Node.js', 'Express', 'YouTube Data API v3', 'REST API', 'Vercel', 'Render'],
+    category: ['fullstack', 'frontend', 'personal'],
+    liveUrl: 'https://amen-plus.vercel.app',
+    githubUrl: 'https://github.com/petersisay/AMEN-',
+    featured: true,
+    image: '/projects/amen-plus/desktop_homepage.png',
+    screenshots: [
+      {
+        url: '/projects/amen-plus/desktop_homepage.png',
+        caption: 'Desktop Homepage & Hero Spotlight — Channel statistics and latest media release spotlight',
+        label: 'Hero Spotlight',
+      },
+      {
+        url: '/projects/amen-plus/desktop_video_grid.png',
+        caption: 'Video Browsing Section — 16:9 media cards feed with progressive pagination and Set-based deduplication',
+        label: 'Media Feed',
+      },
+      {
+        url: '/projects/amen-plus/desktop_player_modal.png',
+        caption: 'Theater Video Player Modal — youtube-nocookie.com embed with focus trapping and keyboard navigation',
+        label: 'Player Modal',
+      },
+      {
+        url: '/projects/amen-plus/desktop_about_section.png',
+        caption: 'Ministry About & Community — Apostolic Church history, feature highlights, and interactive Telegram badge',
+        label: 'Ministry Info',
+      },
+      {
+        url: '/projects/amen-plus/mobile_homepage.png',
+        caption: 'Mobile Homepage Viewport — Responsive layout with tailored Amharic typography (390 × 844 px)',
+        label: 'Mobile View',
+      },
+      {
+        url: '/projects/amen-plus/mobile_navigation.png',
+        caption: 'Mobile Slide-down Navigation — Accessible hamburger navigation drawer with ARIA controls',
+        label: 'Mobile Menu',
+      },
+    ],
+    color: '#D6B45C',
+  },
+  {
     id: 'code-together',
     title: 'CodeTogether — Real-Time Collaborative Workspace',
     tagline: 'Live multi-user code editing with WebRTC video/voice calling & ZIP export.',
