@@ -1,131 +1,190 @@
-.timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-  margin-top: 3rem;
-  max-width: 820px;
-  margin-left: auto;
-  margin-right: auto;
+.journeySection {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   position: relative;
 }
 
+.timelineWrapper {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* ── Continuous Center Gradient Line ── */
+.timelineLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-violet) 0%,
+    var(--accent-pink) 50%,
+    var(--accent-cyan) 100%
+  );
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.4);
+}
+
+.timelineList {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* ── Timeline Item (Row) ── */
 .timelineItem {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 1.5rem;
+  display: flex;
   position: relative;
+  width: 100%;
 }
 
-.markerCol {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.timelineItemLeft {
+  justify-content: flex-start;
 }
 
-.markerDot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background-color: var(--bg-card);
-  border: 2px solid var(--border-accent);
-  color: var(--accent-primary);
+.timelineItemRight {
+  justify-content: flex-end;
+}
+
+/* ── Center Node with Pulsing Ring ── */
+.nodeWrapper {
+  position: absolute;
+  left: 50%;
+  top: 24px;
+  transform: translate(-50%, -50%);
   z-index: 2;
 }
 
-.currentDot {
-  background-color: var(--accent-primary);
-  color: #ffffff;
-  box-shadow: var(--shadow-glow);
+.timelineNode {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.25);
+  animation: pulse-ring 2.5s infinite;
 }
 
-.markerLine {
-  width: 2px;
-  flex: 1;
-  background-color: var(--border-subtle);
-  margin-top: 0.5rem;
+.nodeInnerDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ffffff;
 }
 
-.card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem 1.75rem;
-  transition: border-color var(--transition-fast), transform var(--transition-fast);
+/* ── Timeline Card ── */
+.timelineCard {
+  width: calc(50% - 44px);
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  position: relative;
 }
 
-.card:hover {
-  border-color: var(--border-accent);
-  transform: translateX(4px);
+.timelineCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), 0 0 30px rgba(139, 92, 246, 0.15);
 }
 
 .cardHeader {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
 .yearBadge {
-  font-family: var(--font-mono);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-code);
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--accent-primary);
-  background-color: var(--accent-light);
-  padding: 0.15rem 0.55rem;
-  border-radius: var(--radius-xs);
-  border: 1px solid var(--border-accent);
+  color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
 }
 
-.statusBadge {
-  font-size: 0.725rem;
-  font-family: var(--font-mono);
-  color: var(--success-text);
-  background-color: var(--success-bg);
-  border: 1px solid var(--success-border);
-  padding: 0.15rem 0.5rem;
-  border-radius: var(--radius-xs);
+.categoryBadge {
+  font-family: var(--font-code);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
 }
 
 .itemTitle {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0.2rem;
+  margin-bottom: 6px;
 }
 
 .institution {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: var(--accent-violet);
+  margin-bottom: 12px;
   font-weight: 500;
-  margin-bottom: 0.85rem;
 }
 
 .description {
   font-size: 0.925rem;
   line-height: 1.6;
   color: var(--text-secondary);
-  margin-bottom: 1.25rem;
+  margin-bottom: 18px;
 }
 
-.tagList {
+.tagsRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 6px;
 }
 
-@media (max-width: 640px) {
+.tag {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  padding: 3px 9px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+/* ── Mobile Layout (All cards on right) ── */
+@media (max-width: 768px) {
+  .timelineLine {
+    left: 20px;
+  }
+
   .timelineItem {
-    grid-template-columns: 36px 1fr;
-    gap: 0.85rem;
+    justify-content: flex-end;
   }
-  .markerDot {
-    width: 32px;
-    height: 32px;
+
+  .nodeWrapper {
+    left: 20px;
   }
-  .card {
-    padding: 1.25rem;
+
+  .timelineCard {
+    width: calc(100% - 50px);
+    margin-left: auto;
   }
 }

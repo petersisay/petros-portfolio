@@ -1,201 +1,200 @@
-import { useState, useEffect, useRef } from 'react';
-import { Send, ArrowDown, Download, ExternalLink, Terminal, Sparkles } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../common/Icons';
-import { siteConfig } from '../../data/config';
+import React, { useState, useEffect } from 'react';
+import {
+  ArrowDown,
+  FileDown,
+  Send,
+  Sparkles,
+  Layers,
+  Smartphone,
+  CheckCircle2
+} from 'lucide-react';
+import { Github, Linkedin } from '../common/Icons';
 import styles from './Hero.module.css';
 
 const ROLES = [
-  'Senior Software Engineering Student',
-  'Full-Stack Web Architect',
-  'Cross-Platform Mobile Developer (Flutter)',
-  'Civic Platforms & Systems Builder',
+  'Full-Stack Developer',
+  'React & Node.js',
+  'Flutter Mobile Dev',
+  'Java Engineer',
 ];
 
-function TypedRoles() {
-  const [index, setIndex] = useState(0);
+export default function Hero() {
   const [text, setText] = useState('');
-  const [deleting, setDeleting] = useState(false);
-  const timerRef = useRef(null);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const currentRole = ROLES[index];
-    const speed = deleting ? 40 : 80;
+    const currentRole = ROLES[roleIndex];
+    const typingSpeed = isDeleting ? 40 : 80;
 
-    timerRef.current = setTimeout(() => {
-      if (!deleting && text === currentRole) {
-        timerRef.current = setTimeout(() => setDeleting(true), 2000);
-        return;
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        if (text.length < currentRole.length) {
+          setText(currentRole.slice(0, text.length + 1));
+        } else {
+          setTimeout(() => setIsDeleting(true), 1600);
+        }
+      } else {
+        if (text.length > 0) {
+          setText(currentRole.slice(0, text.length - 1));
+        } else {
+          setIsDeleting(false);
+          setRoleIndex((roleIndex + 1) % ROLES.length);
+        }
       }
-      if (deleting && text === '') {
-        setDeleting(false);
-        setIndex(prev => (prev + 1) % ROLES.length);
-        return;
-      }
-      setText(prev =>
-        deleting ? prev.slice(0, -1) : currentRole.slice(0, prev.length + 1)
-      );
-    }, speed);
+    }, typingSpeed);
 
-    return () => clearTimeout(timerRef.current);
-  }, [text, deleting, index]);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, roleIndex]);
 
   return (
-    <span className={styles.typedContainer}>
-      <span className={styles.typedText}>{text}</span>
-      <span className={styles.cursor} aria-hidden="true">|</span>
-    </span>
-  );
-}
+    <section id="hero" className={styles.heroSection}>
+      {/* 3 Animated Background Blobs */}
+      <div className={styles.blobContainer} aria-hidden="true">
+        <div className={`${styles.blob} ${styles.blobViolet}`} />
+        <div className={`${styles.blob} ${styles.blobPink}`} />
+        <div className={`${styles.blob} ${styles.blobCyan}`} />
+      </div>
 
-export default function Hero({ onTriggerToast }) {
-  const handleDownloadCV = (e) => {
-    e.preventDefault();
-    const link = document.createElement('a');
-    link.href = siteConfig.cvPath;
-    link.download = 'Petros_Sisay_CV.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    if (onTriggerToast) onTriggerToast('Downloading Resume...', 'info');
-  };
-
-  return (
-    <section id="home" className={styles.heroSection} aria-label="Hero Introduction">
-      {/* Background Technical Grid */}
-      <div className={styles.bgGrid} aria-hidden="true" />
-      <div className={styles.bgGradientOrb} aria-hidden="true" />
-
-      <div className={`container ${styles.gridContainer}`}>
-        {/* Left Side: Copy & CTAs */}
-        <div className={styles.contentCol}>
-          <div className="badge" aria-label="Availability Status">
-            <span className="badge-dot" />
-            <span>Open for Internships & Junior Roles</span>
+      <div className={`container ${styles.heroContainer}`}>
+        {/* Left Content (60%) */}
+        <div className={styles.heroContent}>
+          {/* Status Badge */}
+          <div className={styles.badgeWrapper}>
+            <div className={styles.badge}>
+              <span className={styles.badgeDot} />
+              <Sparkles size={14} className={styles.badgeIcon} />
+              <span>Open to Internships & Junior Roles</span>
+            </div>
           </div>
 
-          <h1 className={styles.heroName}>
-            {siteConfig.name}
+          {/* Heading */}
+          <h1 className={styles.title}>
+            Hi, I'm <br />
+            <span className="gradient-text">Petros Sisay Gelan</span>
           </h1>
 
-          <p className={styles.roleSubhead}>
-            <TypedRoles />
+          {/* Dynamic Typewriter Role */}
+          <h2 className={styles.typewriterWrapper}>
+            <span className={styles.typewriterPrefix}>I am a </span>
+            <span className={styles.typewriterText}>{text}</span>
+            <span className={styles.typewriterCursor}>|</span>
+          </h2>
+
+          {/* Short Bio */}
+          <p className={styles.bio}>
+            3rd Year Software Engineering Student at <strong>Adama Science and Technology University (ASTU)</strong>, Ethiopia.
+            Specializing in modern full-stack web applications, cross-platform Flutter mobile experiences,
+            and reliable backend database architectures.
           </p>
 
-          <p className={styles.tagline}>
-            {siteConfig.tagline} 3rd Year Software Engineering Student at ASTU building responsive web applications, Java desktop systems, and relational databases.
-          </p>
-
-          {/* Action CTAs */}
+          {/* Call to Actions */}
           <div className={styles.ctaGroup}>
-            <a href="#projects" className={styles.primaryBtn}>
-              <span>View My Projects</span>
-              <ExternalLink size={16} />
+            <a href="#projects" className="btn-primary">
+              <span>View My Work</span>
+              <ArrowDown size={18} />
             </a>
-            <button onClick={handleDownloadCV} className={styles.secondaryBtn}>
-              <Download size={16} />
-              <span>Download CV</span>
-            </button>
             <a
-              href={siteConfig.cvPath}
+              href="/cv.html"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.ghostBtn}
+              className="btn-outline"
             >
-              View CV
+              <FileDown size={18} />
+              <span>Download CV</span>
             </a>
           </div>
 
-          {/* Social Links */}
-          <div className={styles.socialBar}>
+          {/* Social Links Row */}
+          <div className={styles.socialRow}>
             <a
-              href={siteConfig.github}
+              href="https://github.com/petrossisay1646"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="GitHub Profile"
               className={styles.socialLink}
-              aria-label="GitHub profile"
             >
-              <GithubIcon size={20} />
+              <Github size={20} />
             </a>
             <a
-              href={siteConfig.linkedin}
+              href="https://www.linkedin.com/in/petros-sisay-gelan"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
               className={styles.socialLink}
-              aria-label="LinkedIn profile"
             >
-              <LinkedinIcon size={20} />
+              <Linkedin size={20} />
             </a>
             <a
-              href={siteConfig.telegram}
+              href="https://t.me/Petros_sisay"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Telegram Profile"
               className={styles.socialLink}
-              aria-label="Telegram account"
             >
               <Send size={20} />
             </a>
-            <span className={styles.socialDivider} />
-            <a href={`mailto:${siteConfig.email}`} className={styles.emailText}>
-              {siteConfig.email}
+            <a
+              href="mailto:petrossisay7164@gmail.com"
+              aria-label="Direct Email"
+              className={styles.socialLink}
+            >
+              <span className={styles.emailPill}>petrossisay7164@gmail.com</span>
             </a>
           </div>
         </div>
 
-        {/* Right Side: Interactive Developer Code Terminal */}
-        <div className={styles.visualCol} aria-hidden="true">
-          <div className={styles.terminalWindow}>
-            <div className={styles.terminalHeader}>
-              <div className={styles.dots}>
-                <span className={styles.dotRed} />
-                <span className={styles.dotYellow} />
-                <span className={styles.dotGreen} />
-              </div>
-              <div className={styles.terminalTitle}>
-                <Terminal size={13} />
-                <span>petros@astu-dev:~</span>
+        {/* Right Side (40%): Profile Photo & Rotating Gradient Frame */}
+        <div className={styles.heroMedia}>
+          <div className={styles.avatarWrapper}>
+            {/* Rotating gradient ring */}
+            <div className={styles.rotatingRing} aria-hidden="true" />
+
+            {/* Profile Photo Image */}
+            <div className={styles.photoContainer}>
+              <img
+                src="/profile.jpg"
+                alt="Petros Sisay Gelan"
+                className={styles.profileImg}
+                onError={(e) => {
+                  // Fallback in case of missing asset
+                  e.target.src = '/profile.webp';
+                }}
+              />
+            </div>
+
+            {/* Floating Stats Badges */}
+            <div className={`${styles.floatingBadge} ${styles.badgeTopRight}`}>
+              <div className={styles.floatingIconViolet}>⚡</div>
+              <div>
+                <strong className={styles.floatingTitle}>10+ Projects</strong>
+                <span className={styles.floatingSubtitle}>Shipped & Live</span>
               </div>
             </div>
 
-            <div className={styles.terminalBody}>
-              <p><span className={styles.cKeyword}>const</span> <span className={styles.cVar}>developer</span> = {'{'}</p>
-              <p className={styles.indent}><span className={styles.cProp}>name</span>: <span className={styles.cStr}>"{siteConfig.name}"</span>,</p>
-              <p className={styles.indent}><span className={styles.cProp}>title</span>: <span className={styles.cStr}>"Full-Stack Developer"</span>,</p>
-              <p className={styles.indent}><span className={styles.cProp}>university</span>: <span className={styles.cStr}>"ASTU (Adama, Ethiopia)"</span>,</p>
-              <p className={styles.indent}><span className={styles.cProp}>stack</span>: [</p>
-              <p className={styles.indent2}>
-                <span className={styles.cStr}>"React"</span>, <span className={styles.cStr}>"Node.js"</span>,
-              </p>
-              <p className={styles.indent2}>
-                <span className={styles.cStr}>"Java"</span>, <span className={styles.cStr}>"MySQL"</span>,
-              </p>
-              <p className={styles.indent}>],</p>
-              <p className={styles.indent}><span className={styles.cProp}>status</span>: <span className={styles.cStr}>"Ready for opportunities 🚀"</span>,</p>
-              <p>{'}'};</p>
-
-              <div className={styles.terminalPromptLine}>
-                <span className={styles.promptArrow}>&gt;</span> <span className={styles.cFn}>console</span>.<span className={styles.cLog}>log</span>(<span className={styles.cStr}>"Welcome to my portfolio!"</span>);
+            <div className={`${styles.floatingBadge} ${styles.badgeBottomLeft}`}>
+              <div className={styles.floatingIconCyan}>⚛️</div>
+              <div>
+                <strong className={styles.floatingTitle}>MERN Stack</strong>
+                <span className={styles.floatingSubtitle}>React 19 & Node</span>
               </div>
-              <p className={styles.terminalOutput}>// ✅ Rendered clean code architecture</p>
             </div>
-          </div>
 
-          {/* Floating Pill Micro-Badges */}
-          <div className={`${styles.floatBadge} ${styles.float1}`}>
-            <Sparkles size={14} className={styles.badgeIcon} />
-            <span>React.js</span>
-          </div>
-          <div className={`${styles.floatBadge} ${styles.float2}`}>
-            <span>Java & OOP</span>
-          </div>
-          <div className={`${styles.floatBadge} ${styles.float3}`}>
-            <span>MySQL Database</span>
+            <div className={`${styles.floatingBadge} ${styles.badgeBottomRight}`}>
+              <div className={styles.floatingIconPink}>📱</div>
+              <div>
+                <strong className={styles.floatingTitle}>Flutter Dev</strong>
+                <span className={styles.floatingSubtitle}>Android & iOS</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Down Arrow Indicator */}
-      <a href="#about" className={styles.scrollDown} aria-label="Scroll to About section">
-        <ArrowDown size={18} />
+      {/* Scroll Indicator */}
+      <a href="#about" className={styles.scrollIndicator} aria-label="Scroll to About section">
+        <span className={styles.scrollText}>Scroll Down</span>
+        <ArrowDown size={18} className={styles.scrollArrow} />
       </a>
     </section>
   );

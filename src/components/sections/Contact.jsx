@@ -1,257 +1,292 @@
-import { useState } from 'react';
-import { Mail, Send, Copy, Check, MessageSquare, AlertCircle } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../common/Icons';
-import { siteConfig } from '../../data/config';
-import { useIntersection } from '../../hooks/useIntersection';
+import React, { useState } from 'react';
+import {
+  Mail,
+  Send,
+  MapPin,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+  Sparkles,
+  ArrowRight
+} from 'lucide-react';
+import { Github, Linkedin } from '../common/Icons';
 import styles from './Contact.module.css';
 
-export default function Contact({ onTriggerToast }) {
-  const { ref, isVisible } = useIntersection();
-  const [copied, setCopied] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [errors, setErrors] = useState({});
-  const [sending, setSending] = useState(false);
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(siteConfig.email);
-    setCopied(true);
-    if (onTriggerToast) onTriggerToast('Email copied to clipboard!', 'success');
-    setTimeout(() => setCopied(false), 2500);
-  };
+  const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const validate = () => {
-    const errs = {};
-    if (!form.name.trim()) errs.name = 'Name is required';
-    if (!form.email.trim()) {
-      errs.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      errs.email = 'Please enter a valid email address';
-    }
-    if (!form.subject.trim()) errs.subject = 'Subject is required';
-    if (!form.message.trim()) {
-      errs.message = 'Message is required';
-    } else if (form.message.trim().length < 10) {
-      errs.message = 'Message must be at least 10 characters';
-    }
-    return errs;
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus('error');
+      setErrorMessage('Please fill in all required fields.');
       return;
     }
-    setErrors({});
-    setSending(true);
+
+    setStatus('loading');
+    setErrorMessage('');
 
     try {
-      if (siteConfig.contactEndpoint) {
-        const payload = {
-          name: form.name,
-          email: form.email,
-          _replyto: form.email,
-          _subject: `[Portfolio Inquiry] ${form.subject} — from ${form.name}`,
-          message: form.message,
-          _captcha: 'false',
-          _template: 'table',
-        };
+      const response = await fetch('https://formsubmit.co/ajax/petrossisay7164@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _subject: formData.subject || `New Portfolio Message from ${formData.name}`,
+          message: formData.message,
+        }),
+      });
 
-        const response = await fetch(siteConfig.contactEndpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify(payload),
-        });
+      const data = await response.json();
 
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok && data.success !== 'true') {
-          throw new Error(data.message || 'Form submission failed');
-        }
+      if (response.ok && (data.success === 'true' || data.success === true || response.status === 200)) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        // Fallback simulation
-        await new Promise(res => setTimeout(res, 1000));
+        throw new Error(data.message || 'Failed to deliver message.');
       }
-
-      if (onTriggerToast) {
-        onTriggerToast('Message sent! It will arrive in Petros\'s inbox shortly.', 'success');
-      }
-      setForm({ name: '', email: '', subject: '', message: '' });
     } catch (err) {
-      console.error('Contact form error:', err);
-      if (onTriggerToast) {
-        onTriggerToast('Could not send message. Please email petrossisay1646@gmail.com directly.', 'error');
-      }
-    } finally {
-      setSending(false);
+      console.error('Contact form submission error:', err);
+      // Even if FormSubmit has a CORS/network hiccup, treat friendly or show error
+      setStatus('error');
+      setErrorMessage(err.message || 'Something went wrong. Please email directly at petrossisay7164@gmail.com');
     }
   };
 
   return (
-    <section id="contact" className="section">
+    <section id="contact" className={`section ${styles.contactSection}`}>
       <div className="container">
-        {/* Section Heading */}
-        <div ref={ref} className={`reveal ${isVisible ? 'visible' : ''}`}>
-          <p className="section-label">Get In Touch</p>
+        {/* Section Header */}
+        <div className="section-header reveal">
+          <div className="section-label">&lt; Get In Touch /&gt;</div>
           <h2 className="section-title">
-            Let's Build <span>Together</span>
+            Let's Build Something <span className="gradient-text">Exceptional</span>
           </h2>
           <p className="section-subtitle">
-            Whether you have an internship opportunity, junior developer role, freelance project, or simply want to connect — my inbox is always open.
+            Have an internship opening, freelance project, or full-stack engineering challenge?
+            I am eager to connect and discuss how I can contribute.
           </p>
         </div>
 
-        <div className={styles.grid}>
-          {/* Left Column: Direct Contact Info */}
-          <div className={`${styles.infoCol} reveal ${isVisible ? 'visible' : ''}`}>
-            <h3 className={styles.infoHeading}>Contact Details</h3>
-            <p className={styles.infoSub}>
-              Feel free to reach out via email, Telegram, LinkedIn, or send a message using the form.
-            </p>
+        {/* Two-Column Grid */}
+        <div className={styles.contactGrid}>
+          {/* Left Column: Contact Info Cards */}
+          <div className={`${styles.infoColumn} reveal-left`}>
+            <div className={styles.infoCard}>
+              <h3 className={styles.infoHeading}>Contact Information</h3>
+              <p className={styles.infoIntro}>
+                Feel free to reach out directly through any of these communication channels.
+                I typically respond within 24 hours.
+              </p>
 
-            <div className={styles.contactCards}>
-              {/* Email Card */}
-              <div className={styles.card}>
-                <div className={styles.cardIcon}>
-                  <Mail size={20} />
-                </div>
-                <div className={styles.cardText}>
-                  <span className={styles.cardLabel}>Direct Email</span>
-                  <a href={`mailto:${siteConfig.email}`} className={styles.cardValue}>
-                    {siteConfig.email}
-                  </a>
-                </div>
-                <button
-                  onClick={handleCopyEmail}
-                  className={styles.copyBtn}
-                  aria-label="Copy email address"
-                  title="Copy email address"
+              <div className={styles.channelsList}>
+                {/* Email */}
+                <a
+                  href="mailto:petrossisay7164@gmail.com"
+                  className={styles.channelItem}
                 >
-                  {copied ? <Check size={16} className={styles.checkIcon} /> : <Copy size={16} />}
-                </button>
+                  <div className={`${styles.channelIconWrap} ${styles.iconViolet}`}>
+                    <Mail size={20} />
+                  </div>
+                  <div>
+                    <span className={styles.channelLabel}>Email Address</span>
+                    <strong className={styles.channelValue}>petrossisay7164@gmail.com</strong>
+                  </div>
+                </a>
+
+                {/* GitHub */}
+                <a
+                  href="https://github.com/petrossisay1646"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.channelItem}
+                >
+                  <div className={`${styles.channelIconWrap} ${styles.iconCyan}`}>
+                    <Github size={20} />
+                  </div>
+                  <div>
+                    <span className={styles.channelLabel}>GitHub Profile</span>
+                    <strong className={styles.channelValue}>github.com/petrossisay1646</strong>
+                  </div>
+                </a>
+
+                {/* LinkedIn */}
+                <a
+                  href="https://www.linkedin.com/in/petros-sisay-gelan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.channelItem}
+                >
+                  <div className={`${styles.channelIconWrap} ${styles.iconPink}`}>
+                    <Linkedin size={20} />
+                  </div>
+                  <div>
+                    <span className={styles.channelLabel}>LinkedIn</span>
+                    <strong className={styles.channelValue}>linkedin.com/in/petros-sisay-gelan</strong>
+                  </div>
+                </a>
+
+                {/* Telegram */}
+                <a
+                  href="https://t.me/Petros_sisay"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.channelItem}
+                >
+                  <div className={`${styles.channelIconWrap} ${styles.iconOrange}`}>
+                    <Send size={20} />
+                  </div>
+                  <div>
+                    <span className={styles.channelLabel}>Telegram</span>
+                    <strong className={styles.channelValue}>@Petros_sisay</strong>
+                  </div>
+                </a>
               </div>
 
-              {/* Telegram Card */}
-              <a
-                href={siteConfig.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.card}
-              >
-                <div className={styles.cardIcon}>
-                  <Send size={20} />
-                </div>
-                <div className={styles.cardText}>
-                  <span className={styles.cardLabel}>Telegram</span>
-                  <span className={styles.cardValue}>{siteConfig.telegramHandle}</span>
-                </div>
-              </a>
-
-              {/* LinkedIn Card */}
-              <a
-                href={siteConfig.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.card}
-              >
-                <div className={styles.cardIcon}>
-                  <LinkedinIcon size={20} />
-                </div>
-                <div className={styles.cardText}>
-                  <span className={styles.cardLabel}>LinkedIn</span>
-                  <span className={styles.cardValue}>petros-sisay-gelan</span>
-                </div>
-              </a>
-
-              {/* GitHub Card */}
-              <a
-                href={siteConfig.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.card}
-              >
-                <div className={styles.cardIcon}>
-                  <GithubIcon size={20} />
-                </div>
-                <div className={styles.cardText}>
-                  <span className={styles.cardLabel}>GitHub</span>
-                  <span className={styles.cardValue}>petrossisay1646</span>
-                </div>
-              </a>
+              {/* Location Badge */}
+              <div className={styles.locationFooter}>
+                <MapPin size={18} className={styles.pinIcon} />
+                <span>Adama Science and Technology University (ASTU), Ethiopia</span>
+              </div>
             </div>
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className={`${styles.formCol} reveal ${isVisible ? 'visible' : ''}`}>
-            <form onSubmit={handleSubmit} className={styles.form} noValidate>
-              <h3 className={styles.formTitle}>Send Me a Message</h3>
+          <div className={`${styles.formColumn} reveal-right`}>
+            <div className={styles.formCard}>
+              <h3 className={styles.formTitle}>Send a Message</h3>
+              <p className={styles.formSubtitle}>
+                Fill out the form below to deliver an instant message to my inbox.
+              </p>
 
-              <div className={styles.inputRow}>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="name" className={styles.label}>Your Name</label>
+              {/* Toast Notifications */}
+              {status === 'success' && (
+                <div className={styles.alertSuccess}>
+                  <CheckCircle2 size={20} className={styles.alertIcon} />
+                  <div>
+                    <strong>Message Sent Successfully!</strong>
+                    <p>Thank you for reaching out. I'll get back to you shortly.</p>
+                  </div>
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className={styles.alertError}>
+                  <AlertCircle size={20} className={styles.alertIcon} />
+                  <div>
+                    <strong>Message Delivery Notice</strong>
+                    <p>{errorMessage}</p>
+                  </div>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className={styles.form}>
+                {/* Name */}
+                <div className={styles.formGroup}>
+                  <label htmlFor="name" className={styles.formLabel}>
+                    Your Name <span className={styles.required}>*</span>
+                  </label>
                   <input
-                    id="name"
                     type="text"
-                    className={`${styles.input} ${errors.name ? styles.inputError : ''}`}
-                    placeholder="John Doe"
-                    value={form.name}
-                    onChange={e => setForm({ ...form, name: e.target.value })}
+                    id="name"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="e.g. Dawit Bekele"
+                    className={styles.formInput}
                   />
-                  {errors.name && <span className={styles.errorText}>{errors.name}</span>}
                 </div>
 
-                <div className={styles.inputGroup}>
-                  <label htmlFor="email" className={styles.label}>Your Email</label>
+                {/* Email */}
+                <div className={styles.formGroup}>
+                  <label htmlFor="email" className={styles.formLabel}>
+                    Your Email <span className={styles.required}>*</span>
+                  </label>
                   <input
-                    id="email"
                     type="email"
-                    className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
-                    placeholder="john@example.com"
-                    value={form.email}
-                    onChange={e => setForm({ ...form, email: e.target.value })}
+                    id="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="e.g. dawit@example.com"
+                    className={styles.formInput}
                   />
-                  {errors.email && <span className={styles.errorText}>{errors.email}</span>}
                 </div>
-              </div>
 
-              <div className={styles.inputGroup}>
-                <label htmlFor="subject" className={styles.label}>Subject</label>
-                <input
-                  id="subject"
-                  type="text"
-                  className={`${styles.input} ${errors.subject ? styles.inputError : ''}`}
-                  placeholder="Internship / Junior Role / Project Inquiry"
-                  value={form.subject}
-                  onChange={e => setForm({ ...form, subject: e.target.value })}
-                />
-                {errors.subject && <span className={styles.errorText}>{errors.subject}</span>}
-              </div>
+                {/* Subject */}
+                <div className={styles.formGroup}>
+                  <label htmlFor="subject" className={styles.formLabel}>
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="e.g. Software Internship Opportunity"
+                    className={styles.formInput}
+                  />
+                </div>
 
-              <div className={styles.inputGroup}>
-                <label htmlFor="message" className={styles.label}>Message</label>
-                <textarea
-                  id="message"
-                  rows={5}
-                  className={`${styles.textarea} ${errors.message ? styles.inputError : ''}`}
-                  placeholder="Hello Petros, I'd like to talk about an opportunity..."
-                  value={form.message}
-                  onChange={e => setForm({ ...form, message: e.target.value })}
-                />
-                {errors.message && <span className={styles.errorText}>{errors.message}</span>}
-              </div>
+                {/* Message */}
+                <div className={styles.formGroup}>
+                  <label htmlFor="message" className={styles.formLabel}>
+                    Message <span className={styles.required}>*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Tell me about your project, team, or opportunity..."
+                    className={styles.formTextarea}
+                  />
+                </div>
 
-              <button
-                type="submit"
-                disabled={sending}
-                className={styles.submitBtn}
-              >
-                <MessageSquare size={16} />
-                <span>{sending ? 'Sending to Inbox...' : 'Send Message'}</span>
-              </button>
-            </form>
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className={`btn-primary ${styles.submitBtn}`}
+                >
+                  {status === 'loading' ? (
+                    <>
+                      <Loader2 size={18} className={styles.spinner} />
+                      <span>Sending Message...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      <span>Send Message</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

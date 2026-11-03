@@ -1,51 +1,93 @@
-import { LayoutTemplate, Layers, Code2, Database, Server, PenTool, Smartphone } from 'lucide-react';
-import { services } from '../../data/services';
-import { useIntersection } from '../../hooks/useIntersection';
+import React from 'react';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
 import styles from './Services.module.css';
 
-const ICON_MAP = {
-  LayoutTemplate: <LayoutTemplate size={24} />,
-  Smartphone: <Smartphone size={24} />,
-  Layers: <Layers size={24} />,
-  Code2: <Code2 size={24} />,
-  Database: <Database size={24} />,
-  Server: <Server size={24} />,
-  PenTool: <PenTool size={24} />,
-};
+const SERVICES = [
+  {
+    id: 'web-dev',
+    emoji: '🌐',
+    title: 'Full-Stack Web Development',
+    description:
+      'Designing and developing modern, responsive web applications with React.js, Node.js, and Express. Delivering fast page loads, stateful user interfaces, and clean REST APIs.',
+    tech: ['React.js', 'Node.js', 'Express', 'TypeScript', 'REST APIs', 'CSS Modules'],
+    color: 'var(--accent-violet)',
+  },
+  {
+    id: 'mobile-dev',
+    emoji: '📱',
+    title: 'Cross-Platform Mobile Apps',
+    description:
+      'Engineering native-feel Android & iOS applications using Flutter and Dart. Incorporating Clean Architecture, Riverpod state management, offline SQLite caching, and Material 3 design.',
+    tech: ['Flutter', 'Dart', 'Riverpod', 'Clean Architecture', 'Material 3', 'SQLite'],
+    color: 'var(--accent-pink)',
+  },
+  {
+    id: 'java-eng',
+    emoji: '☕',
+    title: 'Java Software Engineering',
+    description:
+      'Building robust object-oriented desktop applications, concurrent multi-client TCP socket servers, and enterprise JDBC database integrations with Java Swing.',
+    tech: ['Java OOP', 'Java Swing', 'TCP Sockets', 'Multithreading', 'JDBC'],
+    color: 'var(--accent-cyan)',
+  },
+  {
+    id: 'database-design',
+    emoji: '🗄️',
+    title: 'Relational Database Architecture',
+    description:
+      'Modeling relational database schemas, normalizing entity relationships (ER diagrams), crafting performant SQL queries, and optimizing indexes for MySQL and SQL Server.',
+    tech: ['MySQL', 'SQL Server', 'Schema Design', 'Normalization', 'Indexing'],
+    color: 'var(--accent-orange)',
+  },
+];
 
 export default function Services() {
-  const { ref, isVisible } = useIntersection();
-
   return (
-    <section id="services" className="section">
+    <section id="services" className={`section ${styles.servicesSection}`}>
       <div className="container">
-        {/* Heading */}
-        <div ref={ref} className={`reveal ${isVisible ? 'visible' : ''}`}>
-          <p className="section-label">Capabilities</p>
+        {/* Section Header */}
+        <div className="section-header reveal">
+          <div className="section-label">&lt; What I Offer /&gt;</div>
           <h2 className="section-title">
-            Services & <span>What I Can Build</span>
+            Specialized <span className="gradient-text">Engineering Services</span>
           </h2>
           <p className="section-subtitle">
-            Focused engineering services based on my verified technical skills and project experience.
+            Delivering high quality software engineering solutions from concept to deployment with modern frameworks,
+            clean architecture, and reliable systems.
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className={styles.grid}>
-          {services.map((item, idx) => (
+        {/* 4 Service Cards Grid */}
+        <div className={styles.servicesGrid}>
+          {SERVICES.map((service, idx) => (
             <div
-              key={item.id}
-              className={`${styles.card} reveal ${isVisible ? 'visible' : ''}`}
-              style={{ transitionDelay: `${idx * 70}ms` }}
+              key={service.id}
+              className={`${styles.serviceCard} reveal`}
+              style={{
+                '--card-glow': service.color,
+                animationDelay: `${idx * 120}ms`
+              }}
             >
-              <div className={styles.iconWrap}>
-                {ICON_MAP[item.icon] || <Code2 size={24} />}
+              {/* Top Row: Emoji Icon + Corner Arrow */}
+              <div className={styles.cardTop}>
+                <div className={styles.emojiWrapper}>
+                  <span className={styles.emoji}>{service.emoji}</span>
+                </div>
+                <div className={styles.cornerArrow}>
+                  <ArrowUpRight size={20} />
+                </div>
               </div>
-              <h3 className={styles.title}>{item.title}</h3>
-              <p className={styles.desc}>{item.description}</p>
-              <div className={styles.tagGroup}>
-                {item.tags.map(t => (
-                  <span key={t} className="tag">{t}</span>
+
+              {/* Title & Description */}
+              <h3 className={styles.serviceTitle}>{service.title}</h3>
+              <p className={styles.serviceDesc}>{service.description}</p>
+
+              {/* Tech Stack Pills */}
+              <div className={styles.techPills}>
+                {service.tech.map(t => (
+                  <span key={t} className={styles.techTag}>
+                    {t}
+                  </span>
                 ))}
               </div>
             </div>

@@ -1,225 +1,312 @@
+.aboutSection {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
 .aboutGrid {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 3.5rem;
-  align-items: flex-start;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  align-items: center;
+  margin-bottom: 64px;
 }
 
-.textCol {
+/* ── Left Column: Visual Frame ── */
+.aboutVisual {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.paragraphs {
+.imageCard {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: visible;
+}
+
+.imageBackdrop {
+  position: absolute;
+  inset: -12px;
+  border-radius: calc(var(--radius-lg) + 12px);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.2), rgba(6, 182, 212, 0.3));
+  filter: blur(16px);
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.aboutImg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--glass-border);
+  box-shadow: var(--shadow-card);
+}
+
+/* Overlaid Geometric Decorations */
+.decoSquare1 {
+  position: absolute;
+  top: -16px;
+  left: -16px;
+  width: 70px;
+  height: 70px;
+  border: 2px dashed var(--accent-violet);
+  border-radius: 12px;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.decoSquare2 {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  width: 90px;
+  height: 90px;
+  border: 2px solid var(--accent-pink);
+  border-radius: 16px;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* Floating 3rd Year Badge */
+.floatingYearBadge {
+  position: absolute;
+  bottom: 24px;
+  left: -20px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  animation: float 6s ease-in-out infinite;
+}
+
+.yearIcon {
+  font-size: 1.5rem;
+}
+
+.floatingYearBadge strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.floatingYearBadge span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ── Right Column: Bio & Facts ── */
+.aboutDetails {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
-  font-size: 1.025rem;
+  gap: 24px;
+}
+
+.bioBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bioText {
+  font-size: 1.05rem;
   line-height: 1.7;
   color: var(--text-secondary);
 }
 
-.paragraphs strong {
+.bioText strong {
   color: var(--text-primary);
   font-weight: 600;
 }
 
-.checklist {
+/* ── 3 Quick-Fact Cards ── */
+.factsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.85rem;
-  margin-top: 1.75rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-subtle);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
-.checkItem {
+.factCard {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--text-primary);
+  gap: 12px;
+  transition: all var(--transition);
 }
 
-.checkIcon {
-  color: var(--accent-primary);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-/* ── Profile Spec Card ── */
-.specCol {
-  display: flex;
-  justify-content: center;
-}
-
-.specCard {
-  width: 100%;
-  max-width: 380px;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-lg);
-  padding: 2.25rem 1.75rem;
-  box-shadow: var(--shadow-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.specCard:hover {
+.factCard:hover {
   transform: translateY(-4px);
-  border-color: var(--border-accent);
-  box-shadow: var(--shadow-lg), 0 0 30px rgba(59, 130, 246, 0.15);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
 }
 
-.avatarContainer {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin-bottom: 1.25rem;
-}
-
-.avatarImage {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: top center;
-  border: 3px solid var(--accent-primary);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.35);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.avatarImage:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
-}
-
-.avatarPlaceholder {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: var(--bg-card-alt);
-  border: 3px solid var(--border-accent);
+.factIconWrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--bg-card);
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.avatarInitials {
-  font-family: var(--font-mono);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--accent-primary);
-}
-
-.avatarTag {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  font-size: 0.7rem;
-  font-family: var(--font-mono);
-  background-color: var(--accent-primary);
-  color: #ffffff;
-  padding: 0.15rem 0.45rem;
-  border-radius: var(--radius-xs);
-  font-weight: 700;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.specName {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 0.25rem;
-}
-
-.specTitle {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.specDivider {
-  width: 100%;
-  height: 1px;
-  background-color: var(--border-subtle);
-  margin: 1.25rem 0;
-}
-
-.specList {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  text-align: left;
-}
-
-.specRow {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.specIcon {
-  color: var(--accent-primary);
-  margin-top: 3px;
   flex-shrink: 0;
 }
 
-.specDetails {
-  display: flex;
-  flex-direction: column;
+.factIconCyan {
+  color: var(--accent-cyan);
 }
 
-.specLabel {
-  font-size: 0.725rem;
-  font-family: var(--font-mono);
-  color: var(--text-muted);
+.factIconViolet {
+  color: var(--accent-violet);
+}
+
+.factIconPink {
+  color: var(--accent-pink);
+}
+
+.factTitle {
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-family: var(--font-code);
+  margin-bottom: 2px;
 }
 
-.specValue {
-  font-size: 0.875rem;
+.factValue {
+  font-size: 0.95rem;
+  font-weight: 700;
   color: var(--text-primary);
-  font-weight: 500;
+  margin-bottom: 2px;
 }
 
-.cardFooter {
-  display: inline-flex;
+.factSub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: block;
+}
+
+/* ── "What Drives Me" Card ── */
+.driverCard {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(236, 72, 153, 0.05) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+}
+
+.driverHeader {
+  display: flex;
   align-items: center;
-  gap: 0.45rem;
-  margin-top: 1.5rem;
-  padding: 0.45rem 1rem;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.driverSparkle {
+  color: var(--accent-pink);
+}
+
+.driverTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.driverText {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ── Horizontal Scrolling Marquee ── */
+.marqueeWrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 16px 0;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.marqueeTrack:hover {
+  animation-play-state: paused;
+}
+
+.techPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--glass-bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius-full);
-  background-color: var(--accent-light);
-  border: 1px solid var(--border-accent);
-  color: var(--accent-primary);
-  font-size: 0.8rem;
-  font-weight: 600;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  white-space: nowrap;
+  transition: all var(--transition);
 }
 
-.statusDot {
-  width: 8px;
-  height: 8px;
+.techPill:hover {
+  border-color: var(--accent-violet);
+  background: rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
+}
+
+.techDot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background-color: var(--accent-primary);
-  box-shadow: 0 0 8px var(--accent-primary);
-  animation: pulse-dot 2s infinite;
+  background: var(--accent-cyan);
 }
 
+.techName {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* ── Responsive ── */
 @media (max-width: 900px) {
   .aboutGrid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 48px;
   }
-  .checklist {
+
+  .factsGrid {
     grid-template-columns: 1fr;
+  }
+
+  .floatingYearBadge {
+    left: 10px;
+    bottom: -15px;
   }
 }

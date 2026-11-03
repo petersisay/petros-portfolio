@@ -1,68 +1,81 @@
-import { GraduationCap, Code, Database, Layers, Sparkles } from 'lucide-react';
+import React from 'react';
+import { Calendar, GraduationCap, Award, Compass, CheckCircle2 } from 'lucide-react';
 import { journeyItems } from '../../data/journey';
-import { useIntersection } from '../../hooks/useIntersection';
 import styles from './Journey.module.css';
 
 export default function Journey() {
-  const { ref, isVisible } = useIntersection();
-
   return (
-    <section id="journey" className="section">
+    <section id="journey" className={`section ${styles.journeySection}`}>
       <div className="container">
-        {/* Section Heading */}
-        <div ref={ref} className={`reveal ${isVisible ? 'visible' : ''}`}>
-          <p className="section-label">Learning & Growth</p>
+        {/* Section Header */}
+        <div className="section-header reveal">
+          <div className="section-label">&lt; Engineering Path /&gt;</div>
           <h2 className="section-title">
-            Software Engineering <span>Journey</span>
+            Education &amp; <span className="gradient-text">Growth Journey</span>
           </h2>
           <p className="section-subtitle">
-            My milestone progression from computer science fundamentals at ASTU to practical web, Java, and database engineering.
+            A chronological timeline of academic achievements, technical milestones, and hands-on software development experience.
           </p>
         </div>
 
-        {/* Timeline List */}
-        <div className={styles.timeline}>
-          {journeyItems.map((item, idx) => (
-            <div
-              key={item.id}
-              className={`${styles.timelineItem} reveal ${isVisible ? 'visible' : ''}`}
-              style={{ transitionDelay: `${idx * 100}ms` }}
-            >
-              {/* Timeline Marker */}
-              <div className={styles.markerCol}>
-                <div className={`${styles.markerDot} ${item.category === 'current' ? styles.currentDot : ''}`}>
-                  {item.category === 'education' && <GraduationCap size={14} />}
-                  {item.category === 'current' && <Sparkles size={14} />}
-                  {item.category === 'experience' && <Layers size={14} />}
-                  {item.category === 'milestone' && <Code size={14} />}
-                </div>
-                {idx < journeyItems.length - 1 && <div className={styles.markerLine} />}
-              </div>
+        {/* Vertical Timeline */}
+        <div className={styles.timelineWrapper}>
+          {/* Continuous Gradient Center Line */}
+          <div className={styles.timelineLine} aria-hidden="true" />
 
-              {/* Content Card */}
-              <div className={styles.card}>
-                <div className={styles.cardHeader}>
-                  <span className={styles.yearBadge}>{item.year}</span>
-                  {item.category === 'current' && (
-                    <span className={styles.statusBadge}>Active Focus</span>
-                  )}
-                  {item.category === 'experience' && (
-                    <span className={styles.statusBadge} style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', borderColor: 'rgba(16, 185, 129, 0.3)' }}>Grade A+</span>
-                  )}
-                </div>
+          {/* Timeline Nodes & Cards */}
+          <div className={styles.timelineList}>
+            {journeyItems.map((item, idx) => {
+              const isEven = idx % 2 === 0;
 
-                <h3 className={styles.itemTitle}>{item.title}</h3>
-                <p className={styles.institution}>{item.institution}</p>
-                <p className={styles.description}>{item.description}</p>
+              return (
+                <div
+                  key={item.id}
+                  className={`${styles.timelineItem} ${isEven ? styles.timelineItemLeft : styles.timelineItemRight}`}
+                >
+                  {/* Timeline Center Node with Pulsing Ring */}
+                  <div className={styles.nodeWrapper}>
+                    <div className={styles.timelineNode}>
+                      <div className={styles.nodeInnerDot} />
+                    </div>
+                  </div>
 
-                <div className={styles.tagList}>
-                  {item.tags.map(t => (
-                    <span key={t} className="tag">{t}</span>
-                  ))}
+                  {/* Timeline Card */}
+                  <div className={`${styles.timelineCard} ${isEven ? 'reveal-left' : 'reveal-right'}`}>
+                    {/* Header: Year Badge & Category */}
+                    <div className={styles.cardHeader}>
+                      <div className={styles.yearBadge}>
+                        <Calendar size={13} />
+                        <span>{item.year}</span>
+                      </div>
+                      <span className={styles.categoryBadge}>{item.category}</span>
+                    </div>
+
+                    {/* Title & Institution */}
+                    <h3 className={styles.itemTitle}>{item.title}</h3>
+                    <p className={styles.institution}>
+                      <GraduationCap size={15} />
+                      <span>{item.institution}</span>
+                    </p>
+
+                    {/* Description */}
+                    <p className={styles.description}>{item.description}</p>
+
+                    {/* Skill Tags */}
+                    {item.tags && (
+                      <div className={styles.tagsRow}>
+                        {item.tags.map(tag => (
+                          <span key={tag} className={styles.tag}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
