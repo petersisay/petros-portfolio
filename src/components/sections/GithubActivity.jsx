@@ -6,6 +6,13 @@ import styles from './GithubActivity.module.css';
 
 const REPOS = [
   {
+    name: 'AMEN-',
+    desc: 'Christian media streaming platform for the Apostolic Church of Ethiopia with React 18, Express proxy, and YouTube Data API v3.',
+    lang: 'JavaScript',
+    url: 'https://github.com/petersisay/AMEN-',
+    stars: 1,
+  },
+  {
     name: 'CodeTogether',
     desc: 'Real-time collaborative code editor & pair programming workspace with WebRTC video/voice calls and ZIP export.',
     lang: 'JavaScript',
