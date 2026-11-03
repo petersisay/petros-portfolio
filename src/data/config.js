@@ -19,8 +19,8 @@ export const siteConfig = {
 
   // Social & Contact Links
   email: 'petrossisay1646@gmail.com',
-  github: 'https://github.com/petersisay',
-  githubUsername: 'petersisay',
+  github: 'https://github.com/petrossisay1646',
+  githubUsername: 'petrossisay1646',
   linkedin: 'https://www.linkedin.com/in/petros-sisay-gelan',
   telegram: 'https://t.me/Petros_sisay',
   telegramHandle: '@Petros_sisay',
