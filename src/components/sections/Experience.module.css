@@ -1,0 +1,320 @@
+.experienceSection {
+  padding: 100px 0;
+  position: relative;
+}
+
+/* Featured Internship Card */
+.mainCard {
+  display: flex;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 32px;
+  position: relative;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.mainCard:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+}
+
+.accentBar {
+  width: 6px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.cardContent {
+  flex: 1;
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.companySub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.companyName {
+  font-size: 2.2rem;
+  font-family: 'DM Serif Display', serif;
+  color: var(--text);
+  line-height: 1.15;
+  margin-top: 4px;
+}
+
+.roleName {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.badgeCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.gradeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-dim);
+  border: 1px solid var(--border-accent);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  box-shadow: 0 0 12px rgba(0, 255, 135, 0.15);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.metaDivider {
+  color: var(--border);
+}
+
+.departmentNote {
+  background: var(--bg-subtle);
+  border-left: 2px solid var(--accent);
+  padding: 12px 18px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.departmentNote strong {
+  color: var(--text);
+}
+
+.achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.achievementsTitle {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.bulletList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.bulletItem strong {
+  color: var(--text);
+}
+
+.bulletIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.techPillRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.techPill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+/* In Progress Sub-section */
+.inProgressSection {
+  margin-top: 70px;
+}
+
+.subHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.subHeading {
+  font-size: 1.6rem;
+  font-family: 'DM Serif Display', serif;
+  color: var(--text);
+}
+
+.inProgressBadge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+.subDesc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  margin-bottom: 24px;
+}
+
+.inProgressGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.inProgressCard {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.inProgressCard:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+}
+
+.inProgressCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.inProgressCardTag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: #f59e0b;
+}
+
+.inProgressCategory {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.inProgressTitle {
+  font-size: 1.4rem;
+  font-family: 'DM Serif Display', serif;
+  color: var(--text);
+}
+
+.inProgressDesc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.inProgressTech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.miniTechPill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  background: var(--bg-subtle);
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.viewLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: 6px;
+  transition: gap 0.2s ease;
+}
+
+.viewLink:hover {
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .inProgressGrid {
+    grid-template-columns: 1fr;
+  }
+  .cardTop {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .badgeCol {
+    align-items: flex-start;
+  }
+  .cardContent {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .experienceSection {
+    padding: 60px 0;
+  }
+}

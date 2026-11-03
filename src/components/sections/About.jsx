@@ -1,147 +1,137 @@
-import React from 'react';
-import { MapPin, GraduationCap, Briefcase, Sparkles, CheckCircle2 } from 'lucide-react';
-import styles from './About.module.css';
-
-const TECH_MARQUEE = [
-  'React.js',
-  'TypeScript',
-  'JavaScript (ES6+)',
-  'Node.js',
-  'Express.js',
-  'MongoDB',
-  'Flutter & Dart',
-  'Java (OOP & Swing)',
-  'MySQL & SQL',
-  'JDBC',
-  'REST APIs',
-  'Git & GitHub',
-  'Vite',
-  'HTML5 & Modern CSS',
-  'Clean Architecture',
-  'Riverpod',
-];
+import React from 'react'
+import { Award, Code2, GraduationCap, ArrowUpRight, Hammer } from 'lucide-react'
+import styles from './About.module.css'
 
 export default function About() {
   return (
-    <section id="about" className={`section ${styles.aboutSection}`}>
+    <section id="about" className={styles.aboutSection}>
       <div className="container">
-        {/* Section Header */}
-        <div className="section-header reveal">
-          <div className="section-label">&lt; About Me /&gt;</div>
-          <h2 className="section-title">
-            Passionate Engineer Crafting <span className="gradient-text">Impactful Software</span>
-          </h2>
-          <p className="section-subtitle">
-            Bridging theoretical computer science principles with high-performance practical applications.
-          </p>
+        <div className="reveal">
+          <div className="section-label">02 / About</div>
+          <h2 className="section-title">Architecting with Purpose</h2>
         </div>
 
-        {/* Two-Column Grid */}
-        <div className={styles.aboutGrid}>
-          {/* Left Column: Visual Frame */}
-          <div className={`${styles.aboutVisual} reveal-left`}>
-            <div className={styles.imageCard}>
-              <div className={styles.imageBackdrop} />
+        <div className={styles.bentoGrid}>
+          {/* 1. Large cell: Who I Am */}
+          <div className={`${styles.bentoCard} ${styles.cellBio} reveal`}>
+            <div className={styles.cardHeader}>
+              <Code2 size={22} className={styles.headerIcon} />
+              <span className={styles.cardTag}>Engineering Philosophy</span>
+            </div>
+            <h3 className={styles.bioHeading}>Who I Am</h3>
+            <p className={styles.bioText}>
+              I&apos;m a 3rd-year Software Engineering student at Adama Science and Technology
+              University (ASTU) in Adama, Ethiopia. My focus is on constructing resilient,
+              production-grade web platforms and native mobile applications that solve tangible
+              infrastructure challenges across Ethiopia and Africa.
+            </p>
+            <p className={styles.bioText}>
+              During my engineering internship at <strong>AIG-Tech Enterprise</strong> (Adama
+              Investment Group), I engineered high-throughput Express REST APIs with MongoDB Atlas
+              and 2dsphere geospatial indexing, implemented real-time Socket.IO courier tracking
+              with municipal boundary geofencing, and integrated Chapa and Telebirr payment webhooks
+              — earning an exemplary <strong>A+ evaluation</strong>.
+            </p>
+            <p className={styles.bioText}>
+              I approach software with strict architectural discipline: strict type safety, modular
+              separation of concerns, comprehensive automated test coverage, and clean, intuitive user
+              interfaces.
+            </p>
+          </div>
+
+          {/* 2. Tall cell: Profile Photo with decorative frame */}
+          <div className={`${styles.bentoCard} ${styles.cellPhoto} reveal`}>
+            <div className={styles.photoContainer}>
               <img
                 src="/profile.jpg"
-                alt="Petros Sisay Gelan"
-                className={styles.aboutImg}
-                onError={(e) => {
-                  e.target.src = '/profile.webp';
-                }}
+                alt="Petros Sisay Gelan portrait"
+                className={styles.portraitImg}
+                loading="lazy"
               />
-              {/* Overlaid Geometric Decorations */}
-              <div className={styles.decoSquare1} />
-              <div className={styles.decoSquare2} />
-
-              {/* Floating "3rd Year" Badge */}
-              <div className={styles.floatingYearBadge}>
-                <span className={styles.yearIcon}>🎓</span>
-                <div>
-                  <strong>3rd Year Student</strong>
-                  <span>B.Sc. Software Engineering</span>
-                </div>
+              <div className={styles.photoPatternOverlay} />
+              <div className={styles.photoCaption}>
+                <span className={styles.photoName}>Petros Sisay Gelan</span>
+                <span className={styles.photoRole}>ASTU · Software Engineering</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Bio & Fact Cards */}
-          <div className={`${styles.aboutDetails} reveal-right`}>
-            <div className={styles.bioBlock}>
-              <p className={styles.bioText}>
-                I am a 3rd Year Software Engineering student at <strong>Adama Science and Technology University (ASTU)</strong> in Ethiopia.
-                My developer philosophy focuses on crafting reliable, responsive, and aesthetically pleasing software systems
-                that solve concrete real-world problems.
-              </p>
-              <p className={styles.bioText}>
-                From engineering full-stack MERN task workflows to developing cross-platform Flutter mobile clients and multi-threaded Java systems,
-                I am deeply committed to writing clean, maintainable code with strict attention to user experience and performance.
-              </p>
+          {/* 3. Stat cell: Projects Built */}
+          <div className={`${styles.bentoCard} ${styles.cellStat} reveal`}>
+            <div className={styles.statIconWrapper}>
+              <Code2 size={20} />
             </div>
-
-            {/* 3 Quick-Fact Cards */}
-            <div className={styles.factsGrid}>
-              <div className={styles.factCard}>
-                <div className={styles.factIconWrap}>
-                  <MapPin className={styles.factIconCyan} size={22} />
-                </div>
-                <div>
-                  <h4 className={styles.factTitle}>Location</h4>
-                  <p className={styles.factValue}>Adama, Ethiopia</p>
-                  <span className={styles.factSub}>ASTU Campus</span>
-                </div>
-              </div>
-
-              <div className={styles.factCard}>
-                <div className={styles.factIconWrap}>
-                  <GraduationCap className={styles.factIconViolet} size={22} />
-                </div>
-                <div>
-                  <h4 className={styles.factTitle}>University</h4>
-                  <p className={styles.factValue}>ASTU</p>
-                  <span className={styles.factSub}>Software Engineering</span>
-                </div>
-              </div>
-
-              <div className={styles.factCard}>
-                <div className={styles.factIconWrap}>
-                  <Briefcase className={styles.factIconPink} size={22} />
-                </div>
-                <div>
-                  <h4 className={styles.factTitle}>Availability</h4>
-                  <p className={styles.factValue}>Open to Work</p>
-                  <span className={styles.factSub}>Internships & Junior Roles</span>
-                </div>
-              </div>
-            </div>
-
-            {/* "What Drives Me" Paragraph */}
-            <div className={styles.driverCard}>
-              <div className={styles.driverHeader}>
-                <Sparkles size={18} className={styles.driverSparkle} />
-                <h4 className={styles.driverTitle}>What Drives Me</h4>
-              </div>
-              <p className={styles.driverText}>
-                I am driven by the thrill of turning complex ideas into elegant, functioning software. Whether it's optimizing SQL schemas,
-                architecting scalable REST APIs, or polishing micro-interactions in React and Flutter, I continuously push my boundaries to become a world-class engineer.
-              </p>
-            </div>
+            <div className={styles.statNumber}>10+</div>
+            <div className={styles.statLabel}>Projects Built</div>
+            <div className={styles.statDesc}>Web, mobile & systems</div>
           </div>
-        </div>
 
-        {/* Bottom Horizontal Scrolling Tech Marquee */}
-        <div className={`${styles.marqueeWrapper} reveal`}>
-          <div className={styles.marqueeTrack}>
-            {/* Duplicated list for infinite seamless loop */}
-            {[...TECH_MARQUEE, ...TECH_MARQUEE].map((tech, idx) => (
-              <div key={`${tech}-${idx}`} className={styles.techPill}>
-                <span className={styles.techDot} />
-                <span className={styles.techName}>{tech}</span>
+          {/* 4. Stat cell: Internship Grade */}
+          <div className={`${styles.bentoCard} ${styles.cellStat} ${styles.statAccentCard} reveal`}>
+            <div className={styles.statIconWrapper}>
+              <Award size={20} />
+            </div>
+            <div className={`${styles.statNumber} ${styles.accentNumber}`}>A+</div>
+            <div className={styles.statLabel}>Internship Grade</div>
+            <div className={styles.statDesc}>AIG-Tech Enterprise</div>
+          </div>
+
+          {/* 5. Stat cell: Year at ASTU */}
+          <div className={`${styles.bentoCard} ${styles.cellStat} reveal`}>
+            <div className={styles.statIconWrapper}>
+              <GraduationCap size={20} />
+            </div>
+            <div className={styles.statNumber}>3rd</div>
+            <div className={styles.statLabel}>Year at ASTU</div>
+            <div className={styles.statDesc}>B.Sc. Software Engineering</div>
+          </div>
+
+          {/* 6. Wide cell: Currently Building */}
+          <div className={`${styles.bentoCard} ${styles.cellBuilding} reveal`}>
+            <div className={styles.buildingHeader}>
+              <div className={styles.buildingTitleRow}>
+                <Hammer size={18} className={styles.buildingIcon} />
+                <span className={styles.buildingTitle}>Currently Building in Production</span>
               </div>
-            ))}
+              <span className={styles.buildingBadge}>Active Engineering</span>
+            </div>
+
+            <div className={styles.chipsGrid}>
+              <div className={styles.projectPill}>
+                <div className={styles.pillTop}>
+                  <span className={styles.pillName}>TemariHub</span>
+                  <span className={styles.pillTag}>STEM Tracker</span>
+                </div>
+                <p className={styles.pillDesc}>
+                  Ethiopian STEM opportunity discovery platform with 125+ automated Vitest tests and
+                  bilingual interface.
+                </p>
+              </div>
+
+              <div className={styles.projectPill}>
+                <div className={styles.pillTop}>
+                  <span className={styles.pillName}>Lehulu</span>
+                  <span className={styles.pillTag}>Services Marketplace</span>
+                </div>
+                <p className={styles.pillDesc}>
+                  Trust-first local services marketplace featuring municipal geospatial boundaries across
+                  Adama & Addis Ababa.
+                </p>
+              </div>
+
+              <div className={styles.projectPill}>
+                <div className={styles.pillTop}>
+                  <span className={styles.pillName}>Revola</span>
+                  <span className={styles.pillTag}>Circular Economy</span>
+                </div>
+                <p className={styles.pillDesc}>
+                  Circular materials marketplace with Chapa ETB payment gateway and Leaflet depot mapping.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

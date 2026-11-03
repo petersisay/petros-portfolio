@@ -1,312 +1,301 @@
 .aboutSection {
-  background-color: var(--bg-secondary);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  padding: 100px 0;
   position: relative;
 }
 
-.aboutGrid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 56px;
-  align-items: center;
-  margin-bottom: 64px;
-}
-
-/* ── Left Column: Visual Frame ── */
-.aboutVisual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.imageCard {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-lg);
-  overflow: visible;
-}
-
-.imageBackdrop {
-  position: absolute;
-  inset: -12px;
-  border-radius: calc(var(--radius-lg) + 12px);
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(236, 72, 153, 0.2), rgba(6, 182, 212, 0.3));
-  filter: blur(16px);
-  z-index: 0;
-  opacity: 0.7;
-}
-
-.aboutImg {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  border-radius: var(--radius-lg);
-  border: 2px solid var(--glass-border);
-  box-shadow: var(--shadow-card);
-}
-
-/* Overlaid Geometric Decorations */
-.decoSquare1 {
-  position: absolute;
-  top: -16px;
-  left: -16px;
-  width: 70px;
-  height: 70px;
-  border: 2px dashed var(--accent-violet);
-  border-radius: 12px;
-  z-index: 0;
-  opacity: 0.6;
-}
-
-.decoSquare2 {
-  position: absolute;
-  bottom: -16px;
-  right: -16px;
-  width: 90px;
-  height: 90px;
-  border: 2px solid var(--accent-pink);
-  border-radius: 16px;
-  z-index: 0;
-  opacity: 0.4;
-}
-
-/* Floating 3rd Year Badge */
-.floatingYearBadge {
-  position: absolute;
-  bottom: 24px;
-  left: -20px;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 18px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-hover);
-  border-radius: var(--radius);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-  animation: float 6s ease-in-out infinite;
-}
-
-.yearIcon {
-  font-size: 1.5rem;
-}
-
-.floatingYearBadge strong {
-  display: block;
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-.floatingYearBadge span {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-/* ── Right Column: Bio & Facts ── */
-.aboutDetails {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.bioBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.bioText {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-
-.bioText strong {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-/* ── 3 Quick-Fact Cards ── */
-.factsGrid {
+.bentoGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
+  margin-top: 32px;
 }
 
-.factCard {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.bentoCard {
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  transition: all var(--transition);
-}
-
-.factCard:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
-}
-
-.factIconWrap {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--bg-card);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.factIconCyan {
-  color: var(--accent-cyan);
-}
-
-.factIconViolet {
-  color: var(--accent-violet);
-}
-
-.factIconPink {
-  color: var(--accent-pink);
-}
-
-.factTitle {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  font-family: var(--font-code);
-  margin-bottom: 2px;
-}
-
-.factValue {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 2px;
-}
-
-.factSub {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  display: block;
-}
-
-/* ── "What Drives Me" Card ── */
-.driverCard {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(236, 72, 153, 0.05) 100%);
-  border: 1px solid rgba(139, 92, 246, 0.25);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-}
-
-.driverHeader {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.driverSparkle {
-  color: var(--accent-pink);
-}
-
-.driverTitle {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.driverText {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
-/* ── Horizontal Scrolling Marquee ── */
-.marqueeWrapper {
-  width: 100%;
-  overflow: hidden;
+  border-radius: var(--radius-lg);
+  padding: 32px;
   position: relative;
-  padding: 16px 0;
-  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  overflow: hidden;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
-.marqueeTrack {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  width: max-content;
-  animation: marquee 28s linear infinite;
-}
-
-.marqueeTrack:hover {
-  animation-play-state: paused;
-}
-
-.techPill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 18px;
-  background: var(--glass-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  white-space: nowrap;
-  transition: all var(--transition);
-}
-
-.techPill:hover {
-  border-color: var(--accent-violet);
-  background: rgba(139, 92, 246, 0.15);
+.bentoCard:hover {
+  border-color: var(--border-accent);
   transform: translateY(-2px);
 }
 
-.techDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-cyan);
+/* 1. Bio Cell */
+.cellBio {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.techName {
-  font-family: var(--font-code);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-primary);
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
 }
 
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  .aboutGrid {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
+.headerIcon {
+  color: var(--accent);
+}
 
-  .factsGrid {
+.cardTag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.bioHeading {
+  font-size: 2rem;
+  font-family: 'DM Serif Display', serif;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.bioText {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.bioText strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* 2. Photo Cell */
+.cellPhoto {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.photoContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+}
+
+.portraitImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photoPatternOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 13, 20, 0.1) 0%, rgba(13, 13, 20, 0.85) 100%),
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 255, 135, 0.03) 10px, rgba(0, 255, 135, 0.03) 20px);
+  pointer-events: none;
+}
+
+.photoCaption {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.photoName {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.35rem;
+  color: #ffffff;
+}
+
+.photoRole {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+/* 3-5. Stat Cells */
+.cellStat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.statIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.statNumber {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.statAccentCard {
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-subtle) 100%);
+  border-color: rgba(0, 255, 135, 0.2);
+}
+
+.accentNumber {
+  color: var(--accent);
+}
+
+.statLabel {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.statDesc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* 6. Building Cell */
+.cellBuilding {
+  grid-column: 2 / span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.buildingHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.buildingTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.buildingIcon {
+  color: var(--accent);
+}
+
+.buildingTitle {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.buildingBadge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-accent);
+}
+
+.chipsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.projectPill {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.projectPill:hover {
+  border-color: var(--border-accent);
+}
+
+.pillTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.pillName {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.pillTag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+}
+
+.pillDesc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cellBio {
+    grid-column: 1 / span 2;
+  }
+  .cellPhoto {
+    grid-column: 1 / span 2;
+    grid-row: auto;
+    min-height: 320px;
+  }
+  .cellBuilding {
+    grid-column: 1 / span 2;
+  }
+  .chipsGrid {
     grid-template-columns: 1fr;
   }
+}
 
-  .floatingYearBadge {
-    left: 10px;
-    bottom: -15px;
+@media (max-width: 640px) {
+  .aboutSection {
+    padding: 60px 0;
+  }
+  .bentoGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .cellBio,
+  .cellPhoto,
+  .cellStat,
+  .cellBuilding {
+    grid-column: 1;
+  }
+  .bentoCard {
+    padding: 24px;
   }
 }

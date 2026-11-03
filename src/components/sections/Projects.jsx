@@ -1,346 +1,343 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'
 import {
   ExternalLink,
-  Maximize2,
   X,
-  CheckCircle2,
+  Check,
   Sparkles,
-  ArrowRight,
-  Layers,
-  HelpCircle
-} from 'lucide-react';
-import { Github } from '../common/Icons';
-import { projects, filterCategories } from '../../data/projects';
-import styles from './Projects.module.css';
+  LayoutGrid,
+  SlidersHorizontal,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react'
+import { Github } from '../common/Icons'
+import { projects, filterCategories } from '../../data/projects'
+import styles from './Projects.module.css'
 
 export default function Projects() {
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('all')
+  const [selectedProject, setSelectedProject] = useState(null)
+  const [viewMode, setViewMode] = useState('grid') // 'grid' | 'strip'
+  const stripRef = useRef(null)
 
-  // Filter projects
-  const filteredProjects = projects.filter(project => {
-    if (activeFilter === 'all') return true;
-    return project.category && project.category.includes(activeFilter);
-  });
-
-  // Modal accessibility: disable body scroll & handle Escape key
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setSelectedProject(null);
-      }
-    };
-
-    if (selectedProject) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.body.style.overflow = '';
+  // Filter projects by active category
+  const filteredProjects = projects.filter((proj) => {
+    if (activeCategory === 'all') return true
+    if (Array.isArray(proj.category)) {
+      return proj.category.includes(activeCategory)
     }
+    return proj.category === activeCategory
+  })
 
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [selectedProject]);
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden'
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') setSelectedProject(null)
+      }
+      window.addEventListener('keydown', handleKeyDown)
+      return () => {
+        document.body.style.overflow = ''
+        window.removeEventListener('keydown', handleKeyDown)
+      }
+    } else {
+      document.body.style.overflow = ''
+    }
+  }, [selectedProject])
+
+  const scrollStrip = (direction) => {
+    if (stripRef.current) {
+      const scrollAmount = direction === 'left' ? -420 : 420
+      stripRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+    }
+  }
 
   return (
-    <section id="projects" className={`section ${styles.projectsSection}`}>
+    <section id="projects" className={styles.projectsSection}>
       <div className="container">
-        {/* Section Header */}
-        <div className="section-header reveal">
-          <div className="section-label">&lt; Portfolio Showcases /&gt;</div>
-          <h2 className="section-title">
-            Featured Projects &amp; <span className="gradient-text">Case Studies</span>
-          </h2>
-          <p className="section-subtitle">
-            A comprehensive collection of production-grade full-stack web applications, Flutter mobile suites,
-            Java desktop systems, and client solutions.
-          </p>
+        <div className="reveal">
+          <div className="section-label">04 / Work</div>
+          <div className={styles.headerRow}>
+            <div>
+              <h2 className="section-title">Featured Engineering Projects</h2>
+              <p className={styles.sectionSubtitle}>
+                A curated selection of full-stack platforms, cross-platform mobile apps, and distributed
+                systems built with clean architecture and modern tooling.
+              </p>
+            </div>
 
-          {/* Filter Tabs */}
-          <div className={styles.filterTabs}>
-            {filterCategories.map(cat => {
-              const count = cat.id === 'all'
-                ? projects.length
-                : projects.filter(p => p.category && p.category.includes(cat.id)).length;
-              const isActive = activeFilter === cat.id;
-
-              return (
+            {/* View Mode Switcher (Desktop) */}
+            <div className={styles.viewControls}>
+              <div className={styles.viewSwitcher}>
                 <button
-                  key={cat.id}
-                  type="button"
-                  className={`${styles.filterBtn} ${isActive ? styles.filterBtnActive : ''}`}
-                  onClick={() => setActiveFilter(cat.id)}
+                  onClick={() => setViewMode('grid')}
+                  className={`${styles.viewBtn} ${viewMode === 'grid' ? styles.activeViewBtn : ''}`}
+                  aria-label="Grid View"
+                  title="2-Column Grid View"
                 >
-                  <span>{cat.label}</span>
-                  <span className={styles.filterCount}>{count}</span>
+                  <LayoutGrid size={16} />
+                  <span>Grid</span>
                 </button>
-              );
-            })}
+                <button
+                  onClick={() => setViewMode('strip')}
+                  className={`${styles.viewBtn} ${viewMode === 'strip' ? styles.activeViewBtn : ''}`}
+                  aria-label="Horizontal Strip View"
+                  title="Horizontal Scroll Strip View"
+                >
+                  <SlidersHorizontal size={16} />
+                  <span>Strip</span>
+                </button>
+              </div>
+
+              {viewMode === 'strip' && (
+                <div className={styles.arrowGroup}>
+                  <button
+                    onClick={() => scrollStrip('left')}
+                    className={styles.arrowBtn}
+                    aria-label="Scroll Left"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    onClick={() => scrollStrip('right')}
+                    className={styles.arrowBtn}
+                    aria-label="Scroll Right"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Projects Grid (2 cols desktop, 1 col mobile) */}
-        <div className={styles.projectsGrid}>
-          {filteredProjects.map((project, idx) => (
-            <article
-              key={project.id}
-              className={`${styles.projectCard} reveal`}
-              style={{ animationDelay: `${(idx % 4) * 100}ms` }}
+        {/* Filter Tabs */}
+        <div className={`${styles.filterRow} reveal`}>
+          {filterCategories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`${styles.filterPill} ${activeCategory === cat.id ? styles.activeFilter : ''}`}
             >
-              {/* Media Header / Image */}
-              <div className={styles.imageContainer}>
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Projects Container (Grid or Horizontal Strip) */}
+        <div
+          ref={stripRef}
+          className={`${viewMode === 'strip' ? styles.stripGrid : styles.grid}`}
+        >
+          {filteredProjects.map((project) => (
+            <div
+              key={project.id}
+              className={`${styles.card} ${viewMode === 'strip' ? styles.stripCard : ''} reveal`}
+              onClick={() => setSelectedProject(project)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  setSelectedProject(project)
+                }
+              }}
+              aria-label={`View details for ${project.title}`}
+            >
+              {/* Project Image */}
+              <div className={styles.imageWrapper}>
                 <img
                   src={project.image}
                   alt={project.title}
-                  loading="lazy"
                   className={styles.projectImage}
+                  loading="lazy"
                   onError={(e) => {
-                    // Fallback to a placeholder gradient if image is missing
-                    e.target.style.display = 'none';
-                    e.target.parentElement.classList.add(styles.imageFallback);
+                    e.target.style.display = 'none'
                   }}
                 />
-
-                {/* Gradient Hover Overlay with View Details Trigger */}
-                <div
-                  className={styles.imageOverlay}
-                  onClick={() => setSelectedProject(project)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`View details for ${project.title}`}
-                  onKeyDown={(e) => { if (e.key === 'Enter') setSelectedProject(project); }}
-                >
-                  <button type="button" className={styles.viewDetailsBtn}>
-                    <Maximize2 size={16} />
-                    <span>View Case Study</span>
-                  </button>
+                <div className={styles.imageOverlay}>
+                  <span className={styles.viewPrompt}>Click for Case Study</span>
                 </div>
-
-                {/* Featured Badge */}
-                {project.featured && (
-                  <div className={styles.featuredBadge}>
-                    <Sparkles size={12} />
-                    <span>Featured</span>
-                  </div>
-                )}
               </div>
 
               {/* Card Body */}
               <div className={styles.cardBody}>
-                {/* Categories */}
-                <div className={styles.badgeRow}>
-                  {project.category.map(cat => (
-                    <span key={cat} className={styles.categoryPill}>
-                      {cat}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Title & Tagline */}
-                <h3 className={styles.projectTitle}>
-                  <button
-                    type="button"
-                    className={styles.titleBtn}
-                    onClick={() => setSelectedProject(project)}
-                  >
-                    {project.title}
-                  </button>
-                </h3>
-                <p className={styles.projectTagline}>{project.tagline}</p>
-                <p className={styles.projectDescription}>{project.description}</p>
-
-                {/* Tech Stack Pills */}
-                <div className={styles.techStack}>
-                  {project.tech.slice(0, 5).map(tech => (
-                    <span key={tech} className={styles.techBadge}>
-                      {tech}
-                    </span>
-                  ))}
-                  {project.tech.length > 5 && (
-                    <span className={styles.techBadgeMore}>
-                      +{project.tech.length - 5}
+                {/* Categories & Tech chips */}
+                <div className={styles.chipsRow}>
+                  {project.featured && (
+                    <span className={styles.featuredBadge}>
+                      <Sparkles size={11} /> Featured
                     </span>
                   )}
-                </div>
-
-                {/* Action Buttons Row */}
-                <div className={styles.cardActions}>
-                  <div className={styles.externalLinks}>
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.actionIconBtn}
-                        aria-label={`GitHub repository for ${project.title}`}
-                        title="Source Code"
-                      >
-                        <Github size={18} />
-                      </a>
-                    )}
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.liveDemoBtn}
-                        aria-label={`Live demo for ${project.title}`}
-                      >
-                        <ExternalLink size={15} />
-                        <span>Live Demo</span>
-                      </a>
-                    )}
-                  </div>
-
-                  <button
-                    type="button"
-                    className={styles.detailsTextBtn}
-                    onClick={() => setSelectedProject(project)}
-                  >
-                    <span>Details</span>
-                    <ArrowRight size={14} />
-                  </button>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      {/* Case Study Modal */}
-      {selectedProject && (
-        <div
-          className={styles.modalBackdrop}
-          onClick={() => setSelectedProject(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-title"
-        >
-          <div
-            className={styles.modalContent}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className={styles.modalHeader}>
-              <div>
-                <div className={styles.modalCategories}>
-                  {selectedProject.category.map(c => (
-                    <span key={c} className={styles.categoryPill}>{c}</span>
+                  {project.tech?.slice(0, 3).map((t) => (
+                    <span key={t} className={styles.techChip}>
+                      {t}
+                    </span>
                   ))}
                 </div>
-                <h2 id="modal-title" className={styles.modalTitle}>
-                  {selectedProject.title}
-                </h2>
-                <p className={styles.modalTagline}>{selectedProject.tagline}</p>
-              </div>
 
+                <h3 className={styles.projectTitle}>{project.title}</h3>
+                <p className={styles.projectDesc}>{project.description}</p>
+
+                {/* Footer Buttons */}
+                <div className={styles.cardFooter}>
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.linkBtn}
+                      onClick={(e) => e.stopPropagation()}
+                      aria-label={`GitHub repo for ${project.title}`}
+                    >
+                      <Github size={15} />
+                      <span>Code →</span>
+                    </a>
+                  )}
+
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${styles.linkBtn} ${styles.liveBtn}`}
+                      onClick={(e) => e.stopPropagation()}
+                      aria-label={`Live demo for ${project.title}`}
+                    >
+                      <ExternalLink size={15} />
+                      <span>Live Demo →</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Modal Dialog for Project Case Study */}
+        {selectedProject && (
+          <div
+            className={styles.modalOverlay}
+            onClick={() => setSelectedProject(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+          >
+            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
               <button
-                type="button"
-                className={styles.modalCloseBtn}
+                className={styles.closeBtn}
                 onClick={() => setSelectedProject(null)}
                 aria-label="Close dialog"
               >
                 <X size={20} />
               </button>
-            </div>
 
-            {/* Modal Image */}
-            <div className={styles.modalImageWrap}>
-              <img
-                src={selectedProject.image}
-                alt={selectedProject.title}
-                className={styles.modalImage}
-              />
-            </div>
-
-            {/* Modal Body */}
-            <div className={styles.modalBody}>
-              {/* Problem & Solution Callouts */}
-              <div className={styles.probSolGrid}>
-                {selectedProject.problem && (
-                  <div className={styles.problemBox}>
-                    <h4 className={styles.boxTitle}>
-                      <HelpCircle size={16} />
-                      <span>The Challenge</span>
-                    </h4>
-                    <p>{selectedProject.problem}</p>
-                  </div>
-                )}
-                {selectedProject.solution && (
-                  <div className={styles.solutionBox}>
-                    <h4 className={styles.boxTitle}>
-                      <Sparkles size={16} />
-                      <span>The Solution</span>
-                    </h4>
-                    <p>{selectedProject.solution}</p>
-                  </div>
-                )}
+              <div className={styles.modalImageContainer}>
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className={styles.modalImage}
+                />
               </div>
 
-              {/* Long Description */}
-              <div className={styles.modalSection}>
-                <h4 className={styles.sectionHeading}>About This Project</h4>
-                <p className={styles.modalText}>{selectedProject.longDescription}</p>
-              </div>
-
-              {/* Key Features List */}
-              {selectedProject.features && selectedProject.features.length > 0 && (
-                <div className={styles.modalSection}>
-                  <h4 className={styles.sectionHeading}>Key Features &amp; Architecture</h4>
-                  <ul className={styles.featuresList}>
-                    {selectedProject.features.map((feat, i) => (
-                      <li key={i} className={styles.featureItem}>
-                        <CheckCircle2 size={16} className={styles.featureCheck} />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Complete Tech Stack */}
-              <div className={styles.modalSection}>
-                <h4 className={styles.sectionHeading}>Technologies Used</h4>
-                <div className={styles.modalTechGrid}>
-                  {selectedProject.tech.map(t => (
-                    <span key={t} className={styles.techTag}>
-                      {t}
+              <div className={styles.modalBody}>
+                <div className={styles.modalMeta}>
+                  {selectedProject.category && (
+                    <span className={styles.modalCategory}>
+                      {Array.isArray(selectedProject.category)
+                        ? selectedProject.category.join(' · ')
+                        : selectedProject.category}
                     </span>
-                  ))}
+                  )}
                 </div>
-              </div>
 
-              {/* Action Buttons */}
-              <div className={styles.modalFooterActions}>
-                {selectedProject.liveUrl && (
-                  <a
-                    href={selectedProject.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary"
-                  >
-                    <ExternalLink size={18} />
-                    <span>Launch Live Demo</span>
-                  </a>
+                <h3 id="modal-title" className={styles.modalTitle}>
+                  {selectedProject.title}
+                </h3>
+
+                {selectedProject.tagline && (
+                  <p className={styles.modalTagline}>{selectedProject.tagline}</p>
                 )}
-                {selectedProject.githubUrl && (
-                  <a
-                    href={selectedProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-outline"
-                  >
-                    <Github size={18} />
-                    <span>View GitHub Source</span>
-                  </a>
+
+                <p className={styles.modalLongDesc}>
+                  {selectedProject.longDescription || selectedProject.description}
+                </p>
+
+                {/* Problem & Solution */}
+                {(selectedProject.problem || selectedProject.solution) && (
+                  <div className={styles.probSolGrid}>
+                    {selectedProject.problem && (
+                      <div className={styles.probCard}>
+                        <h4 className={styles.probTitle}>The Engineering Problem</h4>
+                        <p className={styles.probText}>{selectedProject.problem}</p>
+                      </div>
+                    )}
+                    {selectedProject.solution && (
+                      <div className={styles.solCard}>
+                        <h4 className={styles.solTitle}>The Architectural Solution</h4>
+                        <p className={styles.solText}>{selectedProject.solution}</p>
+                      </div>
+                    )}
+                  </div>
                 )}
+
+                {/* Features List */}
+                {selectedProject.features && selectedProject.features.length > 0 && (
+                  <div className={styles.featuresSection}>
+                    <h4 className={styles.featuresHeading}>Core Architectural Features</h4>
+                    <ul className={styles.featuresList}>
+                      {selectedProject.features.map((feature, idx) => (
+                        <li key={idx} className={styles.featureItem}>
+                          <Check size={16} className={styles.checkIcon} />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Full Tech Stack */}
+                <div className={styles.modalTechSection}>
+                  <h4 className={styles.techHeading}>Technology Stack</h4>
+                  <div className={styles.modalTechRow}>
+                    {selectedProject.tech?.map((t) => (
+                      <span key={t} className={styles.modalTechPill}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action Links */}
+                <div className={styles.modalActions}>
+                  {selectedProject.githubUrl && (
+                    <a
+                      href={selectedProject.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.modalPrimaryBtn}
+                    >
+                      <Github size={18} />
+                      <span>View Source on GitHub</span>
+                    </a>
+                  )}
+                  {selectedProject.liveUrl && (
+                    <a
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.modalSecondaryBtn}
+                    >
+                      <ExternalLink size={18} />
+                      <span>Open Live Production Site</span>
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
-  );
+  )
 }

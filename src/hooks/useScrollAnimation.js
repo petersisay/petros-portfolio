@@ -2,20 +2,19 @@ import { useEffect } from 'react';
 
 export function useScrollAnimation() {
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const obs = new IntersectionObserver(
       entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.12 }
     );
 
-    const elements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    elements.forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
+    document.querySelectorAll('.reveal, .reveal-left').forEach(el => obs.observe(el));
+    return () => obs.disconnect();
   }, []);
 }
