@@ -1,4 +1,4 @@
-# Petros Sisay Gelan — Professional Developer Portfolio
+# Petros Sisay Gelan — Professional Developer personal Portfolio
 
 A modern, production-quality personal portfolio built with React and Vite. Dark-first premium design with full dark/light mode, responsive layout, interactive command palette, project showcase, and contact form.
 
