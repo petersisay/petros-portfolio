@@ -7,7 +7,17 @@ import styles from './Projects.module.css';
 
 // ── Project Modal Dialog ──────────────────────────────
 function ProjectModal({ project, onClose }) {
+  const [activeScreenshotIdx, setActiveScreenshotIdx] = useState(0);
+
   if (!project) return null;
+
+  const hasScreenshots = Array.isArray(project.screenshots) && project.screenshots.length > 0;
+  const currentImg = hasScreenshots && project.screenshots[activeScreenshotIdx]
+    ? project.screenshots[activeScreenshotIdx].url
+    : project.image;
+  const currentCaption = hasScreenshots && project.screenshots[activeScreenshotIdx]
+    ? project.screenshots[activeScreenshotIdx].caption
+    : null;
 
   return (
     <div
@@ -19,16 +29,56 @@ function ProjectModal({ project, onClose }) {
     >
       <div className={styles.modalContent}>
         {/* Header Image if available */}
-        {project.image && (
+        {currentImg && (
           <div className={styles.modalImageContainer}>
             <img
-              src={project.image}
+              src={currentImg}
               alt={`${project.title} preview`}
               className={styles.modalImage}
             />
             <button className={styles.modalCloseFloating} onClick={onClose} aria-label="Close dialog">
               <X size={20} />
             </button>
+          </div>
+        )}
+
+        {/* Optional Screenshot Gallery Navigation */}
+        {hasScreenshots && (
+          <div className={styles.galleryContainer}>
+            <div className={styles.galleryTabs} role="tablist" aria-label="Project screenshots">
+              {project.screenshots.map((shot, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeScreenshotIdx === idx}
+                  className={`${styles.galleryThumbBtn} ${activeScreenshotIdx === idx ? styles.galleryThumbActive : ''}`}
+                  onClick={() => setActiveScreenshotIdx(idx)}
+                  onKeyDown={e => {
+                    if (e.key === 'ArrowRight') {
+                      setActiveScreenshotIdx((idx + 1) % project.screenshots.length);
+                    } else if (e.key === 'ArrowLeft') {
+                      setActiveScreenshotIdx((idx - 1 + project.screenshots.length) % project.screenshots.length);
+                    }
+                  }}
+                  title={shot.caption || shot.label}
+                >
+                  <img
+                    src={shot.url}
+                    alt={shot.label || `Screenshot ${idx + 1}`}
+                    className={styles.galleryThumbImg}
+                    loading="lazy"
+                  />
+                  <span className={styles.galleryThumbLabel}>{shot.label || `Preview ${idx + 1}`}</span>
+                </button>
+              ))}
+            </div>
+            {currentCaption && (
+              <p className={styles.galleryCaption}>
+                <span className={styles.captionBadge}>{activeScreenshotIdx + 1}/{project.screenshots.length}</span>
+                {currentCaption}
+              </p>
+            )}
           </div>
         )}
 
@@ -40,7 +90,7 @@ function ProjectModal({ project, onClose }) {
             </span>
             <h3 id="modal-title" className={styles.modalTitle}>{project.title}</h3>
           </div>
-          {!project.image && (
+          {!currentImg && (
             <button className={styles.modalCloseBtn} onClick={onClose} aria-label="Close dialog">
               <X size={18} />
             </button>
@@ -63,6 +113,24 @@ function ProjectModal({ project, onClose }) {
                 <h4 className={styles.psTitle}>The Solution</h4>
                 <p>{project.solution}</p>
               </div>
+            </div>
+          )}
+
+          {/* Architecture & Security Details */}
+          {(project.architecture || project.security) && (
+            <div className={styles.problemSolutionGrid}>
+              {project.architecture && (
+                <div className={styles.psBox}>
+                  <h4 className={styles.psTitle}>System Architecture</h4>
+                  <p>{project.architecture}</p>
+                </div>
+              )}
+              {project.security && (
+                <div className={styles.psBox}>
+                  <h4 className={styles.psTitle}>Security & Privacy Model</h4>
+                  <p>{project.security}</p>
+                </div>
+              )}
             </div>
           )}
 
