@@ -1,48 +1,77 @@
-import { useState, useEffect } from 'react'
-import { useTheme } from './hooks/useTheme'
-import { useScrollAnimation } from './hooks/useScrollAnimation'
-import { useScrollSpy } from './hooks/useScrollSpy'
-import SideNav from './components/layout/SideNav'
-import MobileNav from './components/layout/MobileNav'
-import Hero from './components/sections/Hero'
-import About from './components/sections/About'
-import Projects from './components/sections/Projects'
-import Skills from './components/sections/Skills'
-import Experience from './components/sections/Experience'
-import EngineeringActivity from './components/sections/EngineeringActivity'
-import Contact from './components/sections/Contact'
-import Footer from './components/layout/Footer'
-import MouseGlow from './components/common/MouseGlow'
-import styles from './App.module.css'
+import { useState } from 'react';
+import { useTheme } from './hooks/useTheme';
+import { useCommandPalette } from './hooks/useCommandPalette';
+
+import ScrollProgress from './components/layout/ScrollProgress';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+
+import Hero from './components/sections/Hero';
+import About from './components/sections/About';
+import Skills from './components/sections/Skills';
+import Projects from './components/sections/Projects';
+import Journey from './components/sections/Journey';
+import Education from './components/sections/Education';
+import Services from './components/sections/Services';
+import GithubActivity from './components/sections/GithubActivity';
+import Contact from './components/sections/Contact';
+
+import CommandPalette from './components/interactive/CommandPalette';
+import Toast from './components/common/Toast';
 
 export default function App() {
-  const { theme, toggle } = useTheme()
-  const activeSection = useScrollSpy([
-    'hero',
-    'about',
-    'projects',
-    'skills',
-    'experience',
-    'engineering-activity',
-    'contact',
-  ])
-  useScrollAnimation()
+  const { theme, toggleTheme } = useTheme();
+  const palette = useCommandPalette();
+  const [toast, setToast] = useState({ message: '', type: 'success' });
+
+  const triggerToast = (message, type = 'success') => {
+    setToast({ message, type });
+  };
 
   return (
-    <div className={styles.app}>
-      <MouseGlow />
-      <SideNav active={activeSection} theme={theme} toggleTheme={toggle} />
-      <MobileNav active={activeSection} theme={theme} toggleTheme={toggle} />
-      <main className={styles.main}>
-        <Hero />
+    <div className="app">
+      {/* Top Scroll Indicator */}
+      <ScrollProgress />
+
+      {/* Main Header / Navigation */}
+      <Navbar
+        theme={theme}
+        toggleTheme={toggleTheme}
+        onOpenPalette={palette.open}
+        onTriggerToast={triggerToast}
+      />
+
+      {/* Page Sections */}
+      <main id="main-content">
+        <Hero onTriggerToast={triggerToast} />
         <About />
-        <Projects />
         <Skills />
-        <Experience />
-        <EngineeringActivity />
-        <Contact />
-        <Footer />
+        <Projects />
+        <Journey />
+        <Education />
+        <Services />
+        <GithubActivity />
+        <Contact onTriggerToast={triggerToast} />
       </main>
+
+      {/* Main Footer */}
+      <Footer />
+
+      {/* Interactive Command Palette (Ctrl+K) */}
+      <CommandPalette
+        isOpen={palette.isOpen}
+        onClose={palette.close}
+        theme={theme}
+        toggleTheme={toggleTheme}
+        onTriggerToast={triggerToast}
+      />
+
+      {/* Global Toast Notification */}
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        onClose={() => setToast({ message: '', type: 'success' })}
+      />
     </div>
-  )
+  );
 }

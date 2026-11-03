@@ -1,170 +1,202 @@
-import React, { useState, useEffect } from 'react'
-import { ArrowDownRight, FileText, Mail, Sparkles, Terminal } from 'lucide-react'
-import { Github, Linkedin, Telegram } from '../common/Icons'
-import { siteConfig } from '../../data/config'
-import styles from './Hero.module.css'
+import { useState, useEffect, useRef } from 'react';
+import { Send, ArrowDown, Download, ExternalLink, Terminal, Sparkles } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '../common/Icons';
+import { siteConfig } from '../../data/config';
+import styles from './Hero.module.css';
 
 const ROLES = [
-  'Full-Stack Developer',
-  'Software Engineering Student',
-  'React & Node.js Engineer',
-  'Flutter Mobile Developer',
-  'API & Database Architect',
-]
+  'Senior Software Engineering Student',
+  'Full-Stack Web Architect',
+  'Cross-Platform Mobile Developer (Flutter)',
+  'Civic Platforms & Systems Builder',
+];
 
-export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0)
-  const [isFading, setIsFading] = useState(false)
+function TypedRoles() {
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [deleting, setDeleting] = useState(false);
+  const timerRef = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsFading(true)
-      setTimeout(() => {
-        setRoleIndex((prev) => (prev + 1) % ROLES.length)
-        setIsFading(false)
-      }, 300)
-    }, 3200)
+    const currentRole = ROLES[index];
+    const speed = deleting ? 40 : 80;
 
-    return () => clearInterval(interval)
-  }, [])
+    timerRef.current = setTimeout(() => {
+      if (!deleting && text === currentRole) {
+        timerRef.current = setTimeout(() => setDeleting(true), 2000);
+        return;
+      }
+      if (deleting && text === '') {
+        setDeleting(false);
+        setIndex(prev => (prev + 1) % ROLES.length);
+        return;
+      }
+      setText(prev =>
+        deleting ? prev.slice(0, -1) : currentRole.slice(0, prev.length + 1)
+      );
+    }, speed);
 
-  const scrollTo = (e, id) => {
-    e.preventDefault()
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
+    return () => clearTimeout(timerRef.current);
+  }, [text, deleting, index]);
 
   return (
-    <section id="hero" className={styles.heroSection}>
-      <div className="container">
-        <div className={styles.grid}>
-          {/* Left Column */}
-          <div className={styles.leftCol}>
-            <div className={styles.sectionBadge}>
-              <span className="mono">01 —</span>
-              <span className={styles.subTitle}>ASTU · Software Engineering · 4th Year</span>
-            </div>
+    <span className={styles.typedContainer}>
+      <span className={styles.typedText}>{text}</span>
+      <span className={styles.cursor} aria-hidden="true">|</span>
+    </span>
+  );
+}
 
-            <div className={styles.headerBlock}>
-              <h2 className={styles.name}>{siteConfig.name}</h2>
-              <div className={styles.typewriterRow}>
-                <Terminal size={18} className={styles.termIcon} aria-hidden="true" />
-                <span className={`${styles.roleText} ${isFading ? styles.fadeOut : styles.fadeIn}`}>
-                  {ROLES[roleIndex]}
-                </span>
-                <span className={styles.cursor} aria-hidden="true" />
+export default function Hero({ onTriggerToast }) {
+  const handleDownloadCV = (e) => {
+    e.preventDefault();
+    const link = document.createElement('a');
+    link.href = siteConfig.cvPath;
+    link.download = 'Petros_Sisay_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    if (onTriggerToast) onTriggerToast('Downloading Resume...', 'info');
+  };
+
+  return (
+    <section id="home" className={styles.heroSection} aria-label="Hero Introduction">
+      {/* Background Technical Grid */}
+      <div className={styles.bgGrid} aria-hidden="true" />
+      <div className={styles.bgGradientOrb} aria-hidden="true" />
+
+      <div className={`container ${styles.gridContainer}`}>
+        {/* Left Side: Copy & CTAs */}
+        <div className={styles.contentCol}>
+          <div className="badge" aria-label="Availability Status">
+            <span className="badge-dot" />
+            <span>Open for Internships & Junior Roles</span>
+          </div>
+
+          <h1 className={styles.heroName}>
+            {siteConfig.name}
+          </h1>
+
+          <p className={styles.roleSubhead}>
+            <TypedRoles />
+          </p>
+
+          <p className={styles.tagline}>
+            {siteConfig.tagline} 3rd Year Software Engineering Student at ASTU building responsive web applications, Java desktop systems, and relational databases.
+          </p>
+
+          {/* Action CTAs */}
+          <div className={styles.ctaGroup}>
+            <a href="#projects" className={styles.primaryBtn}>
+              <span>View My Projects</span>
+              <ExternalLink size={16} />
+            </a>
+            <button onClick={handleDownloadCV} className={styles.secondaryBtn}>
+              <Download size={16} />
+              <span>Download CV</span>
+            </button>
+            <a
+              href={siteConfig.cvPath}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.ghostBtn}
+            >
+              View CV
+            </a>
+          </div>
+
+          {/* Social Links */}
+          <div className={styles.socialBar}>
+            <a
+              href={siteConfig.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+              aria-label="GitHub profile"
+            >
+              <GithubIcon size={20} />
+            </a>
+            <a
+              href={siteConfig.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+              aria-label="LinkedIn profile"
+            >
+              <LinkedinIcon size={20} />
+            </a>
+            <a
+              href={siteConfig.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+              aria-label="Telegram account"
+            >
+              <Send size={20} />
+            </a>
+            <span className={styles.socialDivider} />
+            <a href={`mailto:${siteConfig.email}`} className={styles.emailText}>
+              {siteConfig.email}
+            </a>
+          </div>
+        </div>
+
+        {/* Right Side: Interactive Developer Code Terminal */}
+        <div className={styles.visualCol} aria-hidden="true">
+          <div className={styles.terminalWindow}>
+            <div className={styles.terminalHeader}>
+              <div className={styles.dots}>
+                <span className={styles.dotRed} />
+                <span className={styles.dotYellow} />
+                <span className={styles.dotGreen} />
+              </div>
+              <div className={styles.terminalTitle}>
+                <Terminal size={13} />
+                <span>petros@astu-dev:~</span>
               </div>
             </div>
 
-            <h1 className={styles.headline}>
-              Building Digital Products That Solve Real Problems.
-            </h1>
+            <div className={styles.terminalBody}>
+              <p><span className={styles.cKeyword}>const</span> <span className={styles.cVar}>developer</span> = {'{'}</p>
+              <p className={styles.indent}><span className={styles.cProp}>name</span>: <span className={styles.cStr}>"{siteConfig.name}"</span>,</p>
+              <p className={styles.indent}><span className={styles.cProp}>title</span>: <span className={styles.cStr}>"Full-Stack Developer"</span>,</p>
+              <p className={styles.indent}><span className={styles.cProp}>university</span>: <span className={styles.cStr}>"ASTU (Adama, Ethiopia)"</span>,</p>
+              <p className={styles.indent}><span className={styles.cProp}>stack</span>: [</p>
+              <p className={styles.indent2}>
+                <span className={styles.cStr}>"React"</span>, <span className={styles.cStr}>"Node.js"</span>,
+              </p>
+              <p className={styles.indent2}>
+                <span className={styles.cStr}>"Java"</span>, <span className={styles.cStr}>"MySQL"</span>,
+              </p>
+              <p className={styles.indent}>],</p>
+              <p className={styles.indent}><span className={styles.cProp}>status</span>: <span className={styles.cStr}>"Ready for opportunities 🚀"</span>,</p>
+              <p>{'}'};</p>
 
-            <p className={styles.bio}>
-              I design, develop, and deploy practical software solutions using modern technologies,
-              combining thoughtful engineering, problem-solving, and user-centered design.
-            </p>
-
-            <div className={styles.metaStrip}>
-              <div className={styles.metaItem}>
-                <span className={styles.metaKey}>Institution:</span>
-                <span className={styles.metaVal}>ASTU (Adama, Ethiopia)</span>
+              <div className={styles.terminalPromptLine}>
+                <span className={styles.promptArrow}>&gt;</span> <span className={styles.cFn}>console</span>.<span className={styles.cLog}>log</span>(<span className={styles.cStr}>"Welcome to my portfolio!"</span>);
               </div>
-              <span className={styles.metaDivider}>·</span>
-              <div className={styles.metaItem}>
-                <span className={styles.metaKey}>Status:</span>
-                <span className={styles.statusPill}>
-                  <span className={styles.statusDot} />
-                  Open to Internships &amp; Roles
-                </span>
-              </div>
-            </div>
-
-            <div className={styles.ctaRow}>
-              <a href="#projects" onClick={(e) => scrollTo(e, 'projects')} className={styles.primaryBtn}>
-                Explore My Work
-                <ArrowDownRight size={18} />
-              </a>
-              <a href={siteConfig.cvPath} target="_blank" rel="noopener noreferrer" className={styles.secondaryBtn}>
-                <FileText size={18} />
-                Download CV
-              </a>
-              <a href="#contact" onClick={(e) => scrollTo(e, 'contact')} className={styles.tertiaryBtn}>
-                <Mail size={16} />
-                Contact Me
-              </a>
-            </div>
-
-            <div className={styles.socialRow}>
-              <span className={styles.socialLabel}>Direct Profiles:</span>
-              <a
-                href={siteConfig.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label="GitHub Profile"
-              >
-                <Github size={17} />
-                <span>GitHub</span>
-              </a>
-              <span className={styles.divider}>/</span>
-              <a
-                href={siteConfig.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label="LinkedIn Profile"
-              >
-                <Linkedin size={17} />
-                <span>LinkedIn</span>
-              </a>
-              <span className={styles.divider}>/</span>
-              <a
-                href={siteConfig.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label="Telegram Profile"
-              >
-                <Telegram size={17} />
-                <span>Telegram</span>
-              </a>
+              <p className={styles.terminalOutput}>// ✅ Rendered clean code architecture</p>
             </div>
           </div>
 
-          {/* Right Column */}
-          <div className={styles.rightCol}>
-            <div className={styles.avatarWrapper}>
-              <div className={styles.glowRing} />
-              <img
-                src={siteConfig.profilePhoto}
-                alt={siteConfig.name}
-                className={styles.avatar}
-                width="340"
-                height="340"
-              />
-
-              {/* 3 Genuine Verified Chips */}
-              <div className={`${styles.floatingChip} ${styles.chipOne}`}>
-                <Sparkles size={14} className={styles.chipIcon} />
-                <span>A+ Intern · AIG-Tech</span>
-              </div>
-
-              <div className={`${styles.floatingChip} ${styles.chipTwo}`}>
-                <span className={styles.dotAccent} />
-                <span>ASTU 4th Year</span>
-              </div>
-
-              <div className={`${styles.floatingChip} ${styles.chipThree}`}>
-                <span className={styles.dotAccent} />
-                <span>Full-Stack &amp; Flutter</span>
-              </div>
-            </div>
+          {/* Floating Pill Micro-Badges */}
+          <div className={`${styles.floatBadge} ${styles.float1}`}>
+            <Sparkles size={14} className={styles.badgeIcon} />
+            <span>React.js</span>
+          </div>
+          <div className={`${styles.floatBadge} ${styles.float2}`}>
+            <span>Java & OOP</span>
+          </div>
+          <div className={`${styles.floatBadge} ${styles.float3}`}>
+            <span>MySQL Database</span>
           </div>
         </div>
       </div>
+
+      {/* Down Arrow Indicator */}
+      <a href="#about" className={styles.scrollDown} aria-label="Scroll to About section">
+        <ArrowDown size={18} />
+      </a>
     </section>
-  )
+  );
 }

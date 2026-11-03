@@ -1,79 +1,94 @@
-import React from 'react'
-import { ArrowUp } from 'lucide-react'
-import { Github, Linkedin, Telegram } from '../common/Icons'
-import { siteConfig } from '../../data/config'
-import styles from './Footer.module.css'
+import { Send, Mail, ArrowUp } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '../common/Icons';
+import { siteConfig } from '../../data/config';
+import styles from './Footer.module.css';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
-
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
-    <footer className={styles.footer}>
-      <div className="container">
-        <div className={styles.footerInner}>
-          <div className={styles.infoCol}>
-            <div className={styles.nameRow}>
-              <span className={styles.nameAccent}>{siteConfig.name}</span>
-              <span className={styles.dotSeparator}>•</span>
-              <span className={styles.roleText}>
-                Fourth-Year Software Engineering Student @ ASTU
+    <footer className={styles.footer} role="contentinfo">
+      <div className={`container ${styles.inner}`}>
+        <div className={styles.topRow}>
+          {/* Left Brand info */}
+          <div className={styles.brand}>
+            <a href="#home" className={styles.logo}>
+              <span className={styles.logoMark}>P</span>
+              <span className={styles.logoText}>
+                {siteConfig.name}<span className={styles.logoDot}>.</span>
               </span>
-            </div>
-            <p className={styles.builtInfo}>
-              Designed &amp; Engineered by {siteConfig.name} · {currentYear}
-            </p>
-            <p className={styles.techInfo}>
-              Built with React 19 + Vite 8 + CSS Modules · Deployed on Vercel
-            </p>
+            </a>
+            <p className={styles.role}>{siteConfig.title}</p>
+            <p className={styles.school}>{siteConfig.university}</p>
           </div>
 
-          <div className={styles.rightCol}>
-            <div className={styles.socials}>
+          {/* Nav links */}
+          <div className={styles.linksCol}>
+            <h4 className={styles.colTitle}>Navigation</h4>
+            <ul className={styles.linkList}>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#skills">Skills</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#journey">Journey</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          {/* Social links */}
+          <div className={styles.socialCol}>
+            <h4 className={styles.colTitle}>Connect</h4>
+            <div className={styles.socialIcons}>
               <a
                 href={siteConfig.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.socialBtn}
                 aria-label="GitHub Profile"
+                className={styles.iconLink}
               >
-                <Github size={18} />
+                <GithubIcon size={18} />
               </a>
               <a
                 href={siteConfig.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.socialBtn}
                 aria-label="LinkedIn Profile"
+                className={styles.iconLink}
               >
-                <Linkedin size={18} />
+                <LinkedinIcon size={18} />
               </a>
               <a
                 href={siteConfig.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.socialBtn}
                 aria-label="Telegram Profile"
+                className={styles.iconLink}
               >
-                <Telegram size={18} />
+                <Send size={18} />
+              </a>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                aria-label="Send Email"
+                className={styles.iconLink}
+              >
+                <Mail size={18} />
               </a>
             </div>
-
-            <button
-              onClick={scrollToTop}
-              className={styles.backToTopBtn}
-              aria-label="Return to top of page"
-              title="Return to top"
-            >
-              <ArrowUp size={16} />
-              <span>Back to Top</span>
-            </button>
           </div>
+        </div>
+
+        <div className={styles.bottomRow}>
+          <p className={styles.copyright}>
+            &copy; {new Date().getFullYear()} {siteConfig.name}. Designed & Engineered with precision.
+          </p>
+          <button onClick={scrollToTop} className={styles.topBtn} aria-label="Back to top">
+            <span>Back to top</span>
+            <ArrowUp size={14} />
+          </button>
         </div>
       </div>
     </footer>
-  )
+  );
 }

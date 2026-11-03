@@ -1,160 +1,135 @@
-import React from 'react'
-import { Award, Code2, GraduationCap, Hammer, Layers, Cpu } from 'lucide-react'
-import { siteConfig } from '../../data/config'
-import styles from './About.module.css'
+import { useState } from 'react';
+import { GraduationCap, MapPin, Code2, BookOpen, CheckCircle, Award, Sparkles } from 'lucide-react';
+import { siteConfig } from '../../data/config';
+import { useIntersection } from '../../hooks/useIntersection';
+import styles from './About.module.css';
 
 export default function About() {
+  const { ref, isVisible } = useIntersection();
+  const [imgError, setImgError] = useState(false);
+
+  const highlights = [
+    'Senior Software Engineering Student (4th Year) at ASTU',
+    'AIG-Tech Full-Stack Intern (Grade A+) — REST APIs, OSRM & Socket.IO',
+    'Modern Full-Stack engineering with React 19, TypeScript & Node.js',
+    'Cross-Platform mobile apps with Flutter 3 & Clean Architecture',
+    'High-throughput databases: MongoDB Atlas & MySQL relational modeling',
+    'Engineering civic platforms (TemariHub, Lehulu, Revola) for Ethiopian realities',
+  ];
+
   return (
-    <section id="about" className={styles.aboutSection}>
+    <section id="about" className="section section--alt">
       <div className="container">
-        <div className="reveal">
-          <div className="section-label">02 / About Me</div>
-          <h2 className="section-title">Engineering Practical Solutions</h2>
-        </div>
-
-        <div className={styles.bentoGrid}>
-          {/* 1. Large cell: Who I Am */}
-          <div className={`${styles.bentoCard} ${styles.cellBio} reveal`}>
-            <div className={styles.cardHeader}>
-              <Code2 size={22} className={styles.headerIcon} />
-              <span className={styles.cardTag}>Professional Introduction</span>
-            </div>
-            <h3 className={styles.bioHeading}>Who I Am</h3>
-            <p className={styles.bioText}>
-              I&apos;m a <strong>Fourth-year, first-semester Software Engineering student</strong> at{' '}
-              <strong>Adama Science and Technology University (ASTU)</strong> in Adama, Ethiopia.
-              My work centers on designing, engineering, and deploying practical software products
-              that combine rigorous computational architecture with intuitive, accessible user
-              experiences.
-            </p>
-            <p className={styles.bioText}>
-              My engineering interests span the full application lifecycle:
-            </p>
-            <ul className={styles.focusList}>
-              <li>
-                <strong>Full-Stack &amp; Architecture:</strong> Developing scalable React 19 and
-                TypeScript web platforms with clear separation of concerns.
-              </li>
-              <li>
-                <strong>Backend &amp; API Engineering:</strong> Architecting resilient Node.js, Express,
-                and Java backend services, event-driven Socket.IO channels, and secure RESTful APIs.
-              </li>
-              <li>
-                <strong>Database Modeling:</strong> Designing normalized relational MySQL schemas and
-                high-throughput MongoDB Atlas document stores with 2dsphere geospatial indexing.
-              </li>
-              <li>
-                <strong>Mobile Engineering:</strong> Building cross-platform Flutter applications
-                structured around Clean Architecture, Riverpod state management, and offline SQLite caching.
-              </li>
-              <li>
-                <strong>Practical Digital Solutions:</strong> Delivering civic and educational platforms
-                specifically tailored to solve regional infrastructure bottlenecks in Ethiopia.
-              </li>
-            </ul>
-            <p className={styles.bioText}>
-              During my industrial internship at <strong>AIG-Tech Enterprise</strong> (Adama
-              Investment Group) within the Innovation &amp; Development Department, I engineered
-              express REST services, municipal geospatial geofencing, real-time courier telemetry,
-              and Chapa payment webhooks, earning an <strong>A+ performance evaluation</strong>.
-            </p>
-          </div>
-
-          {/* 2. Tall cell: Portrait with technical frame */}
-          <div className={`${styles.bentoCard} ${styles.cellPhoto} reveal`}>
-            <div className={styles.photoContainer}>
-              <img
-                src={siteConfig.profilePhoto}
-                alt={siteConfig.name}
-                className={styles.portraitImg}
-                loading="lazy"
-                width="380"
-                height="460"
-              />
-              <div className={styles.photoPatternOverlay} />
-              <div className={styles.photoCaption}>
-                <span className={styles.photoName}>{siteConfig.name}</span>
-                <span className={styles.photoRole}>ASTU · 4th Year Software Engineering</span>
-              </div>
-            </div>
-          </div>
-
-          {/* 3. Stat cell: Projects Built */}
-          <div className={`${styles.bentoCard} ${styles.cellStat} reveal`}>
-            <div className={styles.statIconWrapper}>
-              <Layers size={20} />
-            </div>
-            <div className={styles.statNumber}>10+</div>
-            <div className={styles.statLabel}>Projects Built</div>
-            <div className={styles.statDesc}>Web, mobile, desktop &amp; systems</div>
-          </div>
-
-          {/* 4. Stat cell: Internship Evaluation */}
-          <div className={`${styles.bentoCard} ${styles.cellStat} ${styles.statAccentCard} reveal`}>
-            <div className={styles.statIconWrapper}>
-              <Award size={20} />
-            </div>
-            <div className={`${styles.statNumber} ${styles.accentNumber}`}>A+</div>
-            <div className={styles.statLabel}>Internship Evaluation</div>
-            <div className={styles.statDesc}>AIG-Tech Enterprise (Innovation Dept)</div>
-          </div>
-
-          {/* 5. Stat cell: Academic Year */}
-          <div className={`${styles.bentoCard} ${styles.cellStat} reveal`}>
-            <div className={styles.statIconWrapper}>
-              <GraduationCap size={20} />
-            </div>
-            <div className={styles.statNumber}>4th</div>
-            <div className={styles.statLabel}>Year at ASTU</div>
-            <div className={styles.statDesc}>B.Sc. Software Engineering</div>
-          </div>
-
-          {/* 6. Wide cell: Active Engineering Focus */}
-          <div className={`${styles.bentoCard} ${styles.cellBuilding} reveal`}>
-            <div className={styles.buildingHeader}>
-              <div className={styles.buildingTitleRow}>
-                <Cpu size={18} className={styles.buildingIcon} />
-                <span className={styles.buildingTitle}>Active Engineering Focus</span>
-              </div>
-              <span className={styles.buildingBadge}>4th Year Senior Engineering</span>
+        <div ref={ref} className={`${styles.aboutGrid} reveal ${isVisible ? 'visible' : ''}`}>
+          {/* Left Column: Narrative */}
+          <div className={styles.textCol}>
+            <div className="badge" style={{ marginBottom: '0.75rem', alignSelf: 'flex-start' }}>
+              <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
+              <span>Background & Passion</span>
             </div>
 
-            <div className={styles.chipsGrid}>
-              <div className={styles.projectPill}>
-                <div className={styles.pillTop}>
-                  <span className={styles.pillName}>TemariHub</span>
-                  <span className={styles.pillTag}>STEM Discovery</span>
+            <p className="section-label">About Me</p>
+            <h2 className="section-title">
+              Engineering Practical <span>Software Solutions</span>
+            </h2>
+
+            <div className={styles.paragraphs}>
+              <p>
+                Hello! I'm <strong>{siteConfig.name}</strong>, a senior Software Engineering student in my 4th year of studies at <strong>{siteConfig.university}</strong> in Ethiopia.
+              </p>
+              <p>
+                My passion lies in crafting robust digital experiences — bridging frontend user interfaces with structured backend logic and well-designed relational databases. Whether building responsive web interfaces with React or engineering desktop software in Java with MySQL, I focus on writing clean, maintainable code.
+              </p>
+              <p>
+                Completed an industrial Full-Stack Web Development internship at <strong>AIG-Tech Enterprise (Adama Investment Group)</strong> earning an <strong>A+ Grade</strong>. My focus centered on Express REST APIs, MongoDB 2dsphere geospatial indexing, Socket.IO live courier tracking, and secure Chapa/Telebirr payment webhooks.
+              </p>
+            </div>
+
+            {/* Checklist */}
+            <div className={styles.checklist}>
+              {highlights.map((item, index) => (
+                <div key={index} className={styles.checkItem}>
+                  <CheckCircle size={16} className={styles.checkIcon} />
+                  <span>{item}</span>
                 </div>
-                <p className={styles.pillDesc}>
-                  Bilingual career discovery &amp; 7-stage application tracking platform with 125+
-                  automated Vitest tests.
-                </p>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Quick Profile Specifications Card */}
+          <div className={styles.specCol}>
+            <div className={styles.specCard}>
+              <div className={styles.avatarContainer}>
+                {!imgError ? (
+                  <img
+                    src="/profile.jpg"
+                    alt={siteConfig.name}
+                    className={styles.avatarImage}
+                    onError={() => setImgError(true)}
+                  />
+                ) : (
+                  <div className={styles.avatarPlaceholder}>
+                    <span className={styles.avatarInitials}>{siteConfig.initials}</span>
+                  </div>
+                )}
+                <span className={styles.avatarTag}>Dev</span>
               </div>
 
-              <div className={styles.projectPill}>
-                <div className={styles.pillTop}>
-                  <span className={styles.pillName}>Revola</span>
-                  <span className={styles.pillTag}>Circular Economy</span>
+              <h3 className={styles.specName}>{siteConfig.name}</h3>
+              <p className={styles.specTitle}>{siteConfig.title}</p>
+
+              <div className={styles.specDivider} />
+
+              <div className={styles.specList}>
+                <div className={styles.specRow}>
+                  <GraduationCap size={16} className={styles.specIcon} />
+                  <div className={styles.specDetails}>
+                    <span className={styles.specLabel}>University</span>
+                    <span className={styles.specValue}>{siteConfig.university}</span>
+                  </div>
                 </div>
-                <p className={styles.pillDesc}>
-                  Managed materials marketplace with Chapa ETB payment processing and Leaflet geospatial
-                  depot mapping.
-                </p>
+
+                <div className={styles.specRow}>
+                  <BookOpen size={16} className={styles.specIcon} />
+                  <div className={styles.specDetails}>
+                    <span className={styles.specLabel}>Degree / Year</span>
+                    <span className={styles.specValue}>{siteConfig.degree} ({siteConfig.year})</span>
+                  </div>
+                </div>
+
+                <div className={styles.specRow}>
+                  <Award size={16} className={styles.specIcon} />
+                  <div className={styles.specDetails}>
+                    <span className={styles.specLabel}>Internship Honor</span>
+                    <span className={styles.specValue}>AIG-Tech Enterprise (Grade A+)</span>
+                  </div>
+                </div>
+
+                <div className={styles.specRow}>
+                  <Code2 size={16} className={styles.specIcon} />
+                  <div className={styles.specDetails}>
+                    <span className={styles.specLabel}>Focus</span>
+                    <span className={styles.specValue}>Full-Stack & Database Engineering</span>
+                  </div>
+                </div>
+
+                <div className={styles.specRow}>
+                  <MapPin size={16} className={styles.specIcon} />
+                  <div className={styles.specDetails}>
+                    <span className={styles.specLabel}>Location</span>
+                    <span className={styles.specValue}>{siteConfig.location}</span>
+                  </div>
+                </div>
               </div>
 
-              <div className={styles.projectPill}>
-                <div className={styles.pillTop}>
-                  <span className={styles.pillName}>EngiLab</span>
-                  <span className={styles.pillTag}>In Development</span>
-                </div>
-                <p className={styles.pillDesc}>
-                  Academic engineering laboratory management and experiment learning platform for ASTU.
-                </p>
+              <div className={styles.cardFooter}>
+                <span className={styles.statusDot} />
+                <span>Available for Opportunities</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
