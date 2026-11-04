@@ -325,6 +325,33 @@ export const projects = [
     color: '#22c55e',
   },
   {
+    id: 'engilab',
+    title: 'EngiLab — Academic Laboratory Management Platform',
+    tagline: 'Laboratory resource orchestration and engineering experiment learning system for ASTU.',
+    description:
+      'An academic engineering laboratory management and learning platform designed for the ASTU interdisciplinary engineering context, structuring lab equipment allocation, safety compliance, and virtual procedure tracking.',
+    longDescription:
+      'EngiLab addresses physical resource bottlenecks across ASTU engineering faculties (Electrical, Mechanical, Chemical, and Civil). It models specialized hardware inventory (FPGA kits, oscilloscopes, reagent logs), schedules lab slot reservations to eliminate department collisions, audits student safety certifications, and delivers interactive pre-lab procedural modules.',
+    problem:
+      'ASTU interdisciplinary engineering departments face equipment scheduling collisions, paper-based safety logs, and manual inventory tracking that slow student laboratory throughput.',
+    solution:
+      'Architecting an academic management platform with role-isolated faculty/student portals, reservation conflict resolution engines, and normalized relational databases for inventory tracking.',
+    features: [
+      'Role-isolated portals for Academic Faculty, Engineering Students, and Lab Custodians',
+      'Laboratory slot reservation engine with automated conflict resolution',
+      'Hardware asset tracking for oscilloscopes, FPGA kits, and precision tooling',
+      'Pre-lab safety compliance verification and prerequisite checklist gates',
+      'Interactive procedural experiment guides with structured report submissions',
+    ],
+    tech: ['React 19', 'TypeScript', 'Node.js', 'Express', 'MySQL', 'Relational Modeling'],
+    category: ['academic', 'fullstack'],
+    liveUrl: null,
+    githubUrl: 'https://github.com/petersisay/EngiLab',
+    featured: true,
+    image: '/projects/engilab.webp',
+    color: '#60a5fa',
+  },
+  {
     id: 'ace-meklit',
     title: 'ACE Meklit Business Website',
     tagline: 'Polished, responsive corporate site for ACE Meklit with custom layout.',
@@ -401,8 +428,7 @@ export const filterCategories = [
   { id: 'all', label: 'All Projects' },
   { id: 'fullstack', label: 'Full-Stack' },
   { id: 'mobile', label: '📱 Mobile' },
-  { id: 'frontend', label: 'Frontend' },
-  { id: 'java', label: 'Java' },
-  { id: 'academic', label: 'Academic' },
-  { id: 'personal', label: 'Personal' },
+  { id: 'java', label: 'Java & Systems' },
+  { id: 'academic', label: 'Academic & In-Dev' },
+  { id: 'frontend', label: 'Frontend UI' },
 ];
