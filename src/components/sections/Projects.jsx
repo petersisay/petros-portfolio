@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { ExternalLink, X, ChevronRight, Sparkles, Folder, Eye } from 'lucide-react';
+import { ExternalLink, X, ChevronRight, Sparkles, Folder, Eye, Search } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { projects, filterCategories } from '../../data/projects';
 import { useIntersection } from '../../hooks/useIntersection';
@@ -258,11 +258,19 @@ function ProjectCard({ project, onOpenDetails, featured = false, delay = 0 }) {
           </div>
         </div>
 
-        {featured && (
+        {project.id === 'flutter-todo-pro' ? (
+          <span className={styles.mobileBadge}>
+            📱 Flutter Mobile App
+          </span>
+        ) : project.id === 'engilab' ? (
+          <span className={styles.academicBadge}>
+            🧪 Academic · In Development
+          </span>
+        ) : featured ? (
           <span className={styles.featuredBadge}>
             <Sparkles size={12} /> Featured Work
           </span>
-        )}
+        ) : null}
 
         <h3 className={styles.cardTitle} onClick={() => onOpenDetails(project)}>
           {project.title}
@@ -292,73 +300,122 @@ function ProjectCard({ project, onOpenDetails, featured = false, delay = 0 }) {
 // ── Main Projects Section Component ───────────────────
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedProject, setSelectedProject] = useState(null);
   const { ref, isVisible } = useIntersection();
 
-  const featuredProjects = useMemo(() => {
-    return projects.filter(p => p.featured);
-  }, []);
-
   const filteredProjects = useMemo(() => {
-    if (activeFilter === 'all') return projects;
-    return projects.filter(p => p.category.includes(activeFilter));
-  }, [activeFilter]);
+    let result = projects;
+    if (activeFilter !== 'all') {
+      result = result.filter(p => p.category.includes(activeFilter));
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      result = result.filter(p =>
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        (p.tagline && p.tagline.toLowerCase().includes(q)) ||
+        (Array.isArray(p.tech) && p.tech.some(t => t.toLowerCase().includes(q)))
+      );
+    }
+    return result;
+  }, [activeFilter, searchQuery]);
 
   return (
     <>
       <section id="projects" className="section section--alt">
         <div className="container">
-          {/* Section Header */}
+          {/* Section Header & Search */}
           <div ref={ref} className={`reveal ${isVisible ? 'visible' : ''}`}>
-            <p className="section-label">Selected Showcase</p>
-            <h2 className="section-title">
-              Software Projects <span>I've Built</span>
-            </h2>
-            <p className="section-subtitle">
-              Demonstrating full-stack web applications, Java desktop systems, database design, and modern responsive UI.
-            </p>
+            <div className={styles.headerRow}>
+              <div>
+                <p className="section-label">Engineering Showcase</p>
+                <h2 className="section-title">
+                  Featured <span>Projects</span>
+                </h2>
+                <p className="section-subtitle">
+                  Explore full-stack platforms, cross-platform mobile apps, and systems engineering.
+                </p>
+              </div>
+
+              {/* Instant Search Bar */}
+              <div className={styles.searchWrapper}>
+                <Search size={16} className={styles.searchIcon} />
+                <input
+                  type="text"
+                  placeholder="Search by tech or keyword (e.g. Flutter, React)..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className={styles.searchInput}
+                  aria-label="Search projects by title or technology"
+                />
+                {searchQuery && (
+                  <button
+                    className={styles.searchClearBtn}
+                    onClick={() => setSearchQuery('')}
+                    aria-label="Clear search"
+                  >
+                    <X size={14} />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Filter Category Tabs (Project Options) */}
+            <div className={styles.filterBar} role="tablist" aria-label="Filter projects">
+              {filterCategories.map(cat => {
+                const count = cat.id === 'all'
+                  ? projects.length
+                  : projects.filter(p => p.category.includes(cat.id)).length;
+                return (
+                  <button
+                    key={cat.id}
+                    role="tab"
+                    aria-selected={activeFilter === cat.id}
+                    className={`${styles.filterTab} ${activeFilter === cat.id ? styles.activeTab : ''}`}
+                    onClick={() => {
+                      setActiveFilter(cat.id);
+                    }}
+                  >
+                    <span>{cat.label}</span>
+                    <span className={styles.filterCount}>{count}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Featured Highlights Showcase */}
-          <div className={styles.featuredGrid}>
-            {featuredProjects.map((proj, idx) => (
-              <ProjectCard
-                key={proj.id}
-                project={proj}
-                featured={true}
-                onOpenDetails={setSelectedProject}
-                delay={idx * 100}
-              />
-            ))}
-          </div>
-
-          {/* Filter Category Tabs */}
-          <div className={styles.filterBar} role="tablist" aria-label="Filter projects">
-            {filterCategories.map(cat => (
+          {/* Unified Projects Grid */}
+          {filteredProjects.length > 0 ? (
+            <div className={styles.projectsGrid}>
+              {filteredProjects.map((proj, idx) => (
+                <ProjectCard
+                  key={proj.id}
+                  project={proj}
+                  featured={proj.featured}
+                  onOpenDetails={setSelectedProject}
+                  delay={idx * 60}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className={styles.emptyState}>
+              <Folder size={44} className={styles.emptyIcon} />
+              <p className={styles.emptyTitle}>No matching projects found</p>
+              <p className={styles.emptyText}>
+                No projects matched your criteria {searchQuery ? `for "${searchQuery}"` : ''}.
+              </p>
               <button
-                key={cat.id}
-                role="tab"
-                aria-selected={activeFilter === cat.id}
-                className={`${styles.filterTab} ${activeFilter === cat.id ? styles.activeTab : ''}`}
-                onClick={() => setActiveFilter(cat.id)}
+                className={styles.resetBtn}
+                onClick={() => {
+                  setActiveFilter('all');
+                  setSearchQuery('');
+                }}
               >
-                {cat.label}
+                Reset Filters
               </button>
-            ))}
-          </div>
-
-          {/* All Filtered Grid */}
-          <div className={styles.projectsGrid}>
-            {filteredProjects.map((proj, idx) => (
-              <ProjectCard
-                key={proj.id}
-                project={proj}
-                featured={false}
-                onOpenDetails={setSelectedProject}
-                delay={idx * 60}
-              />
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       </section>
 
