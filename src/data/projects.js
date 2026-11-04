@@ -319,7 +319,7 @@ export const projects = [
     ],
     tech: ['HTML5', 'CSS3', 'JavaScript'],
     category: ['frontend', 'personal'],
-    liveUrl: 'https://beamish-pavlova-feadd8.netlify.app/',
+    liveUrl: 'https://responsive-portfolio-psi-five.vercel.app',
     githubUrl: 'https://github.com/petersisay/Responsive-Portfolio',
     featured: false,
     image: '/projects/portfolio-v1.webp',
