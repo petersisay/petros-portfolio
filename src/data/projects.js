@@ -296,7 +296,7 @@ export const projects = [
     ],
     tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design'],
     category: ['frontend', 'personal'],
-    liveUrl: 'https://ace-meklit.netlify.app/',
+    liveUrl: 'https://ace-meklit.vercel.app',
     githubUrl: 'https://github.com/petersisay/ACE-Meklit',
     featured: false,
     image: '/projects/ace-meklit.webp',
