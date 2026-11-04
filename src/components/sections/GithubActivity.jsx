@@ -34,10 +34,10 @@ const REPOS = [
     stars: 1,
   },
   {
-    name: 'StudentRegisterSystem',
-    desc: 'Enterprise-grade Java EE student registration and academic lifecycle management web application with MVC & MySQL.',
+    name: 'student-registration-system',
+    desc: 'Modern Ethiopian elementary school management & student registration system (Grades 1–8) with Amharic bilingual UI on Render.',
     lang: 'Java',
-    url: 'https://github.com/petersisay/StudentRegisterSystem',
+    url: 'https://github.com/petersisay/student-registration-system',
     stars: 1,
   },
   {
