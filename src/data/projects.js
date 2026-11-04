@@ -250,32 +250,6 @@ export const projects = [
     color: '#ec4899',
   },
   {
-    id: 'portfolio-v2',
-    title: 'Professional Developer Portfolio (v2 — This Site)',
-    tagline: 'Production-quality React portfolio with command palette and dark theme.',
-    description:
-      'A fully engineered React SPA portfolio featuring dark/light mode, Ctrl+K command palette, scroll animations, project showcases, and a responsive mobile-first layout.',
-    longDescription:
-      'This portfolio itself represents my most complete engineering effort — designed from scratch as a production-quality React application with custom CSS design tokens, reusable component architecture, and interactive features that go beyond standard templates.',
-    problem: 'Needed a professional online presence that reflects serious engineering skills rather than an obvious template.',
-    solution: 'Architected a complete React SPA from scratch with its own design system, custom hooks, and interactive features.',
-    features: [
-      'Dark/light theme with localStorage persistence',
-      'Ctrl+K command palette for keyboard navigation',
-      'Scroll-reveal animations throughout',
-      'Project filtering with case-study modal dialogs',
-      'Fully accessible (ARIA, keyboard navigation)',
-      'Deployed on Vercel with optimized production build',
-    ],
-    tech: ['React', 'Vite', 'CSS Modules', 'JavaScript'],
-    category: ['frontend', 'fullstack', 'personal'],
-    liveUrl: 'https://petros-portfolio-one.vercel.app',
-    githubUrl: 'https://github.com/petersisay/petros-portfolio',
-    featured: true,
-    image: '/projects/portfolio-v2.webp',
-    color: '#8b5cf6',
-  },
-  {
     id: 'student-registration',
     title: 'Student Registration System — Java EE Enterprise App',
     tagline: 'Robust academic management system engineered with Java EE, MVC, and MySQL.',
