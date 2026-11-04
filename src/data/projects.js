@@ -377,29 +377,6 @@ export const projects = [
     color: '#3b82f6',
   },
   {
-    id: 'puppy-lovers',
-    title: 'Puppy Lovers Experience',
-    tagline: 'Creative, interactive web page showcasing expressive CSS styling.',
-    description:
-      'A fun, responsive web page built to experiment with expressive CSS animations, card layout compositions, and mobile-friendly interactive elements.',
-    longDescription:
-      'This project explores visual creativity, custom CSS keyframe animations, card compositions, and mobile-friendly interactions for web users.',
-    problem: 'Exploring creative layout design and user engagement through CSS animations.',
-    solution: 'Built an interactive, visually engaging responsive web page with clean HTML5/CSS3.',
-    features: [
-      'Custom CSS keyframe animations',
-      'Responsive grid layout for image cards',
-      'Interactive UI elements and smooth hover effects',
-    ],
-    tech: ['HTML5', 'CSS3', 'JavaScript'],
-    category: ['frontend', 'personal'],
-    liveUrl: 'https://frolicking-entremet-b5f6f4.netlify.app/',
-    githubUrl: 'https://github.com/petersisay/puppy-lovers-page',
-    featured: false,
-    image: '/projects/puppy-lovers.webp',
-    color: '#a78bfa',
-  },
-  {
     id: 'portfolio-v1',
     title: 'Personal Portfolio (v1)',
     tagline: 'First personal portfolio website — where the developer journey began.',
