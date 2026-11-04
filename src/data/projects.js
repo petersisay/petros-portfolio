@@ -276,31 +276,6 @@ export const projects = [
     color: '#8b5cf6',
   },
   {
-    id: 'group-chat-app',
-    title: 'Java Multi-Client Group Chat',
-    tagline: 'Real-time multi-threaded Java desktop chat application over TCP sockets.',
-    description:
-      'A Java desktop application enabling real-time group chat among multiple concurrent client instances connected to a central TCP server with message broadcasting.',
-    longDescription:
-      'Built using core Java networking APIs and multithreading, this system implements a dedicated server thread pool to handle concurrent client sockets, broadcast messages in real-time, and manage connection states cleanly.',
-    problem: 'Required implementing reliable multi-client concurrent network communication in standard Java.',
-    solution: 'Engineered a TCP socket server architecture managing multiple client handlers with thread safety and message broadcasting.',
-    features: [
-      'Multi-threaded server architecture with socket handlers',
-      'Real-time message broadcasting to active clients',
-      'Client connection/disconnection lifecycle management',
-      'Java Swing desktop user interface',
-      'Event-driven communication flow',
-    ],
-    tech: ['Java', 'Java Swing', 'TCP Sockets', 'Multithreading'],
-    category: ['java', 'personal'],
-    liveUrl: null,
-    githubUrl: 'https://github.com/petersisay/GroupChatApp',
-    featured: false,
-    image: '/projects/group-chat-app.webp',
-    color: '#f59e0b',
-  },
-  {
     id: 'student-registration',
     title: 'Student Registration System — Java EE Enterprise App',
     tagline: 'Robust academic management system engineered with Java EE, MVC, and MySQL.',
