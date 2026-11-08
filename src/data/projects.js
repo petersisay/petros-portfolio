@@ -382,6 +382,31 @@ export const projects = [
     color: '#60a5fa',
   },
   {
+    id: 'responsive-portfolio-2',
+    title: 'Responsive Developer Portfolio (v2 Edition)',
+    tagline: 'Interactive personal portfolio with scroll-spy navigation & contact validation on Vercel.',
+    description:
+      'A responsive developer portfolio website engineered with clean HTML5 semantic structure, CSS3 custom layouts, and Vanilla JavaScript for smooth navigation.',
+    longDescription:
+      'Developed as an evolutionary milestone in my frontend engineering journey, this portfolio incorporates dynamic scroll-spy navigation that highlights the active section in real-time, a click-based hamburger menu drawer that auto-closes on selection, client-side contact form validation, and animated project showcase cards deployed on Vercel.',
+    problem: 'Needed an interactive, mobile-responsive personal site with smooth scrolling and dynamic navigation highlights without UI libraries.',
+    solution: 'Implemented modular Vanilla JavaScript scroll listeners, CSS layout techniques, and accessible hamburger drawer states.',
+    features: [
+      'Dynamic scroll-spy navigation with active section highlighting and navbar background transitions',
+      'Click-based hamburger navigation drawer with auto-dismissal on link selection',
+      'Client-side contact form input validation preventing empty submissions',
+      'Responsive project cards grid with smooth hover interactions',
+      'Deployed on Vercel with optimized production performance',
+    ],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'Vercel'],
+    category: ['frontend', 'personal'],
+    liveUrl: 'https://responsive-portfolio2.vercel.app',
+    githubUrl: 'https://github.com/petersisay/Responsive_portfolio2',
+    featured: false,
+    image: '/projects/portfolio-v2.webp',
+    color: '#8b5cf6',
+  },
+  {
     id: 'portfolio-v1',
     title: 'Personal Portfolio (v1)',
     tagline: 'First personal portfolio website — where the developer journey began.',
