@@ -331,6 +331,32 @@ export const projects = [
     color: '#3b82f6',
   },
   {
+    id: 'pomodoro-timer',
+    title: 'Pomodoro Focus Timer — Productivity Web App',
+    tagline: 'Sleek glassmorphic focus timer with custom session tracking & audio alerts deployed on Vercel.',
+    description:
+      'A modern, beautifully designed Pomodoro Timer web application built with HTML5, modern CSS3 glassmorphism, and Vanilla JavaScript to boost deep work sessions.',
+    longDescription:
+      'Engineered to eliminate focus fatigue and track productivity metrics across study and engineering workflows. Built with zero runtime frameworks, it delivers 25-minute focus intervals, automatic 5-minute and 15-minute break scheduling, session counting, localStorage persistence across browser restarts, and customizable interval configurations.',
+    problem: 'Developers and students face workflow distractions and lack a clean, lightweight browser-based focus timer that persists stats without heavy account requirements.',
+    solution: 'Created a responsive web app with glassmorphism visual styling, customizable durations, audio chime notifications via Web Audio API, and persistent localStorage session tracking.',
+    features: [
+      '25-minute classic Pomodoro focus countdown with large high-contrast display',
+      'Automatic short break (5-min) and long break (15-min) scheduling',
+      'Persistent stats tracking completed sessions and total focus hours via localStorage',
+      'Audio chime notification alerts upon timer completion',
+      'Custom glassmorphism modal dialogs for settings configuration and stats reset',
+      'Production deployment on Vercel Edge CDN',
+    ],
+    tech: ['JavaScript (ES6+)', 'HTML5', 'CSS3', 'Glassmorphism', 'Web Audio API', 'Vercel'],
+    category: ['frontend', 'personal'],
+    liveUrl: 'https://promodoro-timer1.vercel.app',
+    githubUrl: 'https://github.com/petersisay/promodoro-timer1',
+    featured: false,
+    image: '/projects/mern-todo-pro.webp',
+    color: '#ef4444',
+  },
+  {
     id: 'portfolio-v1',
     title: 'Personal Portfolio (v1)',
     tagline: 'First personal portfolio website — where the developer journey began.',
