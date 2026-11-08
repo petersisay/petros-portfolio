@@ -357,6 +357,31 @@ export const projects = [
     color: '#ef4444',
   },
   {
+    id: 'apple-website',
+    title: 'Apple Website Clone — Responsive Landing Page',
+    tagline: "Pixel-precise static front-end recreation of Apple's flagship product showcase.",
+    description:
+      "A professionally structured responsive website inspired by Apple's homepage, crafted using pure HTML5, CSS3, and modern JavaScript layout techniques.",
+    longDescription:
+      "Replicating Apple's design language provided an excellent engineering exercise in pixel-precise typography scaling, flexible layout hierarchy, sticky navigation states, and cross-device responsiveness across phones, tablets, and desktop viewports without external libraries.",
+    problem: 'Mastering fluid CSS grid and flexbox responsive rules without relying on UI frameworks.',
+    solution: 'Meticulously structured the page using semantic HTML5, custom CSS styling, and viewport-adaptive container scaling.',
+    features: [
+      'Sticky top navigation bar with Apple product category links',
+      'High-impact hero showcase sections (MacBook, iPhone, iPad, Apple Watch, AirPods)',
+      'Promotional call-to-action buttons with subtle micro-interactions',
+      'Multi-column responsive footer adhering to Apple layout patterns',
+      '100% fluid responsiveness across mobile phones, tablets, and laptops',
+    ],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'CSS Grid', 'Flexbox'],
+    category: ['frontend', 'personal'],
+    liveUrl: 'https://melodic-hummingbird-fdca26.netlify.app/',
+    githubUrl: 'https://github.com/petersisay/Apple-website',
+    featured: false,
+    image: '/projects/apple-website.webp',
+    color: '#60a5fa',
+  },
+  {
     id: 'portfolio-v1',
     title: 'Personal Portfolio (v1)',
     tagline: 'First personal portfolio website — where the developer journey began.',
