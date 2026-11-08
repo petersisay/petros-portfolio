@@ -198,6 +198,34 @@ export const projects = [
     color: '#06b6d4',
   },
   {
+    id: 'app-revola',
+    title: 'Revola Mobile — Flutter Cross-Platform Marketplace Client',
+    tagline: 'Native Flutter (Android, iOS & Web) client for circular construction materials trade in Adama.',
+    description:
+      'The companion cross-platform mobile application for Revola engineered with Flutter 3.29, Dart, and Riverpod 2.6, delivering an on-the-go native experience for builders, material depots, and sellers across Adama, Ethiopia.',
+    longDescription:
+      'Revola Mobile brings circular procurement directly to mobile viewports with feature-first modular architecture and Riverpod 2.6 state management. It features interactive OpenStreetMap depot navigation (flutter_map) locating 30+ verified regional supply yards, in-app Chapa ETB payment gateway integration with callback interception, CBE bank transfer receipt photo upload, live milestone order tracking (Placed → Confirmed → Hub Dispatch → Delivered), and encrypted JWT token storage via FlutterSecureStorage.',
+    problem:
+      'Site engineers and local contractors frequently operate on active construction jobs without laptops, needing a lightweight, native mobile interface to locate salvaged supplies, inspect depots, and order materials on-site.',
+    solution:
+      'Engineered a high-performance Flutter mobile application with offline-resilient local storage, OpenStreetMap geospatial visualizer, in-app mobile checkout, and real-time milestone progress tracking.',
+    features: [
+      'Interactive Adama Marketplace Map powered by OpenStreetMap & flutter_map with 30+ verified supply yards',
+      'In-app Chapa Ethiopian Payment Gateway webview integration with cryptographic callback interception',
+      'Live order tracking pipeline with sequential milestone progress bars and photo-supported dispute filing',
+      'Seller listing manager with multi-image gallery upload and condition grading (Metals, Wood, Masonry)',
+      'Native Google Sign-In and email/password authentication with persistent FlutterSecureStorage encryption',
+      'Adaptive Dark, Light, and System Theme modes with persistent local preferences',
+    ],
+    tech: ['Flutter 3.29', 'Dart', 'Riverpod', 'Dio', 'flutter_map', 'OpenStreetMap', 'Chapa API', 'Secure Storage'],
+    category: ['mobile', 'fullstack', 'personal'],
+    liveUrl: null,
+    githubUrl: 'https://github.com/petersisay/App-revola',
+    featured: true,
+    image: '/projects/adama-materials.webp',
+    color: '#02569B',
+  },
+  {
     id: 'guided-annual-planner',
     title: 'Guided Annual Planner & Growth Sanctuary',
     tagline: 'Paper-inspired annual planning & mindfulness Progressive Web App (PWA).',
