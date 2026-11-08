@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { ExternalLink, X, ChevronRight, Sparkles, Folder, Eye, Search } from 'lucide-react';
-import { GithubIcon } from '../common/Icons';
 import { projects, filterCategories } from '../../data/projects';
 import { useIntersection } from '../../hooks/useIntersection';
 import styles from './Projects.module.css';
@@ -173,17 +172,6 @@ function ProjectModal({ project, onClose }) {
               <span>Live Demo</span>
             </a>
           )}
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.modalSecondaryBtn}
-            >
-              <GithubIcon size={16} />
-              <span>View Source Code</span>
-            </a>
-          )}
         </div>
       </div>
     </div>
@@ -231,28 +219,17 @@ function ProjectCard({ project, onOpenDetails, featured = false, delay = 0 }) {
             <Folder size={20} />
           </div>
           <div className={styles.cardLinks}>
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${project.title} GitHub repository`}
-                className={styles.iconBtn}
-                title="GitHub Repo"
-              >
-                <GithubIcon size={17} />
-              </a>
-            )}
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${project.title} Live Demo`}
-                className={styles.iconBtn}
-                title="Live Deployment"
+                className={styles.liveDemoBtn}
+                title="Live Demo"
               >
-                <ExternalLink size={17} />
+                <span>Live Demo</span>
+                <ExternalLink size={13} />
               </a>
             )}
           </div>

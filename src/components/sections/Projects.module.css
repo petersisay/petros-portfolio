@@ -379,6 +379,28 @@
   gap: 0.6rem;
 }
 
+.liveDemoBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background-color: var(--accent-subtle);
+  border: 1px solid var(--border-accent);
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.liveDemoBtn:hover {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
 .iconBtn {
   display: flex;
   align-items: center;
