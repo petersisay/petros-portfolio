@@ -23,6 +23,18 @@ dist-ssr
 *.sln
 *.sw?
 
+# Environment & Local Secrets
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+*.pem
+*.key
+credentials.json
+secrets.*
+
 # Playwright
 test-results/
 playwright-report/

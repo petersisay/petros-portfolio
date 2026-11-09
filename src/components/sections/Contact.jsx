@@ -83,7 +83,7 @@ export default function Contact({ onTriggerToast }) {
     } catch (err) {
       console.error('Contact form error:', err);
       if (onTriggerToast) {
-        onTriggerToast('Could not send message. Please email petrossisay1646@gmail.com directly.', 'error');
+        onTriggerToast(`Could not send message. Please email ${siteConfig.email} directly.`, 'error');
       }
     } finally {
       setSending(false);
@@ -178,7 +178,7 @@ export default function Contact({ onTriggerToast }) {
                 </div>
                 <div className={styles.cardText}>
                   <span className={styles.cardLabel}>GitHub</span>
-                  <span className={styles.cardValue}>petrossisay1646</span>
+                  <span className={styles.cardValue}>{siteConfig.githubUsername}</span>
                 </div>
               </a>
             </div>

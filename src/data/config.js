@@ -29,8 +29,8 @@ export const siteConfig = {
   cvPath: '/cv.pdf',
   profilePhoto: '/profile.jpg',
 
-  // Active contact endpoint sending real emails to petrossisay1646@gmail.com
-  contactEndpoint: 'https://formsubmit.co/ajax/petrossisay1646@gmail.com',
+  // Secure contact endpoint (configured via environment variable to protect API keys & email)
+  contactEndpoint: import.meta.env.VITE_CONTACT_ENDPOINT || '',
 
   // Meta SEO
   metaTitle: 'Petros Sisay Gelan — Software Engineering Student & Full-Stack Developer',
