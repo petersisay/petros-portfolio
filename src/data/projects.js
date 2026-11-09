@@ -290,7 +290,7 @@ export const projects = [
     ],
     tech: ['React 19', 'TypeScript', 'Node.js', 'Express', 'MySQL', 'Relational Modeling'],
     category: ['academic', 'fullstack'],
-    liveUrl: null,
+    liveUrl: 'https://engi-lab.vercel.app',
     featured: true,
     image: '/projects/engilab.webp',
     color: '#60a5fa',

@@ -241,7 +241,7 @@ function ProjectCard({ project, onOpenDetails, featured = false, delay = 0 }) {
           </span>
         ) : project.id === 'engilab' ? (
           <span className={styles.academicBadge}>
-            🧪 Academic · In Development
+            🧪 Academic Platform
           </span>
         ) : featured ? (
           <span className={styles.featuredBadge}>
