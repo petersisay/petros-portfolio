@@ -165,6 +165,33 @@ export const projects = [
     color: '#2563eb',
   },
   {
+    id: 'kedami',
+    title: 'ቀዳሚ (Kedami) — Real Estate & Property Portal',
+    tagline: "Ethiopia's premier bilingual real estate marketplace for rental & purchase properties.",
+    description:
+      'A full-stack bilingual real estate portal serving Addis Ababa and Adama, connecting property seekers, verified brokers, and developers with dynamic ETB pricing and automated inquiries.',
+    longDescription:
+      'ቀዳሚ (Kedami) modernizes Ethiopian real estate transactions with a streamlined bilingual (Amharic & English) portal. It features verified rental and purchase listings across prime districts (Bole, CMC, Ayat, and Adama), developer showcases (Ayat, Tsehay, Noah, Flintstone), dynamic pricing in Ethiopian Birr (ETB), contact request dispatching, and role-based workflows for renters, buyers, and administrators.',
+    problem:
+      'Property seekers in Ethiopia face fragmented listings, unverified brokers, and lack of transparent pricing across Addis Ababa and regional growth corridors like Adama.',
+    solution:
+      'Created a responsive bilingual property marketplace with React 19, Tailwind CSS, Express backend on Render, and Vercel edge deployment providing verified listings and instant inquiries.',
+    features: [
+      'Bilingual user interface with seamless Amharic and English locale switching',
+      'Multi-city property discovery spanning Addis Ababa (Bole, CMC, Ayat) and Adama',
+      'Verified rental and purchase listings categorized by property type and bedroom count',
+      'Developer project directory with unit availability and starting prices in ETB',
+      'Automated tenant/buyer contact inquiry dispatching directly to property owners',
+      'Full responsive experience optimized for mobile, tablet, and desktop viewports',
+    ],
+    tech: ['React 19', 'Tailwind CSS', 'Vite', 'Node.js', 'Express', 'Render', 'Vercel', 'Bilingual (Amharic)'],
+    category: ['fullstack', 'frontend', 'personal'],
+    liveUrl: 'https://rental-buy.vercel.app',
+    featured: true,
+    image: '/projects/kedami.jpg',
+    color: '#009a44',
+  },
+  {
     id: 'flutter-todo-pro',
     title: 'PetroFlow — Mobile Productivity Suite',
     tagline: 'Cross-platform Flutter mobile app for Android & iOS — Task management, Kanban & Pomodoro.',
