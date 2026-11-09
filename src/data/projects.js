@@ -88,7 +88,7 @@ export const projects = [
     ],
     tech: ['React', 'Vite', 'Node.js', 'Express', 'Socket.IO', 'WebRTC', 'Tailwind CSS'],
     category: ['fullstack', 'frontend', 'personal'],
-    liveUrl: null,
+    liveUrl: 'https://code-together-weld.vercel.app',
     featured: true,
     image: '/projects/code-together.jpg',
     color: '#06b6d4',
