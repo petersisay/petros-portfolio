@@ -1,95 +1,201 @@
-# Petros Sisay Gelan — Developer Portfolio
+# Petros Sisay Gelan — Professional Developer personal Portfolio
 
-[![Live Site](https://img.shields.io/badge/Live_Site-petros--portfolio--one.vercel.app-2563eb?style=for-the-badge&logo=vercel)](https://petros-portfolio-one.vercel.app)
-[![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite_8-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-
-A modern, high-performance personal developer portfolio showcasing full-stack web platforms, cross-platform mobile apps, and systems engineering projects.
-
-🌐 **Live Portfolio:** [petros-portfolio-one.vercel.app](https://petros-portfolio-one.vercel.app)
+A modern, production-quality personal portfolio built with React and Vite. Dark-first premium design with full dark/light mode, responsive layout, interactive command palette, project showcase, and contact form.
 
 ---
 
-## ✨ Key Highlights
+## 🚀 Tech Stack
 
-- **⚡ Modern Architecture:** Built with React 19 and Vite for sub-second page loads, near-zero runtime overhead, and smooth client transitions.
-- **🎨 Adaptive Theme System:** First-class Dark and Light modes with system preference auto-detection and persistent theme caching.
-- **🔍 Instant Live Search & Filter:** Filter projects by category (Full-Stack, Frontend, Mobile, Academic, Personal) with real-time text query matching.
-- **⌨️ Keyboard Command Palette:** Global keyboard shortcuts (`Ctrl + K` / `Cmd + K`) for instant section navigation, direct live project launching, and quick actions.
-- **📱 Fully Responsive:** Crafted with pure CSS Modules and custom design tokens, ensuring fluid layout adaptation across phones, tablets, and wide monitors.
-- **🔒 Privacy & Security First:** Zero hardcoded API keys, environment-variable-backed contact integrations, and strict sandbox isolation.
-
----
-
-## 🛠️ Tech Stack
-
-| Domain | Technologies |
-| :--- | :--- |
-| **Frontend Framework** | React 19, Vanilla JavaScript (ES6+), HTML5 Semantic Structure |
-| **Styling & Design** | CSS Modules, CSS Custom Properties (Design Tokens), Dark/Light Theming |
-| **Build & Tooling** | Vite 8, Rollup / Rolldown bundling, PostCSS |
-| **Icons & Media** | Lucide React, Custom SVG vector assets, Responsive WebP thumbnails |
-| **Deployment & CDN** | Vercel Edge Network, Continuous Integration via GitHub |
+- **React 19** — Component-based UI architecture
+- **Vite 8** — Ultra-fast build tooling and dev server
+- **CSS Modules** — Scoped, component-level styling
+- **CSS Custom Properties** — Centralized design tokens
+- **Lucide React** — Consistent icon library
 
 ---
 
-## 🚀 Featured Engineering Projects
+## 📂 Project Structure
 
-A curated selection of production platforms and systems engineered by Petros:
-
-- **[AMEN+ (አሜን+)](https://amen-plus.vercel.app)** — Christian media streaming platform for the Apostolic Church of Ethiopia built with React 18, Express proxy, and YouTube Data API v3.
-- **[CodeTogether](https://code-together-weld.vercel.app)** — Real-time collaborative browser workspace featuring concurrent code editing, Socket.IO sync, and peer-to-peer WebRTC video/voice calls.
-- **[TemariHub (ተማሪሀብ)](https://temari-hub.vercel.app)** — Opportunity discovery & 7-stage application tracking platform for Ethiopian STEM students with 125+ automated tests and Amharic bilingual UI.
-- **[Lehulu (ለሁሉ)](https://lehulu-two.vercel.app)** — Production digital marketplace connecting households with verified local service professionals across Ethiopian cities.
-- **[Revola](https://adama-materials-e-commerce.vercel.app)** — Circular economy construction materials trading marketplace with MongoDB 2dsphere geospatial mapping and Chapa ETB payments.
-- **[ቀዳሚ (Kedami)](https://rental-buy.vercel.app)** — Premier bilingual property portal connecting property seekers, verified brokers, and developers in Addis Ababa & Adama.
-- **[Bule Hora Elementary School System](https://bule-hora-elementary-school.onrender.com)** — Ethiopian school information management & student registration system (Grades 1–8) with Amharic UI on Render.
-- **[EngiLab](https://engi-lab.vercel.app)** — Academic engineering laboratory resource orchestration and experiment tracking system for ASTU faculties.
-- **[PetroFlow](https://petros-portfolio-one.vercel.app)** — Production-grade Flutter cross-platform mobile suite with Kanban boards, Pomodoro timer, and Clean Architecture.
-
----
-
-## 💻 Local Development
-
-### Prerequisites
-
-- Node.js (v18.0.0 or later)
-- npm or pnpm
-
-### Getting Started
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/petersisay/petros-portfolio.git
-cd petros-portfolio
-
-# 2. Install dependencies
-npm install
-
-# 3. (Optional) Configure environment variables
-cp .env.example .env.local
-
-# 4. Start local development server
-npm run dev
+```
+src/
+├── App.jsx                         ← Main application composition
+├── main.jsx                        ← React entry point
+├── components/
+│   ├── common/
+│   │   ├── Icons.jsx               ← Custom SVG icons (GithubIcon, LinkedinIcon)
+│   │   ├── Toast.jsx               ← Toast notification component
+│   │   └── Toast.module.css
+│   ├── interactive/
+│   │   ├── CommandPalette.jsx      ← Ctrl+K keyboard navigation command palette
+│   │   └── CommandPalette.module.css
+│   ├── layout/
+│   │   ├── Navbar.jsx              ← Sticky responsive navigation bar
+│   │   ├── Navbar.module.css
+│   │   ├── Footer.jsx              ← Site footer
+│   │   ├── Footer.module.css
+│   │   ├── ScrollProgress.jsx      ← Top scroll progress indicator
+│   │   └── ScrollProgress.module.css
+│   └── sections/
+│       ├── Hero.jsx / Hero.module.css
+│       ├── About.jsx / About.module.css
+│       ├── Skills.jsx / Skills.module.css
+│       ├── Projects.jsx / Projects.module.css
+│       ├── Journey.jsx / Journey.module.css
+│       ├── Education.jsx / Education.module.css
+│       ├── Services.jsx / Services.module.css
+│       ├── GithubActivity.jsx / GithubActivity.module.css
+│       └── Contact.jsx / Contact.module.css
+├── data/
+│   ├── config.js                   ← ⭐ ALL personal info (name, links, bio, etc.)
+│   ├── projects.js                 ← ⭐ All project data
+│   ├── skills.js                   ← ⭐ Technical skill categories
+│   ├── journey.js                  ← ⭐ Timeline/milestone data
+│   └── services.js                 ← ⭐ Services offered
+├── hooks/
+│   ├── useTheme.js                 ← Dark/light mode with localStorage persistence
+│   ├── useScrollSpy.js             ← Active section detection for navbar
+│   ├── useIntersection.js          ← Scroll-reveal animations
+│   └── useCommandPalette.js        ← Ctrl+K keyboard shortcut handler
+└── styles/
+    ├── variables.css               ← ⭐ Design tokens (colors, spacing, radii, shadows)
+    ├── globals.css                 ← Reset, utility classes, section helpers
+    └── animations.css              ← Keyframes and reveal animation classes
 ```
 
-### Production Build
+---
+
+## ⚙️ Setup & Development
 
 ```bash
-# Build optimized production bundle
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
 npm run build
 
-# Preview production build locally
+# Preview production build
 npm run preview
 ```
 
 ---
 
-## 👤 Author
+## 📁 Adding Your Personal Assets
 
-**Petros Sisay Gelan**
-- Software Engineering Student at Adama Science and Technology University (ASTU)
-- GitHub: [@petersisay](https://github.com/petersisay)
-- LinkedIn: [Petros Sisay Gelan](https://www.linkedin.com/in/petros-sisay-gelan)
-- Telegram: [@Petros_sisay](https://t.me/Petros_sisay)
+### 1. CV / Resume PDF
+**Place your resume PDF at:**
+```
+public/cv.pdf
+```
+The "Download CV" and "View CV" buttons will automatically use this file.
+
+### 2. Profile Photo
+**Place your profile image at:**
+```
+public/profile.jpg
+```
+Recommended: Square image, minimum 400×400px. The About section will use this.
+
+### 3. Project Screenshots
+To add screenshots for projects, place them in:
+```
+public/projects/
+  ace-meklit.jpg
+  apple-website.jpg
+  group-chat-app.jpg
+  student-registration.jpg
+  ...
+```
+Then in `src/data/projects.js`, update the `image` field:
+```js
+image: '/projects/ace-meklit.jpg',
+```
+
+---
+
+## 🎨 Customizing Your Information
+
+### Update Personal Info
+Edit `src/data/config.js` to change:
+- Your name, title, bio, and tagline
+- Email, GitHub, LinkedIn, Telegram links
+- University and location details
+- CV file path
+
+### Update Projects
+Edit `src/data/projects.js` to:
+- Add new projects (copy the object template)
+- Update GitHub and live demo URLs
+- Mark projects as `featured: true` to highlight them
+
+### Update Skills
+Edit `src/data/skills.js` to add or remove technologies and adjust proficiency status.
+
+### Update Journey/Timeline
+Edit `src/data/journey.js` to add or update milestones.
+
+### Update Services
+Edit `src/data/services.js` to update what you offer.
+
+---
+
+## 📧 Contact Form Integration
+
+The contact form includes full client-side validation. To enable real email delivery:
+
+1. Set up a service such as **Formspree**, **Web3Forms**, or **EmailJS**
+2. In `src/data/config.js`, update:
+   ```js
+   contactEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
+   ```
+3. The form will POST JSON to this endpoint when a user submits.
+
+When `contactEndpoint` is empty, the form simulates submission and shows a success toast.
+
+---
+
+## ⌨️ Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl + K` / `Cmd + K` | Open command palette |
+| `Escape` | Close command palette / modals |
+| `Tab` | Navigate interactive elements |
+
+---
+
+## 🌙 Theme System
+
+- **Default**: Dark mode
+- Preference saved to `localStorage`
+- Respects `prefers-color-scheme` as fallback
+- Toggle via Navbar button or Command Palette
+
+---
+
+## ♿ Accessibility
+
+- Semantic HTML with proper heading hierarchy
+- ARIA labels on all interactive elements
+- Keyboard navigable modals and menus
+- Visible `:focus-visible` states
+- `prefers-reduced-motion` support
+- Sufficient color contrast in both themes
+
+---
+
+## 📦 Deployment
+
+This is a standard Vite SPA — deploy to:
+- **Vercel** (recommended): `npx vercel` or connect GitHub repo
+- **Netlify**: Drag and drop the `/dist` folder or connect GitHub
+- **GitHub Pages**: Build and push `/dist` to `gh-pages` branch
+
+Build output: `dist/`
+
+---
+
+*Built by Petros Sisay Gelan — Software Engineering Student & Full-Stack Developer*
+*Adama Science and Technology University (ASTU), Ethiopia*
