@@ -21,7 +21,8 @@ export const siteConfig = {
   email: 'petrossisay1646@gmail.com',
   github: 'https://github.com/petersisay',
   githubUsername: 'petersisay',
-  linkedin: 'https://www.linkedin.com/in/petros-sisay-gelan',
+  linkedin: 'https://www.linkedin.com/in/petros-sisay',
+  linkedinUsername: 'petros-sisay',
   telegram: 'https://t.me/Petros_sisay',
   telegramHandle: '@Petros_sisay',
 

@@ -162,7 +162,7 @@ export default function Contact({ onTriggerToast }) {
                 </div>
                 <div className={styles.cardText}>
                   <span className={styles.cardLabel}>LinkedIn</span>
-                  <span className={styles.cardValue}>petros-sisay-gelan</span>
+                  <span className={styles.cardValue}>{siteConfig.linkedinUsername || 'petros-sisay'}</span>
                 </div>
               </a>
 
@@ -178,7 +178,7 @@ export default function Contact({ onTriggerToast }) {
                 </div>
                 <div className={styles.cardText}>
                   <span className={styles.cardLabel}>GitHub</span>
-                  <span className={styles.cardValue}>petrossisay1646</span>
+                  <span className={styles.cardValue}>{siteConfig.githubUsername || 'petersisay'}</span>
                 </div>
               </a>
             </div>
